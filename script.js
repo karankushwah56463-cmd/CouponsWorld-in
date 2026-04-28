@@ -1,7 +1,9 @@
+
 const storeGrid = document.querySelector("#store-grid");
 const offerGrid = document.querySelector("#offer-grid");
 const searchForm = document.querySelector("#search-form");
 const searchInput = document.querySelector("#search-input");
+const storeCards = [...document.querySelectorAll(".store-card")];
 const chips = [...document.querySelectorAll(".chip")];
 
 const stores = [
@@ -91,6 +93,13 @@ const offers = [
 let activeFilter = "all";
 let searchQuery = "";
 
+function filterStores(filter) {
+  storeCards.forEach((card) => {
+    const text = card.textContent.toLowerCase();
+    const categoryMatch = filter === "all" || card.dataset.category === filter;
+    const searchMatch = !searchQuery || text.includes(searchQuery);
+    card.style.display = categoryMatch && searchMatch ? "" : "none";
+  });
 function renderStores() {
   storeGrid.innerHTML = stores
     .filter((store) => {
@@ -98,3 +107,55 @@ function renderStores() {
       const searchMatch =
         !searchQuery ||
         `${store.name} ${store.offer} ${store.detail}`.toLowerCase().includes(searchQuery);
+      return categoryMatch && searchMatch;
+    })
+    .map(
+      (store) => `
+        <article class="store-card" data-category="${store.category}">
+          <p>${store.name}</p>
+          <strong>${store.offer}</strong>
+          <span>${store.detail}</span>
+        </article>
+      `
+    )
+    .join("");
+}
+
+function renderOffers() {
+  offerGrid.innerHTML = offers
+    .map(
+      (offer) => `
+        <article class="offer-card">
+          <div>
+            <p class="offer-badge">${offer.category}</p>
+            <h3>${offer.title}</h3>
+            <p>${offer.text}</p>
+          </div>
+          <div class="offer-footer">
+            <strong>${offer.code}</strong>
+            <button class="button button-secondary" type="button">${offer.button}</button>
+          </div>
+        </article>
+      `
+    )
+    .join("");
+}
+
+chips.forEach((chip) => {
+    chips.forEach((item) => item.classList.remove("active"));
+    chip.classList.add("active");
+    activeFilter = chip.dataset.filter;
+    filterStores(activeFilter);
+    renderStores();
+  });
+});
+
+searchForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  searchQuery = searchInput.value.trim().toLowerCase();
+  filterStores(activeFilter);
+  renderStores();
+});
+
+renderStores();
+renderOffers();
