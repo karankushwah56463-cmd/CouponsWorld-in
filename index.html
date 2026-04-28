@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CouponsWorld</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+body { background:#f5f5f5; font-family:Arial; }
+
+/* HEADER */
+.topbar {
+    background:#fff;
+    padding:10px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-bottom:1px solid #ddd;
+}
+.logo { font-weight:bold; color:#ff6f00; font-size:22px; }
+
+.search input {
+    padding:8px;
+    width:250px;
+    border-radius:5px;
+    border:1px solid #ccc;
+}
+
+/* CATEGORY BAR */
+.category-bar {
+    background:#ff6f00;
+    color:white;
+    padding:10px;
+    display:flex;
+    gap:15px;
+    overflow:auto;
+}
+.category-bar div {
+    cursor:pointer;
+}
+
+/* DEALS */
+.section {
+    padding:20px;
+}
+.card {
+    border:none;
+    border-radius:10px;
+    overflow:hidden;
+}
+.card img {
+    height:150px;
+    object-fit:cover;
+}
+.deal-btn {
+    background:#28a745;
+    color:white;
+    width:100%;
+}
+
+/* COUPON BADGE */
+.badge-coupon {
+    background:red;
+    color:white;
+    padding:5px;
+    position:absolute;
+    top:10px;
+    left:10px;
+}
+
+/* FOOTER */
+.footer {
+    background:#222;
+    color:white;
+    text-align:center;
+    padding:15px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+<div class="logo">CouponsWorld</div>
+<div class="search">
+<input type="text" placeholder="Search for stores, brands...">
+</div>
+<div>Login</div>
+</div>
+
+<!-- CATEGORY -->
+<div class="category-bar">
+<div>All</div>
+<div>Amazon</div>
+<div>Flipkart</div>
+<div>Fashion</div>
+<div>Mobiles</div>
+<div>Electronics</div>
+</div>
+
+<!-- DEALS -->
+<div class="container section">
+<div class="row g-3">
+
+<div class="col-md-3">
+<div class="card position-relative">
+<span class="badge-coupon">70% OFF</span>
+<img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9">
+<div class="p-2">
+<h6>Amazon Mobile Sale</h6>
+<p>Best deals on smartphones</p>
+<a href="#" class="btn deal-btn">Get Deal</a>
+</div>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="card position-relative">
+<span class="badge-coupon">50% OFF</span>
+<img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30">
+<div class="p-2">
+<h6>Smart Watch Offers</h6>
+<p>Top discounts available</p>
+<a href="#" class="btn deal-btn">Get Deal</a>
+</div>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="card position-relative">
+<span class="badge-coupon">60% OFF</span>
+<img src="https://images.unsplash.com/photo-1580910051074-3eb694886505">
+<div class="p-2">
+<h6>Laptop Deals</h6>
+<p>Save big on laptops</p>
+<a href="#" class="btn deal-btn">Get Deal</a>
+</div>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="card position-relative">
+<span class="badge-coupon">40% OFF</span>
+<img src="https://images.unsplash.com/photo-1606813907291-d86efa9b94db">
+<div class="p-2">
+<h6>Headphones Sale</h6>
+<p>Premium sound offers</p>
+<a href="#" class="btn deal-btn">Get Deal</a>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+© 2026 CouponsWorld
+</div>
+
+</body>
+</html>
