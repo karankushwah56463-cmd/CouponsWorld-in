@@ -6,14 +6,10 @@ const chips = [...document.querySelectorAll(".chip")];
 
 const stores = [
   {
-  {
-  name: "Amazon",
-  category: "fashion",
-  offer: "Up to 6% rewards",
-  detail: "Electronics, fashion, home",
-  url: "https://amzn.to/4tAxbM7"
-}
-
+    name: "Amazon",
+    category: "fashion",
+    offer: "Up to 6% rewards",
+    detail: "Electronics, fashion, home",
   },
   {
     name: "Myntra",
