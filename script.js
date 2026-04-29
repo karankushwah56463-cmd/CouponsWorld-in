@@ -8,7 +8,7 @@ const stores = [
   {
     name: "Amazon",
     badge: "AM",
-    logo: "https://cdn.jsdelivr.net/npm/simple-icons@16.7.0/icons/amazon.svg",
+    logo: "https://cdn.simpleicons.org/amazon",
     category: "fashion",
     offer: "Up to 6% rewards",
     detail: "Electronics, fashion, home",
@@ -85,7 +85,7 @@ const stores = [
   {
     name: "Flipkart",
     badge: "FK",
-    logo: "https://cdn.jsdelivr.net/npm/simple-icons@16.7.0/icons/flipkart.svg",
+    logo: "https://cdn.simpleicons.org/flipkart",
     category: "tech",
     offer: "Price drop on gadgets",
     detail: "Mobiles, laptops, electronics",
@@ -258,10 +258,12 @@ function renderStores() {
             </div>
             <span class="store-status">${store.status}</span>
           </div>
+
           <div class="store-card-copy">
             <strong>${store.offer}</strong>
             <p>${store.summary}</p>
           </div>
+
           <div class="store-card-footer">
             <span class="store-kpi">${store.kpi}</span>
             <a class="store-action" href="#coupons">View offers &rarr;</a>
@@ -298,13 +300,16 @@ function renderOffers() {
               <p class="offer-badge">${offer.category}</p>
               <span class="offer-time">${offer.expires}</span>
             </div>
+
             <h3>${offer.title}</h3>
             <p>${offer.text}</p>
+
             <div class="offer-stats">
               <span>${offer.uses}</span>
               <span>${offer.extra}</span>
             </div>
           </div>
+
           <div class="offer-footer">
             <strong>${offer.code}</strong>
             <div class="offer-actions">
