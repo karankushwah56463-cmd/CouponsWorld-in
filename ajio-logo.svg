@@ -1,0 +1,8 @@
+<svg width="256" height="256" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Ajio logo</title>
+  <desc id="desc">Local brand style logo for Ajio.</desc>
+  <rect width="256" height="256" rx="52" fill="#111111"/>
+  <circle cx="128" cy="128" r="74" fill="none" stroke="#FF4FA3" stroke-width="14"/>
+  <path d="M96 175L128 79L160 175" fill="none" stroke="#FF4FA3" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M110 134H146" stroke="#FF4FA3" stroke-width="12" stroke-linecap="round"/>
+</svg>

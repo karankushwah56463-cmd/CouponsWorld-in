@@ -8,7 +8,7 @@ const stores = [
   {
     name: "Amazon",
     badge: "AM",
-    logo: "./amazon-logo.svg",
+    logo: "./amazon.png",
     category: "fashion",
     offer: "Up to 6% rewards",
     detail: "Electronics, fashion, home",
@@ -19,7 +19,7 @@ const stores = [
   {
     name: "Myntra",
     badge: "MY",
-    logo: "https://logo.clearbit.com/myntra.com",
+    logo: "./myntra-logo.svg",
     category: "fashion",
     offer: "Flat 15% on ethnic wear",
     detail: "Fashion, footwear, accessories",
@@ -30,7 +30,7 @@ const stores = [
   {
     name: "MakeMyTrip",
     badge: "MM",
-    logo: "https://logo.clearbit.com/makemytrip.com",
+    logo: "./makemytrip.png",
     category: "travel",
     offer: "Up to 8% cashback",
     detail: "Flights, hotels, holiday packages",
@@ -41,7 +41,7 @@ const stores = [
   {
     name: "Zomato",
     badge: "ZO",
-    logo: "https://logo.clearbit.com/zomato.com",
+    logo: "./zomato-logo.svg",
     category: "food",
     offer: "Free delivery coupons",
     detail: "Food, grocery, dining",
@@ -52,7 +52,7 @@ const stores = [
   {
     name: "GoDaddy",
     badge: "GD",
-    logo: "https://logo.clearbit.com/godaddy.com",
+    logo: "./godaddy-logo.svg",
     category: "tech",
     offer: "75% off plans",
     detail: "Domains, hosting, websites",
@@ -63,7 +63,7 @@ const stores = [
   {
     name: "BigBasket",
     badge: "BB",
-    logo: "https://logo.clearbit.com/bigbasket.com",
+    logo: "./bigbasket.png",
     category: "grocery",
     offer: "Weekly grocery cashback",
     detail: "Groceries, staples, household",
@@ -74,7 +74,7 @@ const stores = [
   {
     name: "Ajio",
     badge: "AJ",
-    logo: "https://logo.clearbit.com/ajio.com",
+    logo: "./ajio-logo.svg",
     category: "fashion",
     offer: "Extra 10% on new arrivals",
     detail: "Streetwear, footwear, lifestyle",
@@ -85,7 +85,7 @@ const stores = [
   {
     name: "Flipkart",
     badge: "FK",
-    logo: "./flipkart-logo.svg",
+    logo: "./flipkart.png",
     category: "tech",
     offer: "Price drop on gadgets",
     detail: "Mobiles, laptops, electronics",
@@ -96,7 +96,7 @@ const stores = [
   {
     name: "Croma",
     badge: "CR",
-    logo: "https://logo.clearbit.com/croma.com",
+    logo: "./croma-logo.svg",
     category: "tech",
     offer: "Bank discount on appliances",
     detail: "TV, AC, kitchen and audio",
@@ -107,7 +107,7 @@ const stores = [
   {
     name: "Nykaa",
     badge: "NK",
-    logo: "https://logo.clearbit.com/nykaa.com",
+    logo: "./nykaa-logo.svg",
     category: "beauty",
     offer: "Beauty sale with gifts",
     detail: "Makeup, skincare, fragrance",
