@@ -646,6 +646,11 @@ input {
   font-weight: 700;
 }
 
+.store-card strong {
+  margin: 8px 0;
+  font-size: 1.05rem;
+}
+
 .store-action {
   color: var(--primary);
   font-weight: 800;
