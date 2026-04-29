@@ -118,6 +118,7 @@ input {
 .nav a,
 .hero-text,
 .section-kicker,
+.section-copy,
 .offer-card p,
 .store-card span,
 .step p,
@@ -232,6 +233,43 @@ input {
   max-width: 60ch;
   font-size: 1.04rem;
   line-height: 1.72;
+}
+
+.signal-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.signal-chip {
+  padding: 14px 16px;
+  border-radius: 18px;
+  background: linear-gradient(180deg, #f8fbff 0%, #eef4ff 100%);
+  border: 1px solid rgba(217, 225, 238, 0.9);
+}
+
+.signal-chip strong {
+  display: block;
+  font-size: 0.98rem;
+  color: var(--text);
+}
+
+.signal-chip span {
+  display: block;
+  margin-top: 4px;
+  line-height: 1.55;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.section-copy {
+  display: block;
+  margin-top: 6px;
+  line-height: 1.55;
+  color: var(--muted);
+  font-size: 0.92rem;
+  max-width: 65ch;
 }
 
 .search-bar {
@@ -431,6 +469,49 @@ input {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+}
+
+.store-card::before,
+.offer-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, #0e5ffd, #8db4ff);
+}
+
+.store-card[data-category="fashion"]::before,
+.offer-card[data-category="fashion"]::before {
+  background: linear-gradient(90deg, #ef5b8e, #ff9eb9);
+}
+
+.store-card[data-category="travel"]::before,
+.offer-card[data-category="travel"]::before {
+  background: linear-gradient(90deg, #118ab2, #6ed3f7);
+}
+
+.store-card[data-category="food"]::before,
+.offer-card[data-category="food"]::before {
+  background: linear-gradient(90deg, #f59f2f, #ffd18f);
+}
+
+.store-card[data-category="tech"]::before,
+.offer-card[data-category="tech"]::before {
+  background: linear-gradient(90deg, #0e5ffd, #7da5ff);
+}
+
+.store-card[data-category="grocery"]::before,
+.offer-card[data-category="grocery"]::before {
+  background: linear-gradient(90deg, #13a86f, #8be0b7);
+}
+
+.store-card[data-category="beauty"]::before,
+.offer-card[data-category="beauty"]::before {
+  background: linear-gradient(90deg, #a15bff, #d4b5ff);
 }
 
 .store-badge,
@@ -447,23 +528,129 @@ input {
   text-transform: uppercase;
 }
 
-.store-card p {
-  margin: 14px 0 0;
-  font-size: 1.08rem;
-  font-weight: 800;
+.store-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.store-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.store-logo-wrap {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  border-radius: 15px;
+  overflow: hidden;
+  background: linear-gradient(180deg, #131722 0%, #050505 100%);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+  flex: 0 0 auto;
+}
+
+.store-logo-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 8px;
+  background: #ffffff;
+}
+
+.store-logo-fallback {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-size: 0.84rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  background: linear-gradient(180deg, #131722 0%, #050505 100%);
+}
+
+.store-logo-wrap.is-fallback .store-logo-img {
+  opacity: 0;
+}
+
+.store-logo-wrap.is-fallback .store-logo-fallback {
+  opacity: 1;
+}
+
+.store-logo-wrap:not(.is-fallback) .store-logo-fallback {
+  opacity: 0;
+}
+
+.store-name {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 900;
   color: var(--text);
 }
 
-.store-card strong {
-  margin: 8px 0;
-  font-size: 1.05rem;
+.store-detail {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.4;
+}
+
+.store-status,
+.offer-time {
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 10px;
+  border-radius: 999px;
+  background: #eef4ff;
+  color: var(--primary);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.store-card-copy {
+  margin-top: 16px;
+}
+
+.store-card-copy strong {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 1.06rem;
+  color: var(--text);
+}
+
+.store-card-copy p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.store-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.store-kpi {
+  color: var(--text);
+  font-size: 0.9rem;
+  font-weight: 700;
 }
 
 .store-action {
-  margin-top: 12px;
   color: var(--primary);
-  font-weight: 700;
+  font-weight: 800;
   font-size: 0.92rem;
+  white-space: nowrap;
 }
 
 .offer-card {
@@ -471,6 +658,9 @@ input {
   flex-direction: column;
   justify-content: space-between;
   min-height: 250px;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, #ffffff 0%, #fafcff 100%);
 }
 
 .offer-footer {
@@ -479,6 +669,48 @@ input {
   justify-content: space-between;
   gap: 12px;
   margin-top: 22px;
+}
+
+.offer-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.offer-card h3 {
+  margin-bottom: 12px;
+}
+
+.offer-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.offer-stats span {
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 10px;
+  border-radius: 999px;
+  background: #f5f8ff;
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.offer-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.offer-link {
+  color: var(--primary);
+  font-weight: 800;
+  font-size: 0.9rem;
+  white-space: nowrap;
 }
 
 .steps {
@@ -697,6 +929,10 @@ input {
     flex-direction: column;
     align-items: flex-start;
   }
+
+  .signal-row {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 720px) {
@@ -724,6 +960,7 @@ input {
 
   .hero-stats,
   .mini-grid,
+  .signal-row,
   .store-grid,
   .offer-grid,
   .category-grid,
