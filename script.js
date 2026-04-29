@@ -8,7 +8,7 @@ const stores = [
   {
     name: "Amazon",
     badge: "AM",
-    logo: "https://logo.clearbit.com/amazon.com",
+    logo: "https://cdn.jsdelivr.net/npm/simple-icons@16.7.0/icons/amazon.svg",
     category: "fashion",
     offer: "Up to 6% rewards",
     detail: "Electronics, fashion, home",
@@ -85,7 +85,7 @@ const stores = [
   {
     name: "Flipkart",
     badge: "FK",
-    logo: "https://logo.clearbit.com/flipkart.com",
+    logo: "https://cdn.jsdelivr.net/npm/simple-icons@16.7.0/icons/flipkart.svg",
     category: "tech",
     offer: "Price drop on gadgets",
     detail: "Mobiles, laptops, electronics",
