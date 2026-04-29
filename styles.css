@@ -92,16 +92,13 @@ input {
 }
 
 .brand-mark {
-  display: grid;
-  place-items: center;
+  display: block;
   width: 46px;
   height: 46px;
   border-radius: 14px;
-  background: linear-gradient(135deg, var(--primary), #5a84ff);
-  color: #fff;
-  font-weight: 900;
   box-shadow: var(--shadow);
   flex: 0 0 auto;
+  object-fit: contain;
 }
 
 .brand-name,
@@ -356,7 +353,7 @@ input {
 }
 
 .section {
-  padding: 22px 0 8px;
+  padding: 34px 0 8px;
 }
 
 .section-head {
@@ -532,6 +529,11 @@ input {
   background: linear-gradient(90deg, #0e5ffd, #7da5ff);
 }
 
+.faq-list {
+  display: grid;
+  gap: 12px;
+}
+
 .promo-band {
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
@@ -627,11 +629,6 @@ input {
   line-height: 1.75;
 }
 
-.faq-list {
-  display: grid;
-  gap: 12px;
-}
-
 .faq-item summary {
   cursor: pointer;
   font-weight: 800;
@@ -700,11 +697,6 @@ input {
     flex-direction: column;
     align-items: flex-start;
   }
-
-  .newsletter-box {
-    flex-direction: column;
-    align-items: flex-start;
-  }
 }
 
 @media (max-width: 720px) {
@@ -743,6 +735,11 @@ input {
   }
 
   .offer-footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .newsletter-box {
     flex-direction: column;
     align-items: flex-start;
   }
