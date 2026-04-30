@@ -6,7 +6,7 @@
     <title>CouponsWorld.in - Coupons, Cashback & Deals</title>
     <meta
       name="description"
-      content="CouponsWorld.in helps shoppers discover verified coupons, cashback offers, and trending deals from top Indian stores."
+      content="CouponsWorld.in helps shoppers discover verified coupons, cashback offers, store listings, and trending deals in one clean affiliate hub."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -15,63 +15,46 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./styles.css" />
-    <script
-      defer
-      src="https://static.cloudflareinsights.com/beacon.min.js"
-      data-cf-beacon='{"token":"YOUR_CLOUDFLARE_WEB_ANALYTICS_TOKEN"}'
-    ></script>
   </head>
   <body id="top">
     <div class="announcement">
-      <span>Live deals updated daily</span>
-      <span>CouponsWorld.in - coupons, cashback, and store offers in one place</span>
+      <span>Discover the best affiliate coupons</span>
+      <span>CouponsWorld.in - deals, discounts, and cashback in one place</span>
     </div>
 
-    <header class="topbar">
+    <header class="site-header">
       <a class="brand" href="#top" aria-label="CouponsWorld.in home">
         <img class="brand-mark" src="./logo.png" alt="CouponsWorld.in logo" />
         <div class="brand-copy">
           <p class="brand-name">CouponsWorld.in</p>
-          <p class="brand-tag">Coupons, cashback and smart savings</p>
+          <p class="brand-tag">Affiliate coupons, deals, and cashback</p>
         </div>
       </a>
 
-      <nav class="nav" aria-label="Primary">
-        <a href="#stores">Top Stores</a>
-        <a href="#coupons">Trending Coupons</a>
+      <nav class="header-nav" aria-label="Primary">
+        <a href="#coupons">Browse Coupons</a>
+        <a href="#stores">Stores</a>
         <a href="#categories">Categories</a>
+        <a href="#offers">Popular Offers</a>
       </nav>
 
-      <a class="button button-ghost" href="#coupons">Browse Deals</a>
+      <div class="header-actions">
+        <a class="button button-ghost" href="#stores">Top Stores</a>
+        <a class="button button-primary" href="#submit">Submit Coupon</a>
+      </div>
     </header>
 
     <main>
       <section class="hero">
         <div class="hero-copy">
-          <p class="eyebrow">Verified offers for smarter shopping</p>
-          <h1>CouponsWorld.in helps you save more on every order.</h1>
+          <p class="eyebrow">Discover The Best Affiliate Coupons</p>
+          <h1>CouponsWorld.in keeps coupons, categories, stores, and cashback together.</h1>
           <p class="hero-text">
-            Discover verified coupons, cashback boosts, and limited-time offers
-            from popular brands with a clean browsing experience.
+            Search verified offers, open store listings, and jump into trending deals with a clean coupon site layout built for affiliate traffic.
           </p>
 
-          <div class="signal-row" aria-label="Live site signals">
-            <div class="signal-chip">
-              <strong>Live</strong>
-              <span>updated every few hours</span>
-            </div>
-            <div class="signal-chip">
-              <strong>Verified</strong>
-              <span>store links checked</span>
-            </div>
-            <div class="signal-chip">
-              <strong>Cashback</strong>
-              <span>tracked after checkout</span>
-            </div>
-          </div>
-
           <form class="search-bar" id="search-form">
-            <label class="sr-only" for="search-input">Search offers</label>
+            <label class="sr-only" for="search-input">Search coupons and stores</label>
             <input
               id="search-input"
               type="search"
@@ -80,74 +63,109 @@
             <button class="button button-primary" type="submit">Search</button>
           </form>
 
-          <div class="trust-row">
-            <span>Verified coupon codes</span>
-            <span>Extra cashback savings</span>
-            <span>Top Indian stores</span>
+          <div class="browse-tabs" aria-label="Browse options">
+            <a href="#coupons">Browse Coupons</a>
+            <a href="#coupons">Top Coupons</a>
+            <a href="#offers">Featured Discounts</a>
+            <a href="#offers">Exclusive Offers</a>
+            <a href="#stores">Trending Deals</a>
+            <a href="#ending">Best Deals</a>
           </div>
 
           <div class="hero-stats">
-            <div>
-              <strong>2,000+</strong>
-              <span>stores listed</span>
-            </div>
-            <div>
-              <strong>Verified</strong>
-              <span>coupon codes</span>
-            </div>
-            <div>
-              <strong>Extra</strong>
-              <span>cashback savings</span>
-            </div>
+            <article class="stat-card">
+              <strong>500+</strong>
+              <span>Total categories</span>
+            </article>
+            <article class="stat-card">
+              <strong>4.9</strong>
+              <span>Avg reviews</span>
+            </article>
+            <article class="stat-card">
+              <strong>20% OFF</strong>
+              <span>For all coupons</span>
+            </article>
           </div>
         </div>
 
         <aside class="hero-panel">
-          <div class="panel-card panel-card-accent">
+          <article class="featured-coupon">
             <p class="panel-label">Today's spotlight</p>
-            <h2>Flat 20% off on fashion essentials</h2>
-            <p>Stack coupon code savings with cashback and payment offers.</p>
-            <div class="spotlight-row">
-              <span class="spotlight-chip">Extra cashback</span>
-              <span class="spotlight-chip">Verified code</span>
+            <h2>Flat 20% off on selected styles</h2>
+            <p>Combine coupon code savings with cashback offers and store rewards.</p>
+            <div class="featured-coupon__meta">
+              <span>STYLE20</span>
+              <span>Ends tonight</span>
             </div>
-            <a href="#coupons" class="link-arrow">Explore the offer</a>
-          </div>
+            <div class="featured-coupon__actions">
+              <a class="button button-secondary" href="#coupons">Copy code</a>
+              <a class="button button-ghost" href="#stores">Open store</a>
+            </div>
+          </article>
 
-          <div class="mini-grid">
-            <article class="mini-card">
-              <span>Travel</span>
-              <strong>Up to 8% cashback</strong>
-            </article>
-            <article class="mini-card">
-              <span>Electronics</span>
-              <strong>Bank offers live</strong>
-            </article>
-            <article class="mini-card">
-              <span>Food</span>
-              <strong>Free delivery codes</strong>
-            </article>
-            <article class="mini-card">
-              <span>Beauty</span>
-              <strong>Buy 1 get 1 deals</strong>
-            </article>
+          <div class="side-box">
+            <p class="panel-label">Top cashback stores</p>
+            <div class="side-list">
+              <article class="side-list__item">
+                <span class="side-list__logo">
+                  <img src="./amazon.png" alt="Amazon logo" />
+                </span>
+                <div>
+                  <strong>Amazon</strong>
+                  <span>Up to 6% rewards</span>
+                </div>
+              </article>
+              <article class="side-list__item">
+                <span class="side-list__logo">
+                  <img src="./flipkart.png" alt="Flipkart logo" />
+                </span>
+                <div>
+                  <strong>Flipkart</strong>
+                  <span>Price drop on gadgets</span>
+                </div>
+              </article>
+              <article class="side-list__item">
+                <span class="side-list__logo">
+                  <img src="./makemytrip.png" alt="MakeMyTrip logo" />
+                </span>
+                <div>
+                  <strong>MakeMyTrip</strong>
+                  <span>Up to 8% cashback</span>
+                </div>
+              </article>
+            </div>
           </div>
         </aside>
       </section>
 
-      <section class="section" id="stores">
+      <section class="section" id="coupons">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Browse Coupons</p>
+            <h2>Popular coupons ready to copy and use</h2>
+            <p class="section-copy">
+              Clear coupons, short descriptions, and direct call-to-action buttons keep the browsing flow simple.
+            </p>
+          </div>
+          <a href="#stores" class="link-arrow">See stores</a>
+        </div>
+
+        <div class="coupon-grid" id="coupon-grid"></div>
+      </section>
+
+      <section class="section section-soft" id="stores">
         <div class="section-head">
           <div>
             <p class="section-kicker">Top Stores</p>
-            <h2>Popular brands shoppers check first</h2>
+            <h2>Stores shoppers visit first</h2>
             <p class="section-copy">
-              Real stores people search for first, with coupon filters and cashback-friendly offers.
+              Browse store pages with filters, logo badges, cashback labels, and quick offer links.
             </p>
           </div>
-          <a href="#coupons" class="link-arrow">See trending coupons</a>
+          <a href="#categories" class="link-arrow">Trending categories</a>
         </div>
 
-        <div class="store-row" id="store-filters">
+        <div class="chip-row" id="store-filters" aria-label="Store filters">
           <button class="chip active" data-filter="all" type="button">All</button>
           <button class="chip" data-filter="fashion" type="button">Fashion</button>
           <button class="chip" data-filter="travel" type="button">Travel</button>
@@ -157,242 +175,114 @@
           <button class="chip" data-filter="beauty" type="button">Beauty</button>
         </div>
 
-        <div class="store-grid" id="store-grid">
-          <article class="store-card" data-category="fashion">
-            <div>
-              <span class="store-badge">fashion</span>
-              <p>Amazon</p>
-              <strong>Up to 6% rewards</strong>
-              <span>Electronics, fashion, home</span>
-            </div>
-            <div class="store-action">View deals -></div>
-          </article>
-          <article class="store-card" data-category="fashion">
-            <div>
-              <span class="store-badge">fashion</span>
-              <p>Myntra</p>
-              <strong>Flat 15% on ethnic wear</strong>
-              <span>Fashion, footwear, accessories</span>
-            </div>
-            <div class="store-action">View deals -></div>
-          </article>
-          <article class="store-card" data-category="travel">
-            <div>
-              <span class="store-badge">travel</span>
-              <p>MakeMyTrip</p>
-              <strong>Up to 8% cashback</strong>
-              <span>Flights, hotels, holiday packages</span>
-            </div>
-            <div class="store-action">View deals -></div>
-          </article>
-          <article class="store-card" data-category="food">
-            <div>
-              <span class="store-badge">food</span>
-              <p>Zomato</p>
-              <strong>Free delivery coupons</strong>
-              <span>Food, grocery, dining</span>
-            </div>
-            <div class="store-action">View deals -></div>
-          </article>
-          <article class="store-card" data-category="tech">
-            <div>
-              <span class="store-badge">tech</span>
-              <p>GoDaddy</p>
-              <strong>75% off plans</strong>
-              <span>Domains, hosting, websites</span>
-            </div>
-            <div class="store-action">View deals -></div>
-          </article>
-          <article class="store-card" data-category="grocery">
-            <div>
-              <span class="store-badge">grocery</span>
-              <p>BigBasket</p>
-              <strong>Weekly grocery cashback</strong>
-              <span>Groceries, staples, household</span>
-            </div>
-            <div class="store-action">View deals -></div>
-          </article>
-          <article class="store-card" data-category="fashion">
-            <div>
-              <span class="store-badge">fashion</span>
-              <p>Ajio</p>
-              <strong>Extra 10% on new arrivals</strong>
-              <span>Streetwear, footwear, lifestyle</span>
-            </div>
-            <div class="store-action">View deals -></div>
-          </article>
-          <article class="store-card" data-category="tech">
-            <div>
-              <span class="store-badge">tech</span>
-              <p>Flipkart</p>
-              <strong>Price drop on gadgets</strong>
-              <span>Mobiles, laptops, electronics</span>
-            </div>
-            <div class="store-action">View deals -></div>
-          </article>
-          <article class="store-card" data-category="tech">
-            <div>
-              <span class="store-badge">tech</span>
-              <p>Croma</p>
-              <strong>Bank discount on appliances</strong>
-              <span>TV, AC, kitchen and audio</span>
-            </div>
-            <div class="store-action">View deals -></div>
-          </article>
-          <article class="store-card" data-category="beauty">
-            <div>
-              <span class="store-badge">beauty</span>
-              <p>Nykaa</p>
-              <strong>Beauty sale with gifts</strong>
-              <span>Makeup, skincare, fragrance</span>
-            </div>
-            <div class="store-action">View deals -></div>
-          </article>
-        </div>
+        <div class="store-grid" id="store-grid"></div>
       </section>
 
-      <section class="section" id="coupons">
+      <section class="section section-soft" id="categories">
         <div class="section-head">
           <div>
-            <p class="section-kicker">Trending Coupons</p>
-            <h2>Fresh deals with coupon and cashback positioning</h2>
-            <p class="section-copy">
-              Each deal shows a clear code, a trust signal, and a real shopping action.
-            </p>
+            <p class="section-kicker">Trending Categories</p>
+            <h2>Browse deals by category</h2>
           </div>
-          <a href="#how-it-works" class="link-arrow">How it works</a>
-        </div>
-
-        <div class="offer-grid" id="offer-grid"></div>
-      </section>
-
-      <section class="section promo-band" id="cashback">
-        <div class="promo-copy">
-          <p class="section-kicker">Cashback Picks</p>
-          <h2>Extra savings when you shop through partner stores</h2>
-          <p>
-            Highlight daily cashback rates, coupon stacking, and featured bank offers so people keep scrolling and exploring the site.
-          </p>
-        </div>
-
-        <div class="promo-metrics">
-          <article>
-            <strong>Up to 12%</strong>
-            <span>fashion cashback</span>
-          </article>
-          <article>
-            <strong>Flat 1 day</strong>
-            <span>hot deal rotation</span>
-          </article>
-          <article>
-            <strong>Bank + wallet</strong>
-            <span>stackable offers</span>
-          </article>
-          <article>
-            <strong>200+ codes</strong>
-            <span>new deals weekly</span>
-          </article>
-        </div>
-      </section>
-
-      <section class="section" id="categories">
-        <div class="section-head">
-          <div>
-            <p class="section-kicker">Categories</p>
-            <h2>Browse by the type of savings people want most</h2>
+          <div class="category-tabs">
+            <span class="category-tabs__active">Accessories</span>
+            <span>Clothing</span>
+            <span>Electronics</span>
+            <span>Others</span>
           </div>
         </div>
 
         <div class="category-grid">
           <article class="category-card accent-fashion">
-            <h3>Fashion</h3>
-            <p>Ethnic wear, footwear, accessories, and seasonal sale codes.</p>
+            <div class="category-card__top">
+              <img src="./amazon.png" alt="Amazon logo" />
+              <strong>Up to 70% off</strong>
+            </div>
+            <p>Accessories, style add-ons, and quick saving opportunities.</p>
+            <a href="#offers" class="card-link">View All Offers -></a>
           </article>
-          <article class="category-card accent-travel">
-            <h3>Travel</h3>
-            <p>Flights, hotels, trip bundles, and last-minute booking savings.</p>
-          </article>
-          <article class="category-card accent-food">
-            <h3>Food</h3>
-            <p>Food delivery, groceries, and restaurant discounts.</p>
+          <article class="category-card accent-fashion">
+            <div class="category-card__top">
+              <img src="./amazon.png" alt="Amazon logo" />
+              <strong>Up to 50% off</strong>
+            </div>
+            <p>Fashion deals, footwear, and seasonal sales for repeat visitors.</p>
+            <a href="#offers" class="card-link">View All Offers -></a>
           </article>
           <article class="category-card accent-tech">
-            <h3>Tech</h3>
-            <p>Laptops, domains, web hosting, gadgets, and accessories.</p>
+            <div class="category-card__top">
+              <img src="./myntra-logo.svg" alt="Brand icon" />
+              <strong>Up to 80% off</strong>
+            </div>
+            <p>Electronics and device savings with strong shopping intent.</p>
+            <a href="#offers" class="card-link">View All Offers -></a>
+          </article>
+          <article class="category-card accent-tech">
+            <div class="category-card__top">
+              <img src="./croma-logo.svg" alt="Croma logo" />
+              <strong>Up to 75% off</strong>
+            </div>
+            <p>Tech deals, appliances, and premium category offers.</p>
+            <a href="#offers" class="card-link">View All Offers -></a>
           </article>
         </div>
       </section>
 
-      <section class="section" id="popular">
+      <section class="section" id="cashback">
         <div class="section-head">
           <div>
-            <p class="section-kicker">Popular This Week</p>
-            <h2>More brands people keep checking again and again</h2>
+            <p class="section-kicker">High Cashback Stores</p>
+            <h2>Cashback-first stores worth checking</h2>
           </div>
-          <a href="#faq" class="link-arrow">Skip to FAQ</a>
+          <a href="#ending" class="link-arrow">See all coupons</a>
         </div>
 
-        <div class="wide-grid">
-          <article class="wide-card">
-            <span>Beauty</span>
-            <strong>Nykaa - premium beauty deals</strong>
-            <p>Big sale moments, combo discounts, and brand promos.</p>
-          </article>
-          <article class="wide-card">
-            <span>Grocery</span>
-            <strong>BigBasket - weekly essentials</strong>
-            <p>Useful for repeat visits and household shopping.</p>
-          </article>
-          <article class="wide-card">
-            <span>Travel</span>
-            <strong>Cleartrip - flight savings</strong>
-            <p>Extra cashback and booking codes for trip planners.</p>
-          </article>
-          <article class="wide-card">
-            <span>Food</span>
-            <strong>Swiggy - food and dine offers</strong>
-            <p>Delivery savings and restaurant discount campaigns.</p>
-          </article>
-        </div>
+        <div class="cashback-grid" id="cashback-grid"></div>
       </section>
 
-      <section class="section how-it-works" id="how-it-works">
+      <section class="section section-soft" id="ending">
         <div class="section-head">
           <div>
-            <p class="section-kicker">How It Works</p>
-            <h2>Simple flow for a clean coupon browsing experience</h2>
+            <p class="section-kicker">Ending Soon Coupons</p>
+            <h2>Coupons that should be used first</h2>
+          </div>
+          <a href="#offers" class="link-arrow">See all coupons</a>
+        </div>
+
+        <div class="coupon-grid coupon-grid--urgent" id="ending-grid"></div>
+      </section>
+
+      <section class="section" id="offers">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Popular Offers</p>
+            <h2>Offer categories users keep opening</h2>
           </div>
         </div>
 
-        <div class="steps">
-          <article class="step">
-            <span>1</span>
-            <h3>Search a store</h3>
-            <p>Let users look up their favorite brands or browse by category.</p>
-          </article>
-          <article class="step">
-            <span>2</span>
-            <h3>Open the coupon</h3>
-            <p>Show the code, cashback rate, or direct offer action clearly.</p>
-          </article>
-          <article class="step">
-            <span>3</span>
-            <h3>Save on checkout</h3>
-            <p>Highlight simple savings and keep the flow quick on mobile.</p>
-          </article>
+        <div class="offer-tabs" id="offer-tabs">
+          <button class="chip active" data-tab="all" type="button">All Offer</button>
+          <button class="chip" data-tab="today" type="button">Today's Best Offer</button>
+          <button class="chip" data-tab="upcoming" type="button">Upcoming Offer</button>
+          <button class="chip" data-tab="using" type="button">Currently Using</button>
         </div>
+
+        <div class="offer-grid" id="offer-grid"></div>
       </section>
 
-      <section class="section newsletter">
-        <div class="newsletter-box">
+      <section class="section" id="submit">
+        <div class="newsletter">
           <div>
             <p class="section-kicker">Deal Alerts</p>
             <h2>Let visitors come back for new coupons every day</h2>
-            <p>
-              Add a simple email sign-up or Telegram/WhatsApp CTA later if you want, but even as a static block this section gives the page more depth and keeps the scroll feeling useful.
+            <p class="section-copy">
+              This section can later be connected to email alerts, Telegram, or WhatsApp updates without changing the layout.
             </p>
           </div>
-          <a class="button button-primary" href="#top">Get Deal Updates</a>
+          <div class="newsletter-actions">
+            <a class="button button-primary" href="#top">Get Deal Updates</a>
+            <a class="button button-ghost" href="#coupons">View coupons</a>
+          </div>
         </div>
       </section>
 
@@ -408,19 +298,19 @@
           <details class="faq-item">
             <summary>What is CouponsWorld.in?</summary>
             <p>
-              A coupon and cashback discovery website designed to showcase offers, categories, and stores in a modern layout.
+              A coupon, deal, cashback, and store listing website built for affiliate traffic and repeat visits.
             </p>
           </details>
           <details class="faq-item">
             <summary>Can I add my own offers later?</summary>
             <p>
-              Yes. The site is built from plain HTML, CSS, and JavaScript, so you can replace the sample data with your own coupons anytime.
+              Yes. The layout is built from static HTML, CSS, and JavaScript, so you can swap in real offers anytime.
             </p>
           </details>
           <details class="faq-item">
             <summary>Will this work on GitHub Pages?</summary>
             <p>
-              Yes. It is a static site, so it can be hosted directly on GitHub Pages without a backend.
+              Yes. The site is static and can be hosted directly on GitHub Pages or Cloudflare Pages.
             </p>
           </details>
         </div>
@@ -431,7 +321,7 @@
       <div>
         <p class="brand-name">CouponsWorld.in</p>
         <p class="footer-copy">
-          Built for GitHub Pages hosting. Replace the sample offers with real content whenever you are ready.
+          Built as a static affiliate coupons hub with stores, categories, offers, and cashback blocks.
         </p>
       </div>
       <div class="footer-links">
@@ -440,5 +330,7 @@
         <a href="#top" class="link-arrow">Back to top</a>
       </div>
     </footer>
+
+    <script src="./script.js"></script>
   </body>
 </html>
