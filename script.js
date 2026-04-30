@@ -1,8 +1,12 @@
-const storeGrid = document.querySelector("#store-grid");
-const offerGrid = document.querySelector("#offer-grid");
 const searchForm = document.querySelector("#search-form");
 const searchInput = document.querySelector("#search-input");
-const chips = [...document.querySelectorAll(".chip")];
+const storeGrid = document.querySelector("#store-grid");
+const couponGrid = document.querySelector("#coupon-grid");
+const endingGrid = document.querySelector("#ending-grid");
+const cashbackGrid = document.querySelector("#cashback-grid");
+const offerGrid = document.querySelector("#offer-grid");
+const storeFilters = [...document.querySelectorAll("#store-filters .chip")];
+const offerTabs = [...document.querySelectorAll("#offer-tabs .chip")];
 
 const stores = [
   {
@@ -15,6 +19,7 @@ const stores = [
     summary: "Big-ticket purchases, daily essentials, and seasonal deals.",
     status: "Verified today",
     kpi: "2.4k shoppers checked this week",
+    cashback: "6%",
   },
   {
     name: "Myntra",
@@ -26,6 +31,7 @@ const stores = [
     summary: "Trend-led apparel picks and return-friendly fashion offers.",
     status: "Hot now",
     kpi: "1.8k shoppers checked this week",
+    cashback: "15%",
   },
   {
     name: "MakeMyTrip",
@@ -37,6 +43,7 @@ const stores = [
     summary: "Trips, stays, and bundled travel savings for planners.",
     status: "Travel live",
     kpi: "1.2k trip searches",
+    cashback: "8%",
   },
   {
     name: "Zomato",
@@ -48,6 +55,7 @@ const stores = [
     summary: "Quick orders, late-night bites, and repeat food delivery savings.",
     status: "Delivery offers",
     kpi: "980 order clicks",
+    cashback: "12%",
   },
   {
     name: "GoDaddy",
@@ -59,6 +67,7 @@ const stores = [
     summary: "Useful for creators, small businesses, and landing pages.",
     status: "Starter deal",
     kpi: "1.1k web visits",
+    cashback: "75%",
   },
   {
     name: "BigBasket",
@@ -70,6 +79,7 @@ const stores = [
     summary: "Everyday basket savings with repeat-use household offers.",
     status: "Verified today",
     kpi: "1.5k grocery views",
+    cashback: "5%",
   },
   {
     name: "Ajio",
@@ -81,6 +91,7 @@ const stores = [
     summary: "New season fashion with sharp visual sale moments.",
     status: "Popular now",
     kpi: "900 style clicks",
+    cashback: "10%",
   },
   {
     name: "Flipkart",
@@ -92,6 +103,7 @@ const stores = [
     summary: "Gadgets, upgrades, and high-intent tech searches.",
     status: "Top store",
     kpi: "2.1k gadget views",
+    cashback: "18%",
   },
   {
     name: "Croma",
@@ -103,6 +115,7 @@ const stores = [
     summary: "Home appliances and electronics with bank-led savings.",
     status: "Bank offer",
     kpi: "770 appliance clicks",
+    cashback: "12%",
   },
   {
     name: "Nykaa",
@@ -114,138 +127,192 @@ const stores = [
     summary: "Beauty baskets, combo offers, and premium brand drops.",
     status: "Beauty live",
     kpi: "1.7k beauty clicks",
+    cashback: "20%",
+  },
+];
+
+const coupons = [
+  {
+    category: "fashion",
+    label: "Exclusive",
+    title: "$20 Off Any Purchase Over $100 - Online Only",
+    text: "Great for style shoppers looking for a quick saving opportunity.",
+    code: "STYLE20",
+    store: "Myntra",
+    expiry: "25 Nov, 24",
+    tags: ["Copy Coupon", "Fashion deal"],
+    action: "Show Coupon",
+  },
+  {
+    category: "tech",
+    label: "Exclusive",
+    title: "15% Off Web Hosting Plans",
+    text: "Good for creators, SaaS founders, and landing page projects.",
+    code: "BUILDFAST",
+    store: "GoDaddy",
+    expiry: "25 Nov, 24",
+    tags: ["Copy Coupon", "Tech deal"],
+    action: "Show Coupon",
+  },
+  {
+    category: "tech",
+    label: "Exclusive",
+    title: "20% Off All Electronics - Limited Time Offer",
+    text: "Best for gadgets, devices, and accessories on sale.",
+    code: "TECH20",
+    store: "Flipkart",
+    expiry: "25 Nov, 24",
+    tags: ["Copy Coupon", "Gadget savings"],
+    action: "Copy Code",
+  },
+  {
+    category: "food",
+    label: "Popular",
+    title: "Free Delivery On Quick Orders",
+    text: "Ideal for lunch hours, late nights, and repeat usage.",
+    code: "FOODNOW",
+    store: "Zomato",
+    expiry: "25 Nov, 24",
+    tags: ["Copy Coupon", "Food saving"],
+    action: "Show Coupon",
+  },
+  {
+    category: "grocery",
+    label: "Weekly",
+    title: "Weekly Grocery Cashback Picks",
+    text: "Useful recurring savings for family and home shopping.",
+    code: "BASKET5",
+    store: "BigBasket",
+    expiry: "25 Nov, 24",
+    tags: ["Copy Coupon", "Basket deal"],
+    action: "Copy Code",
+  },
+  {
+    category: "beauty",
+    label: "Beauty",
+    title: "Buy 1 Get 1 and Gift Combos",
+    text: "Beauty and care offers for regular shoppers.",
+    code: "GLOWBOGO",
+    store: "Nykaa",
+    expiry: "25 Nov, 24",
+    tags: ["Copy Coupon", "Beauty combo"],
+    action: "Copy Code",
+  },
+  {
+    category: "fashion",
+    label: "New",
+    title: "Extra 10% On New Arrivals",
+    text: "Fresh looks without paying full price.",
+    code: "NEW10",
+    store: "Ajio",
+    expiry: "25 Nov, 24",
+    tags: ["Copy Coupon", "New arrival"],
+    action: "Show Coupon",
+  },
+  {
+    category: "travel",
+    label: "Travel",
+    title: "Up To 8% Cashback On Bookings",
+    text: "Hotels, flights, and staycation bundles for trip planners.",
+    code: "TRAVELX",
+    store: "MakeMyTrip",
+    expiry: "25 Nov, 24",
+    tags: ["Copy Coupon", "Travel cashback"],
+    action: "Show Coupon",
+  },
+  {
+    category: "travel",
+    label: "Weekend",
+    title: "Weekend Getaway Booking Offer",
+    text: "Plan a short trip with extra hotel and flight savings.",
+    code: "WEEKEND25",
+    store: "MakeMyTrip",
+    expiry: "25 Nov, 24",
+    tags: ["Copy Coupon", "Weekend offer"],
+    action: "Get Deal",
+  },
+  {
+    category: "grocery",
+    label: "Fresh",
+    title: "Fresh Basket Savings Every Week",
+    text: "Simple savings for household repeat buying.",
+    code: "WEEKSAVE",
+    store: "BigBasket",
+    expiry: "25 Nov, 24",
+    tags: ["Copy Coupon", "Every week"],
+    action: "Copy Code",
   },
 ];
 
 const offers = [
   {
-    category: "Fashion",
-    categoryKey: "fashion",
-    title: "Flat 20% off on selected styles",
-    text: "Combine with wallet offers and earn cashback after checkout.",
-    code: "STYLE20",
-    button: "Copy Code",
-    expires: "Ends tonight",
-    uses: "2.8k users viewed",
-    extra: "Stack with wallet offers",
+    tab: "today",
+    category: "fashion",
+    title: "Flat 20% Off On Selected Styles",
+    text: "Strong click-through deal for style shoppers.",
+    tag: "Today's Best Offer",
   },
   {
-    category: "Travel",
-    categoryKey: "travel",
-    title: "Up to 8% cashback on bookings",
-    text: "Hotels, flights, and staycation bundles for trip planners.",
-    code: "Activate cashback",
-    button: "Get Deal",
-    expires: "Limited seats",
-    uses: "1.9k travel clicks",
-    extra: "Best on weekend trips",
+    tab: "today",
+    category: "tech",
+    title: "Web Hosting And Domain Discounts",
+    text: "Great for creators and business landing pages.",
+    tag: "Featured Discount",
   },
   {
-    category: "Tech",
-    categoryKey: "tech",
-    title: "Web hosting and domain discounts",
-    text: "Great fit if you want a creator, SaaS, or business landing page.",
-    code: "BUILDFAST",
-    button: "Copy Code",
-    expires: "Fresh today",
-    uses: "1.1k creator clicks",
-    extra: "Good for launch pages",
+    tab: "upcoming",
+    category: "travel",
+    title: "Weekend Getaway Booking Offer",
+    text: "Good for planners waiting to book later this week.",
+    tag: "Upcoming Offer",
   },
   {
-    category: "Food",
-    categoryKey: "food",
-    title: "Free delivery on quick orders",
-    text: "Food savings for app users, lunch breaks, and late-night bites.",
-    code: "FOODNOW",
-    button: "Grab Offer",
-    expires: "Lunch hours",
-    uses: "3.4k food orders",
-    extra: "Works on fast checkout",
+    tab: "using",
+    category: "food",
+    title: "Free Delivery On Quick Orders",
+    text: "Simple everyday offer for repeat usage.",
+    tag: "Currently Using",
   },
   {
-    category: "Grocery",
-    categoryKey: "grocery",
-    title: "Weekly grocery cashback picks",
-    text: "Fresh produce and essentials with simple savings visibility.",
-    code: "BASKET5",
-    button: "Copy Code",
-    expires: "This week",
-    uses: "1.3k basket views",
-    extra: "Repeat-use savings",
+    tab: "using",
+    category: "beauty",
+    title: "Buy 1 Get 1 And Gift Combos",
+    text: "Works well for regular shopping behavior.",
+    tag: "Currently Using",
   },
   {
-    category: "Beauty",
-    categoryKey: "beauty",
-    title: "Buy 1 Get 1 and gift combos",
-    text: "Beauty and care offers for regular shoppers.",
-    code: "GLOWBOGO",
-    button: "Copy Code",
-    expires: "Gift stock low",
-    uses: "900 beauty views",
-    extra: "Best for skincare",
-  },
-  {
-    category: "Fashion",
-    categoryKey: "fashion",
-    title: "Extra 10% on new season styles",
-    text: "Great for users who want fresh looks without paying full price.",
-    code: "NEW10",
-    button: "Copy Code",
-    expires: "Hot right now",
-    uses: "2.2k style views",
-    extra: "New arrivals eligible",
-  },
-  {
-    category: "Tech",
-    categoryKey: "tech",
-    title: "Holiday discount on gadgets",
-    text: "Best for laptops, smart devices, and accessories.",
-    code: "TECH10",
-    button: "Copy Code",
-    expires: "Limited stock",
-    uses: "1.6k gadget views",
-    extra: "Works on select SKUs",
-  },
-  {
-    category: "Travel",
-    categoryKey: "travel",
-    title: "Weekend getaway booking offer",
-    text: "Plan a short trip with extra hotel and flight savings.",
-    code: "TRAVELX",
-    button: "Get Deal",
-    expires: "This weekend",
-    uses: "1.4k trip clicks",
-    extra: "Best before Friday",
-  },
-  {
-    category: "Grocery",
-    categoryKey: "grocery",
-    title: "Fresh basket savings every week",
-    text: "Useful recurring savings for family and home shopping.",
-    code: "WEEKSAVE",
-    button: "Copy Code",
-    expires: "Updated weekly",
-    uses: "860 basket views",
-    extra: "Routine household saves",
+    tab: "upcoming",
+    category: "grocery",
+    title: "Fresh Basket Savings Every Week",
+    text: "Useful recurring savings for families.",
+    tag: "Upcoming Offer",
   },
 ];
 
-let activeFilter = "all";
+let activeStoreFilter = "all";
+let activeOfferTab = "all";
 let searchQuery = "";
 
+function matchesQuery(text) {
+  return !searchQuery || text.toLowerCase().includes(searchQuery);
+}
+
+function setActive(collection, activeItem) {
+  collection.forEach((item) => item.classList.toggle("active", item === activeItem));
+}
+
 function renderStores() {
-  storeGrid.innerHTML = stores
-    .filter((store) => {
-      const categoryMatch = activeFilter === "all" || store.category === activeFilter;
-      const searchMatch =
-        !searchQuery ||
-        `${store.name} ${store.offer} ${store.detail}`.toLowerCase().includes(searchQuery);
-      return categoryMatch && searchMatch;
-    })
+  const filtered = stores.filter((store) => {
+    const categoryMatch = activeStoreFilter === "all" || store.category === activeStoreFilter;
+    const queryMatch = matchesQuery(`${store.name} ${store.offer} ${store.detail} ${store.summary}`);
+    return categoryMatch && queryMatch;
+  });
+
+  storeGrid.innerHTML = filtered
     .map(
       (store) => `
         <article class="store-card" data-category="${store.category}">
-          <div class="store-card-head">
+          <div class="store-card__top">
             <div class="store-brand">
               <div class="store-logo-wrap">
                 <img class="store-logo-img" src="${store.logo}" alt="${store.name} logo" loading="lazy" />
@@ -258,13 +325,17 @@ function renderStores() {
             </div>
             <span class="store-status">${store.status}</span>
           </div>
-          <div class="store-card-copy">
+          <div class="store-card__body">
             <strong>${store.offer}</strong>
             <p>${store.summary}</p>
           </div>
-          <div class="store-card-footer">
-            <span class="store-kpi">${store.kpi}</span>
-            <a class="store-action" href="#coupons">View offers &rarr;</a>
+          <div class="store-meta">
+            <span>${store.kpi}</span>
+            <span>Cashback ${store.cashback}</span>
+          </div>
+          <div class="store-card__footer">
+            <a class="store-action" href="#coupons">View offers -></a>
+            <a class="button button-ghost" href="#ending">See ending soon</a>
           </div>
         </article>
       `
@@ -288,31 +359,26 @@ function renderStores() {
   });
 }
 
-function renderOffers() {
-  offerGrid.innerHTML = offers
+function renderCouponCards(target, items) {
+  target.innerHTML = items
     .map(
-      (offer) => `
-        <article class="offer-card" data-category="${offer.categoryKey}">
-          <div>
-            <div class="offer-top">
-              <p class="offer-badge">${offer.category}</p>
-              <span class="offer-time">${offer.expires}</span>
-            </div>
-            <h3>${offer.title}</h3>
-            <p>${offer.text}</p>
-            <div class="offer-stats">
-              <span>${offer.uses}</span>
-              <span>${offer.extra}</span>
-            </div>
+      (coupon) => `
+        <article class="coupon-card" data-category="${coupon.category}">
+          <div class="coupon-top">
+            <p class="coupon-badge">${coupon.label}</p>
+            <span>${coupon.expiry}</span>
           </div>
-          <div class="offer-footer">
-            <strong>${offer.code}</strong>
-            <div class="offer-actions">
-              <button class="button button-secondary" type="button" data-code="${offer.code}">
-                ${offer.button}
-              </button>
-              <a class="offer-link" href="#stores">Open store &rarr;</a>
-            </div>
+          <div class="coupon-card__body">
+            <h3>${coupon.title}</h3>
+            <p>${coupon.text}</p>
+          </div>
+          <div class="coupon-meta">
+            <span>${coupon.store}</span>
+            <span>${coupon.tags[0]}</span>
+          </div>
+          <div class="coupon-card__footer">
+            <a class="button button-primary" href="#stores">${coupon.action}</a>
+            <strong class="coupon-code">${coupon.code}</strong>
           </div>
         </article>
       `
@@ -320,12 +386,123 @@ function renderOffers() {
     .join("");
 }
 
-chips.forEach((chip) => {
+function renderCoupons() {
+  const filtered = coupons.filter((coupon) => {
+    const categoryMatch = activeStoreFilter === "all" || coupon.category === activeStoreFilter;
+    const queryMatch = matchesQuery(`${coupon.title} ${coupon.text} ${coupon.store} ${coupon.code}`);
+    return categoryMatch && queryMatch;
+  });
+
+  renderCouponCards(couponGrid, filtered.slice(0, 6));
+}
+
+function renderEndingCoupons() {
+  const endingItems = coupons
+    .filter((coupon) => /tonight|limited|weekend|stock low/i.test(coupon.expiry))
+    .filter((coupon) => matchesQuery(`${coupon.title} ${coupon.text} ${coupon.store}`))
+    .slice(0, 6);
+
+  renderCouponCards(endingGrid, endingItems);
+}
+
+function renderCashbackStores() {
+  const sorted = [...stores]
+    .sort((a, b) => Number.parseInt(b.cashback, 10) - Number.parseInt(a.cashback, 10))
+    .slice(0, 8)
+    .filter((store) => matchesQuery(`${store.name} ${store.offer} ${store.detail}`));
+
+  cashbackGrid.innerHTML = sorted
+    .map(
+      (store) => `
+        <article class="cashback-card" data-category="${store.category}">
+          <div class="cashback-card__top">
+            <div class="cashback-card__logo">
+              <img src="${store.logo}" alt="${store.name} logo" loading="lazy" />
+            </div>
+            <div>
+              <p class="store-name">${store.name}</p>
+              <span class="store-detail">${store.detail}</span>
+            </div>
+          </div>
+          <div class="cashback-card__body">
+            <strong>${store.offer}</strong>
+            <p>${store.summary}</p>
+          </div>
+          <div class="cashback-meta">
+            <span>Flat ${store.cashback} cashback</span>
+            <span>${store.status}</span>
+          </div>
+        </article>
+      `
+    )
+    .join("");
+
+  cashbackGrid.querySelectorAll(".cashback-card__logo img").forEach((img) => {
+    const wrap = img.closest(".cashback-card__logo");
+    if (!wrap) return;
+
+    const showFallback = () => wrap.classList.add("is-fallback");
+    const showImage = () => wrap.classList.remove("is-fallback");
+
+    if (img.complete && img.naturalWidth > 0) {
+      showImage();
+    } else {
+      showFallback();
+      img.addEventListener("load", showImage, { once: true });
+      img.addEventListener("error", showFallback, { once: true });
+    }
+  });
+}
+
+function renderOffers() {
+  const filtered = offers.filter((offer) => {
+    const tabMatch = activeOfferTab === "all" || offer.tab === activeOfferTab;
+    const queryMatch = matchesQuery(`${offer.title} ${offer.text} ${offer.tag}`);
+    return tabMatch && queryMatch;
+  });
+
+  offerGrid.innerHTML = filtered
+    .map(
+      (offer) => `
+        <article class="offer-card" data-category="${offer.category}">
+          <div class="offer-card__top">
+            <p class="offer-badge">${offer.tag}</p>
+            <span class="offer-meta">${offer.category}</span>
+          </div>
+          <div class="offer-card__body">
+            <h3>${offer.title}</h3>
+            <p>${offer.text}</p>
+          </div>
+          <div class="offer-tags">
+            <span>${offer.tag}</span>
+            <span>Affiliate ready</span>
+          </div>
+          <div class="offer-card__footer">
+            <a class="offer-action" href="#stores">Open store -></a>
+            <a class="button button-ghost" href="#coupons">View coupon</a>
+          </div>
+        </article>
+      `
+    )
+    .join("");
+}
+
+storeFilters.forEach((chip) => {
   chip.addEventListener("click", () => {
-    chips.forEach((item) => item.classList.remove("active"));
-    chip.classList.add("active");
-    activeFilter = chip.dataset.filter;
+    activeStoreFilter = chip.dataset.filter;
+    setActive(storeFilters, chip);
     renderStores();
+    renderCoupons();
+    renderEndingCoupons();
+    renderCashbackStores();
+  });
+});
+
+offerTabs.forEach((chip) => {
+  chip.addEventListener("click", () => {
+    activeOfferTab = chip.dataset.tab;
+    setActive(offerTabs, chip);
+    renderOffers();
   });
 });
 
@@ -333,30 +510,14 @@ searchForm.addEventListener("submit", (event) => {
   event.preventDefault();
   searchQuery = searchInput.value.trim().toLowerCase();
   renderStores();
-});
-
-offerGrid.addEventListener("click", async (event) => {
-  const button = event.target.closest("button[data-code]");
-  if (!button) return;
-
-  const code = button.dataset.code;
-  const previousText = button.textContent;
-
-  try {
-    if (navigator.clipboard && code !== "Activate cashback") {
-      await navigator.clipboard.writeText(code);
-      button.textContent = "Copied";
-    } else {
-      button.textContent = "Opened";
-    }
-  } catch {
-    button.textContent = "Saved";
-  }
-
-  window.setTimeout(() => {
-    button.textContent = previousText;
-  }, 1200);
+  renderCoupons();
+  renderEndingCoupons();
+  renderCashbackStores();
+  renderOffers();
 });
 
 renderStores();
+renderCoupons();
+renderCashbackStores();
+renderEndingCoupons();
 renderOffers();
