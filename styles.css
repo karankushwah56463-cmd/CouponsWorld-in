@@ -1027,13 +1027,94 @@ img {
     align-items: flex-start;
   }
 
+  .site-header {
+    position: static;
+    top: auto;
+    padding: 14px;
+  }
+
+  .announcement {
+    border-radius: 16px;
+    gap: 6px;
+  }
+
+  .header-nav,
+  .browse-tabs,
+  .chip-row,
+  .offer-tabs,
+  .category-tabs {
+    width: 100%;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .header-nav::-webkit-scrollbar,
+  .browse-tabs::-webkit-scrollbar,
+  .chip-row::-webkit-scrollbar,
+  .offer-tabs::-webkit-scrollbar,
+  .category-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .header-nav a,
+  .browse-tabs a,
+  .chip,
+  .category-tabs span {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+
+  .header-actions {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .header-actions .button {
+    width: 100%;
+  }
+
   .hero-copy,
   .section-soft {
-    padding: 24px;
+    padding: 18px;
+  }
+
+  .hero {
+    gap: 14px;
+    padding: 16px 0 20px;
+  }
+
+  .hero-copy,
+  .hero-panel,
+  .featured-coupon,
+  .side-box,
+  .coupon-card,
+  .store-card,
+  .cashback-card,
+  .category-card,
+  .offer-card,
+  .faq-item,
+  .newsletter {
+    border-radius: 20px;
+  }
+
+  .hero h1 {
+    max-width: none;
+    font-size: clamp(1.9rem, 8vw, 2.5rem);
+    line-height: 1.05;
+  }
+
+  .hero-text {
+    font-size: 0.96rem;
+    line-height: 1.6;
   }
 
   .search-bar {
     flex-direction: column;
+    padding: 8px;
   }
 
   .coupon-grid,
@@ -1046,12 +1127,74 @@ img {
     grid-template-columns: 1fr;
   }
 
+  .coupon-grid,
+  .store-grid,
+  .cashback-grid,
+  .category-grid,
+  .offer-grid {
+    gap: 12px;
+  }
+
+  .coupon-card,
+  .store-card,
+  .cashback-card,
+  .category-card,
+  .offer-card,
+  .faq-item {
+    padding: 16px;
+  }
+
+  .stat-card {
+    padding: 12px;
+  }
+
+  .side-box {
+    padding: 16px;
+  }
+
+  .section-head {
+    gap: 12px;
+  }
+
+  .section-soft {
+    padding: 18px 14px;
+  }
+
+  .newsletter {
+    padding: 18px;
+    gap: 12px;
+  }
+
+  .newsletter-actions {
+    width: 100%;
+  }
+
+  .newsletter-actions .button {
+    width: 100%;
+  }
+
   .coupon-card__footer,
   .store-card__footer,
   .offer-card__footer,
   .featured-coupon__actions,
   .newsletter-actions {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .coupon-card__footer .button,
+  .store-card__footer .button,
+  .offer-card__footer .button,
+  .featured-coupon__actions .button {
+    width: 100%;
+  }
+
+  .store-card__footer,
+  .offer-card__footer,
+  .coupon-card__footer,
+  .featured-coupon__actions {
+    flex-wrap: wrap;
   }
 }
