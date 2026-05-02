@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CouponsWorld.in - Coupons</title>
+    <meta
+      name="description"
+      content="Browse coupon cards, ending-soon deals, and shareable offer links on CouponsWorld.in."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <script
+      defer
+      src="https://static.cloudflareinsights.com/beacon.min.js"
+      data-cf-beacon='{"token":"YOUR_CLOUDFLARE_WEB_ANALYTICS_TOKEN"}'
+    ></script>
+  </head>
+  <body id="top">
+    <div class="announcement">
+      <span>Fresh coupons, cleaner links</span>
+      <span>CouponsWorld.in - copy, share, and track</span>
+    </div>
+
+    <header class="site-header">
+      <a class="brand" href="./index.html" aria-label="CouponsWorld.in home">
+        <img class="brand-mark" src="./logo.png" alt="CouponsWorld.in logo" />
+        <div class="brand-copy">
+          <p class="brand-name">CouponsWorld.in</p>
+          <p class="brand-tag">Share deals, earn profit, and track cashback</p>
+        </div>
+      </a>
+
+      <nav class="header-nav" aria-label="Primary">
+        <a href="./index.html">Home</a>
+        <a href="./earn.html">Share & Earn</a>
+        <a href="./coupons.html">Coupons</a>
+        <a href="./stores.html">Stores</a>
+        <a href="./offers.html">Offers</a>
+        <a href="./faq.html">FAQ</a>
+      </nav>
+
+      <div class="header-actions">
+        <a class="button button-ghost" href="./login.html">Login</a>
+        <a class="button button-ghost" href="./stores.html">Top Stores</a>
+        <a class="button button-primary" href="./earn.html">Create Profit Link</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero page-hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Coupons</p>
+          <h1>Find the fastest coupon cards to share right now.</h1>
+          <p class="hero-text">
+            Use the search bar to narrow down deals by store, code, or category, then copy the best link into your channel.
+          </p>
+
+          <form class="search-bar" id="search-form">
+            <label class="sr-only" for="search-input">Search coupons</label>
+            <input id="search-input" type="search" placeholder="Search coupons, stores, codes..." />
+            <button class="button button-primary" type="submit">Search</button>
+          </form>
+
+          <div class="page-badges">
+            <span>Copy Link</span>
+            <span>Open Link</span>
+            <span>Ending Soon</span>
+            <span>Travel</span>
+            <span>Tech</span>
+          </div>
+        </div>
+
+        <aside class="hero-panel">
+          <article class="featured-coupon">
+            <p class="panel-label">Top coupon</p>
+            <h2>Flat savings with simple copy actions</h2>
+            <p>Keep the flow short. Pick the card, copy the code, and send it where the click is most likely.</p>
+            <div class="featured-coupon__meta">
+              <span>Quick copy</span>
+              <span>Share ready</span>
+            </div>
+            <div class="featured-coupon__actions">
+              <a class="button button-secondary" href="#coupon-grid">See coupons</a>
+              <a class="button button-ghost" href="#ending">Ending soon</a>
+            </div>
+          </article>
+        </aside>
+      </section>
+
+      <section class="section" id="coupon-section">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Browse Coupons</p>
+            <h2>Popular coupons ready to copy and share</h2>
+          </div>
+          <a href="#ending" class="link-arrow">Jump to ending soon</a>
+        </div>
+
+        <div class="coupon-grid" id="coupon-grid"></div>
+      </section>
+
+      <section class="section section-soft" id="ending">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Ending Soon</p>
+            <h2>Use these first before they expire or change</h2>
+          </div>
+          <a href="./offers.html" class="link-arrow">See offers</a>
+        </div>
+
+        <div class="coupon-grid coupon-grid--urgent" id="ending-grid"></div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div>
+        <p class="brand-name">CouponsWorld.in</p>
+        <p class="footer-copy">A clean coupon page for quick copy, quick share, and quick repeat visits.</p>
+      </div>
+      <div class="footer-links">
+        <a href="./index.html">Home</a>
+        <a href="./stores.html">Stores</a>
+        <a href="#top" class="link-arrow">Back to top</a>
+      </div>
+    </footer>
+
+    <script src="./script.js"></script>
+  </body>
+</html>

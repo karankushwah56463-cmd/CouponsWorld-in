@@ -35,6 +35,10 @@ function formatRupees(value) {
 }
 
 function updateProfitCalculator() {
+  if (!profitInputs.length || !profitTotal) {
+    return;
+  }
+
   let total = 0;
 
   profitInputs.forEach((input) => {
@@ -349,6 +353,10 @@ function setActive(collection, activeItem) {
 }
 
 function renderStores() {
+  if (!storeGrid) {
+    return;
+  }
+
   const filtered = stores.filter((store) => {
     const categoryMatch = activeStoreFilter === "all" || store.category === activeStoreFilter;
     const queryMatch = matchesQuery(`${store.name} ${store.offer} ${store.detail} ${store.summary}`);
@@ -407,6 +415,10 @@ function renderStores() {
 }
 
 function renderCouponCards(target, items) {
+  if (!target) {
+    return;
+  }
+
   target.innerHTML = items
     .map(
       (coupon) => `
@@ -436,6 +448,10 @@ function renderCouponCards(target, items) {
 }
 
 function renderCoupons() {
+  if (!couponGrid) {
+    return;
+  }
+
   const filtered = coupons.filter((coupon) => {
     const categoryMatch = activeStoreFilter === "all" || coupon.category === activeStoreFilter;
     const queryMatch = matchesQuery(`${coupon.title} ${coupon.text} ${coupon.store} ${coupon.code}`);
@@ -446,6 +462,10 @@ function renderCoupons() {
 }
 
 function renderEndingCoupons() {
+  if (!endingGrid) {
+    return;
+  }
+
   const endingItems = coupons
     .filter((coupon) => /tonight|limited|weekend|stock low/i.test(coupon.expiry))
     .filter((coupon) => matchesQuery(`${coupon.title} ${coupon.text} ${coupon.store}`))
@@ -455,6 +475,10 @@ function renderEndingCoupons() {
 }
 
 function renderCashbackStores() {
+  if (!cashbackGrid) {
+    return;
+  }
+
   const sorted = [...stores]
     .sort((a, b) => Number.parseInt(b.cashback, 10) - Number.parseInt(a.cashback, 10))
     .slice(0, 8)
@@ -504,6 +528,10 @@ function renderCashbackStores() {
 }
 
 function renderOffers() {
+  if (!offerGrid) {
+    return;
+  }
+
   const filtered = offers.filter((offer) => {
     const tabMatch = activeOfferTab === "all" || offer.tab === activeOfferTab;
     const queryMatch = matchesQuery(`${offer.title} ${offer.text} ${offer.tag}`);
@@ -536,28 +564,34 @@ function renderOffers() {
     .join("");
 }
 
-storeFilters.forEach((chip) => {
-  chip.addEventListener("click", () => {
-    activeStoreFilter = chip.dataset.filter;
-    setActive(storeFilters, chip);
-    renderStores();
-    renderCoupons();
-    renderEndingCoupons();
-    renderCashbackStores();
+if (storeFilters.length) {
+  storeFilters.forEach((chip) => {
+    chip.addEventListener("click", () => {
+      activeStoreFilter = chip.dataset.filter;
+      setActive(storeFilters, chip);
+      renderStores();
+      renderCoupons();
+      renderEndingCoupons();
+      renderCashbackStores();
+    });
   });
-});
+}
 
-offerTabs.forEach((chip) => {
-  chip.addEventListener("click", () => {
-    activeOfferTab = chip.dataset.tab;
-    setActive(offerTabs, chip);
-    renderOffers();
+if (offerTabs.length) {
+  offerTabs.forEach((chip) => {
+    chip.addEventListener("click", () => {
+      activeOfferTab = chip.dataset.tab;
+      setActive(offerTabs, chip);
+      renderOffers();
+    });
   });
-});
+}
 
-profitInputs.forEach((input) => {
-  input.addEventListener("input", updateProfitCalculator);
-});
+if (profitInputs.length) {
+  profitInputs.forEach((input) => {
+    input.addEventListener("input", updateProfitCalculator);
+  });
+}
 
 function handleCouponAction(event) {
   const button = event.target.closest("button[data-code]");
@@ -572,18 +606,25 @@ function handleCouponAction(event) {
   showToast(`Copied ${code}`);
 }
 
-couponGrid.addEventListener("click", handleCouponAction);
-endingGrid.addEventListener("click", handleCouponAction);
+if (couponGrid) {
+  couponGrid.addEventListener("click", handleCouponAction);
+}
 
-searchForm.addEventListener("submit", (event) => {
-  event.preventDefault();
-  searchQuery = searchInput.value.trim().toLowerCase();
-  renderStores();
-  renderCoupons();
-  renderEndingCoupons();
-  renderCashbackStores();
-  renderOffers();
-});
+if (endingGrid) {
+  endingGrid.addEventListener("click", handleCouponAction);
+}
+
+if (searchForm && searchInput) {
+  searchForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    searchQuery = searchInput.value.trim().toLowerCase();
+    renderStores();
+    renderCoupons();
+    renderEndingCoupons();
+    renderCashbackStores();
+    renderOffers();
+  });
+}
 
 renderStores();
 renderCoupons();

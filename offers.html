@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CouponsWorld.in - Offers</title>
+    <meta
+      name="description"
+      content="Explore popular offers and currently active deal categories on CouponsWorld.in."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <script
+      defer
+      src="https://static.cloudflareinsights.com/beacon.min.js"
+      data-cf-beacon='{"token":"YOUR_CLOUDFLARE_WEB_ANALYTICS_TOKEN"}'
+    ></script>
+  </head>
+  <body id="top">
+    <div class="announcement">
+      <span>Popular offers that keep getting clicks</span>
+      <span>CouponsWorld.in - trending by intent</span>
+    </div>
+
+    <header class="site-header">
+      <a class="brand" href="./index.html" aria-label="CouponsWorld.in home">
+        <img class="brand-mark" src="./logo.png" alt="CouponsWorld.in logo" />
+        <div class="brand-copy">
+          <p class="brand-name">CouponsWorld.in</p>
+          <p class="brand-tag">Share deals, earn profit, and track cashback</p>
+        </div>
+      </a>
+
+      <nav class="header-nav" aria-label="Primary">
+        <a href="./index.html">Home</a>
+        <a href="./earn.html">Share & Earn</a>
+        <a href="./coupons.html">Coupons</a>
+        <a href="./stores.html">Stores</a>
+        <a href="./offers.html">Offers</a>
+        <a href="./faq.html">FAQ</a>
+      </nav>
+
+      <div class="header-actions">
+        <a class="button button-ghost" href="./login.html">Login</a>
+        <a class="button button-ghost" href="./stores.html">Top Stores</a>
+        <a class="button button-primary" href="./earn.html">Create Profit Link</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero page-hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Popular Offers</p>
+          <h1>Track the offer categories people keep opening.</h1>
+          <p class="hero-text">
+            Use these tabs for the most shareable offer buckets. The cards below keep the layout light and readable on mobile.
+          </p>
+
+          <div class="page-badges">
+            <span>All Offer</span>
+            <span>Today's Best Offer</span>
+            <span>Upcoming Offer</span>
+            <span>Currently Using</span>
+          </div>
+        </div>
+
+        <aside class="hero-panel">
+          <article class="featured-coupon">
+            <p class="panel-label">Offer direction</p>
+            <h2>Use the right offer type for the right audience</h2>
+            <p>Short term offers drive action. Recurring offers keep the audience coming back.</p>
+            <div class="featured-coupon__meta">
+              <span>Action first</span>
+              <span>Audience fit</span>
+            </div>
+            <div class="featured-coupon__actions">
+              <a class="button button-secondary" href="#offer-tabs">Filter offers</a>
+              <a class="button button-ghost" href="./coupons.html">Open coupons</a>
+            </div>
+          </article>
+        </aside>
+      </section>
+
+      <section class="section" id="offer-section">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Offer Tabs</p>
+            <h2>Pick the offer mix that matches your audience</h2>
+          </div>
+          <a href="./stores.html" class="link-arrow">See stores</a>
+        </div>
+
+        <div class="offer-tabs" id="offer-tabs">
+          <button class="chip active" data-tab="all" type="button">All Offer</button>
+          <button class="chip" data-tab="today" type="button">Today's Best Offer</button>
+          <button class="chip" data-tab="upcoming" type="button">Upcoming Offer</button>
+          <button class="chip" data-tab="using" type="button">Currently Using</button>
+        </div>
+
+        <div class="offer-grid" id="offer-grid"></div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div>
+        <p class="brand-name">CouponsWorld.in</p>
+        <p class="footer-copy">Offer pages are built to make the sharing decision obvious in one glance.</p>
+      </div>
+      <div class="footer-links">
+        <a href="./index.html">Home</a>
+        <a href="./coupons.html">Coupons</a>
+        <a href="#top" class="link-arrow">Back to top</a>
+      </div>
+    </footer>
+
+    <script src="./script.js"></script>
+  </body>
+</html>

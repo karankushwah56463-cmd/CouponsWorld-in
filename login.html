@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CouponsWorld.in - Login</title>
+    <meta
+      name="description"
+      content="Login and account access screen for CouponsWorld.in."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <script
+      defer
+      src="https://static.cloudflareinsights.com/beacon.min.js"
+      data-cf-beacon='{"token":"YOUR_CLOUDFLARE_WEB_ANALYTICS_TOKEN"}'
+    ></script>
+  </head>
+  <body id="top">
+    <div class="announcement">
+      <span>Welcome back</span>
+      <span>CouponsWorld.in account access</span>
+    </div>
+
+    <header class="site-header">
+      <a class="brand" href="./index.html" aria-label="CouponsWorld.in home">
+        <img class="brand-mark" src="./logo.png" alt="CouponsWorld.in logo" />
+        <div class="brand-copy">
+          <p class="brand-name">CouponsWorld.in</p>
+          <p class="brand-tag">Share deals, earn profit, and track cashback</p>
+        </div>
+      </a>
+
+      <nav class="header-nav" aria-label="Primary">
+        <a href="./index.html">Home</a>
+        <a href="./earn.html">Share & Earn</a>
+        <a href="./coupons.html">Coupons</a>
+        <a href="./stores.html">Stores</a>
+        <a href="./offers.html">Offers</a>
+        <a href="./faq.html">FAQ</a>
+      </nav>
+
+      <div class="header-actions">
+        <a class="button button-ghost" href="./login.html">Login</a>
+        <a class="button button-ghost" href="./stores.html">Top Stores</a>
+        <a class="button button-primary" href="./earn.html">Create Profit Link</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero page-hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Login</p>
+          <h1>Keep the account entry simple and out of the way.</h1>
+          <p class="hero-text">
+            This page is a clean front-end placeholder for now, so the rest of the site can feel complete while we wire the real account flow later.
+          </p>
+
+          <div class="page-badges">
+            <span>Sign in</span>
+            <span>Create free account</span>
+            <span>Dashboard later</span>
+          </div>
+        </div>
+
+        <aside class="hero-panel">
+          <article class="featured-coupon">
+            <p class="panel-label">Why sign in?</p>
+            <h2>Save your stores, links, and earnings in one place</h2>
+            <p>We can wire the real auth later. For now, the shape is here and the rest of the site stays usable.</p>
+          </article>
+        </aside>
+      </section>
+
+      <section class="section">
+        <div class="auth-layout">
+          <article class="auth-card">
+            <p class="section-kicker">Sign In</p>
+            <h2>Use your existing account</h2>
+            <div class="form-stack">
+              <div class="field">
+                <label for="login-email">Email or username</label>
+                <input id="login-email" type="email" placeholder="name@example.com" />
+              </div>
+              <div class="field">
+                <label for="login-password">Password</label>
+                <input id="login-password" type="password" placeholder="Enter password" />
+              </div>
+              <div class="auth-actions">
+                <button class="button button-primary" type="button">Sign In</button>
+                <a class="button button-ghost" href="./earn.html">Create Account</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="auth-card">
+            <p class="section-kicker">What you get</p>
+            <h2>Account space for the next stage</h2>
+            <div class="step-list">
+              <div class="step-list__item">
+                <span>1</span>
+                <div>
+                  <strong>Saved links</strong>
+                  <p>Keep your best share links in one place.</p>
+                </div>
+              </div>
+              <div class="step-list__item">
+                <span>2</span>
+                <div>
+                  <strong>Profit tracking</strong>
+                  <p>See what is pending and what has cleared.</p>
+                </div>
+              </div>
+              <div class="step-list__item">
+                <span>3</span>
+                <div>
+                  <strong>Faster sharing</strong>
+                  <p>Get back to sharing without hunting through the site.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div>
+        <p class="brand-name">CouponsWorld.in</p>
+        <p class="footer-copy">Login page placeholder for the future account flow.</p>
+      </div>
+      <div class="footer-links">
+        <a href="./index.html">Home</a>
+        <a href="./earn.html">Earn</a>
+        <a href="#top" class="link-arrow">Back to top</a>
+      </div>
+    </footer>
+
+    <script src="./script.js"></script>
+  </body>
+</html>

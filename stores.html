@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CouponsWorld.in - Top Stores</title>
+    <meta
+      name="description"
+      content="Browse top stores on CouponsWorld.in with profit-focused store cards, cashback labels, and quick deal links."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <script
+      defer
+      src="https://static.cloudflareinsights.com/beacon.min.js"
+      data-cf-beacon='{"token":"YOUR_CLOUDFLARE_WEB_ANALYTICS_TOKEN"}'
+    ></script>
+  </head>
+  <body id="top">
+    <div class="announcement">
+      <span>Top stores, cashback, and profit links</span>
+      <span>CouponsWorld.in - store pages built for sharing</span>
+    </div>
+
+    <header class="site-header">
+      <a class="brand" href="./index.html" aria-label="CouponsWorld.in home">
+        <img class="brand-mark" src="./logo.png" alt="CouponsWorld.in logo" />
+        <div class="brand-copy">
+          <p class="brand-name">CouponsWorld.in</p>
+          <p class="brand-tag">Share deals, earn profit, and track cashback</p>
+        </div>
+      </a>
+
+      <nav class="header-nav" aria-label="Primary">
+        <a href="./index.html">Home</a>
+        <a href="./earn.html">Share & Earn</a>
+        <a href="./coupons.html">Coupons</a>
+        <a href="./stores.html">Stores</a>
+        <a href="./offers.html">Offers</a>
+        <a href="./faq.html">FAQ</a>
+      </nav>
+
+      <div class="header-actions">
+        <a class="button button-ghost" href="./login.html">Login</a>
+        <a class="button button-ghost" href="./coupons.html">Browse Coupons</a>
+        <a class="button button-primary" href="./earn.html">Create Profit Link</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero page-hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Top Stores</p>
+          <h1>Find the stores that convert best for profit links.</h1>
+          <p class="hero-text">
+            Each store card highlights rewards, clicks, and quick offer paths so you can send the right link faster.
+          </p>
+
+          <form class="search-bar" id="search-form">
+            <label class="sr-only" for="search-input">Search stores</label>
+            <input id="search-input" type="search" placeholder="Search stores, rewards, categories..." />
+            <button class="button button-primary" type="submit">Search</button>
+          </form>
+
+          <div class="page-badges">
+            <span>Fashion</span>
+            <span>Travel</span>
+            <span>Food</span>
+            <span>Tech</span>
+            <span>Grocery</span>
+            <span>Beauty</span>
+          </div>
+
+          <div class="hero-stats">
+            <article class="stat-card">
+              <strong>10</strong>
+              <span>featured brands</span>
+            </article>
+            <article class="stat-card">
+              <strong>Quick</strong>
+              <span>filter by category</span>
+            </article>
+            <article class="stat-card">
+              <strong>Share</strong>
+              <span>open links faster</span>
+            </article>
+          </div>
+        </div>
+
+        <aside class="hero-panel">
+          <article class="featured-coupon">
+            <p class="panel-label">Best performers</p>
+            <h2>Stores with strong intent and repeat traffic</h2>
+            <p>Use these first when you want quick clicks and easy conversion from your audience.</p>
+            <div class="featured-coupon__meta">
+              <span>Profit first</span>
+              <span>Trending now</span>
+            </div>
+            <div class="featured-coupon__actions">
+              <a class="button button-secondary" href="#store-filters">Filter stores</a>
+              <a class="button button-ghost" href="./coupons.html">View coupons</a>
+            </div>
+          </article>
+
+          <div class="side-box">
+            <p class="panel-label">Quick picks</p>
+            <div class="side-list">
+              <article class="side-list__item">
+                <span class="side-list__logo"><img src="./amazon.png" alt="Amazon logo" /></span>
+                <div>
+                  <strong>Amazon</strong>
+                  <span>High volume, broad appeal</span>
+                </div>
+              </article>
+              <article class="side-list__item">
+                <span class="side-list__logo"><img src="./flipkart.png" alt="Flipkart logo" /></span>
+                <div>
+                  <strong>Flipkart</strong>
+                  <span>Gadgets and upgrades</span>
+                </div>
+              </article>
+              <article class="side-list__item">
+                <span class="side-list__logo"><img src="./makemytrip.png" alt="MakeMyTrip logo" /></span>
+                <div>
+                  <strong>MakeMyTrip</strong>
+                  <span>Travel bookings and stays</span>
+                </div>
+              </article>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="section section-soft" id="store-filters-wrap">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Store Filters</p>
+            <h2>Filter by category and keep the good stuff in front</h2>
+          </div>
+          <a href="./offers.html" class="link-arrow">See offers</a>
+        </div>
+
+        <div class="chip-row" id="store-filters" aria-label="Store filters">
+          <button class="chip active" data-filter="all" type="button">All</button>
+          <button class="chip" data-filter="fashion" type="button">Fashion</button>
+          <button class="chip" data-filter="travel" type="button">Travel</button>
+          <button class="chip" data-filter="food" type="button">Food</button>
+          <button class="chip" data-filter="tech" type="button">Tech</button>
+          <button class="chip" data-filter="grocery" type="button">Grocery</button>
+          <button class="chip" data-filter="beauty" type="button">Beauty</button>
+        </div>
+
+        <div class="store-grid" id="store-grid"></div>
+      </section>
+
+      <section class="section" id="cashback">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Cashback First</p>
+            <h2>Stores worth checking when you want extra value</h2>
+          </div>
+          <a href="./earn.html" class="link-arrow">Share these links</a>
+        </div>
+
+        <div class="cashback-grid" id="cashback-grid"></div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div>
+        <p class="brand-name">CouponsWorld.in</p>
+        <p class="footer-copy">Store pages made for quick sharing, filters, and profit-friendly browsing.</p>
+      </div>
+      <div class="footer-links">
+        <a href="./index.html">Home</a>
+        <a href="./coupons.html">Coupons</a>
+        <a href="#top" class="link-arrow">Back to top</a>
+      </div>
+    </footer>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
