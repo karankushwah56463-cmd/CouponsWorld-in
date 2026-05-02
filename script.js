@@ -20,6 +20,9 @@ const sessionSince = document.querySelector("#session-since");
 const headerLoginLink = document.querySelector('.header-actions a[href="./login.html"]');
 const googleLoginButton = document.querySelector("#google-login-button");
 const googleRegisterButton = document.querySelector("#google-register-button");
+const sheetsEndpoint =
+  window.CW_SHEETS_WEBAPP_URL ||
+  "https://script.google.com/macros/s/AKfycbztIckf0ahDvT37VPiMtoq61QZTla_aBgE72svCKV_GjHAioMUVBPNqDwC6SwdrLEsF/exec";
 
 const toastLayer = document.createElement("div");
 toastLayer.className = "toast-stack";
@@ -90,6 +93,29 @@ function isGmailAddress(value) {
 
 function composeDisplayName(firstName, surname) {
   return [firstName, surname].filter(Boolean).join(" ").trim();
+}
+
+function syncSignupToGoogleSheets(payload) {
+  if (!sheetsEndpoint) {
+    return false;
+  }
+
+  const body = new Blob([JSON.stringify(payload)], { type: "application/json" });
+
+  if (navigator.sendBeacon) {
+    return navigator.sendBeacon(sheetsEndpoint, body);
+  }
+
+  void fetch(sheetsEndpoint, {
+    method: "POST",
+    mode: "no-cors",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  }).catch(() => {});
+
+  return true;
 }
 
 function getUsers() {
@@ -797,6 +823,16 @@ function handleRegister(event) {
 
   users.push(user);
   saveUsers(users);
+  syncSignupToGoogleSheets({
+    event: "signup",
+    provider: user.provider,
+    firstName: user.firstName,
+    surname: user.surname,
+    name: user.name,
+    phone: user.phone,
+    email: user.email,
+    createdAt: user.createdAt,
+  });
   saveSession({
     name: user.name,
     email: user.email,
@@ -907,6 +943,16 @@ function handleGoogleRegister() {
 
   users.push(user);
   saveUsers(users);
+  syncSignupToGoogleSheets({
+    event: "signup",
+    provider: user.provider,
+    firstName: user.firstName,
+    surname: user.surname,
+    name: user.name,
+    phone: user.phone,
+    email: user.email,
+    createdAt: user.createdAt,
+  });
   saveSession({
     name: user.name,
     email: user.email,
