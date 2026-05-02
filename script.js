@@ -188,7 +188,7 @@ const coupons = [
     store: "Myntra",
     expiry: "25 Nov, 24",
     tags: ["Copy Coupon", "Fashion deal"],
-    action: "Show Coupon",
+    action: "Copy Link",
   },
   {
     category: "tech",
@@ -199,7 +199,7 @@ const coupons = [
     store: "GoDaddy",
     expiry: "25 Nov, 24",
     tags: ["Copy Coupon", "Tech deal"],
-    action: "Show Coupon",
+    action: "Copy Link",
   },
   {
     category: "tech",
@@ -210,7 +210,7 @@ const coupons = [
     store: "Flipkart",
     expiry: "25 Nov, 24",
     tags: ["Copy Coupon", "Gadget savings"],
-    action: "Copy Code",
+    action: "Copy Link",
   },
   {
     category: "food",
@@ -221,7 +221,7 @@ const coupons = [
     store: "Zomato",
     expiry: "25 Nov, 24",
     tags: ["Copy Coupon", "Food saving"],
-    action: "Show Coupon",
+    action: "Copy Link",
   },
   {
     category: "grocery",
@@ -232,7 +232,7 @@ const coupons = [
     store: "BigBasket",
     expiry: "25 Nov, 24",
     tags: ["Copy Coupon", "Basket deal"],
-    action: "Copy Code",
+    action: "Copy Link",
   },
   {
     category: "beauty",
@@ -243,7 +243,7 @@ const coupons = [
     store: "Nykaa",
     expiry: "25 Nov, 24",
     tags: ["Copy Coupon", "Beauty combo"],
-    action: "Copy Code",
+    action: "Copy Link",
   },
   {
     category: "fashion",
@@ -254,7 +254,7 @@ const coupons = [
     store: "Ajio",
     expiry: "25 Nov, 24",
     tags: ["Copy Coupon", "New arrival"],
-    action: "Show Coupon",
+    action: "Copy Link",
   },
   {
     category: "travel",
@@ -265,7 +265,7 @@ const coupons = [
     store: "MakeMyTrip",
     expiry: "25 Nov, 24",
     tags: ["Copy Coupon", "Travel cashback"],
-    action: "Show Coupon",
+    action: "Copy Link",
   },
   {
     category: "travel",
@@ -276,7 +276,7 @@ const coupons = [
     store: "MakeMyTrip",
     expiry: "25 Nov, 24",
     tags: ["Copy Coupon", "Weekend offer"],
-    action: "Get Deal",
+    action: "Open Link",
   },
   {
     category: "grocery",
@@ -287,7 +287,7 @@ const coupons = [
     store: "BigBasket",
     expiry: "25 Nov, 24",
     tags: ["Copy Coupon", "Every week"],
-    action: "Copy Code",
+    action: "Copy Link",
   },
 ];
 
@@ -381,7 +381,7 @@ function renderStores() {
             <span>Cashback ${store.cashback}</span>
           </div>
           <div class="store-card__footer">
-            <a class="store-action" href="#coupons">View offers -></a>
+            <a class="store-action" href="#coupons">Open link -></a>
             <a class="button button-ghost" href="#ending">See ending soon</a>
           </div>
         </article>
@@ -527,8 +527,8 @@ function renderOffers() {
             <span>Affiliate ready</span>
           </div>
           <div class="offer-card__footer">
-            <a class="offer-action" href="#stores">Open store -></a>
-            <a class="button button-ghost" href="#coupons">View coupon</a>
+            <a class="offer-action" href="#stores">Open link -></a>
+            <a class="button button-ghost" href="#coupons">View deal</a>
           </div>
         </article>
       `
