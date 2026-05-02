@@ -7,6 +7,53 @@ const cashbackGrid = document.querySelector("#cashback-grid");
 const offerGrid = document.querySelector("#offer-grid");
 const storeFilters = [...document.querySelectorAll("#store-filters .chip")];
 const offerTabs = [...document.querySelectorAll("#offer-tabs .chip")];
+const profitInputs = [...document.querySelectorAll(".profit-calculator input[type='range']")];
+const profitTotal = document.querySelector("#profit-total");
+
+const toastLayer = document.createElement("div");
+toastLayer.className = "toast-stack";
+document.body.appendChild(toastLayer);
+
+function showToast(message) {
+  const toast = document.createElement("div");
+  toast.className = "toast";
+  toast.textContent = message;
+  toastLayer.appendChild(toast);
+
+  requestAnimationFrame(() => {
+    toast.classList.add("is-visible");
+  });
+
+  window.setTimeout(() => {
+    toast.classList.remove("is-visible");
+    window.setTimeout(() => toast.remove(), 220);
+  }, 1800);
+}
+
+function formatRupees(value) {
+  return `₹${new Intl.NumberFormat("en-IN").format(value)}`;
+}
+
+function updateProfitCalculator() {
+  let total = 0;
+
+  profitInputs.forEach((input) => {
+    const count = Number.parseInt(input.value, 10) || 0;
+    const rate = Number.parseInt(input.dataset.rate, 10) || 0;
+    const subtotal = count * rate;
+    const output = document.querySelector(`[data-value-for="${input.id}"]`);
+
+    if (output) {
+      output.textContent = formatRupees(subtotal);
+    }
+
+    total += subtotal;
+  });
+
+  if (profitTotal) {
+    profitTotal.textContent = formatRupees(total);
+  }
+}
 
 const stores = [
   {
@@ -377,7 +424,9 @@ function renderCouponCards(target, items) {
             <span>${coupon.tags[0]}</span>
           </div>
           <div class="coupon-card__footer">
-            <a class="button button-primary" href="#stores">${coupon.action}</a>
+            <button class="button button-primary" type="button" data-code="${coupon.code}">
+              ${coupon.action}
+            </button>
             <strong class="coupon-code">${coupon.code}</strong>
           </div>
         </article>
@@ -506,6 +555,26 @@ offerTabs.forEach((chip) => {
   });
 });
 
+profitInputs.forEach((input) => {
+  input.addEventListener("input", updateProfitCalculator);
+});
+
+function handleCouponAction(event) {
+  const button = event.target.closest("button[data-code]");
+  if (!button) return;
+
+  const code = button.dataset.code;
+
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(code).catch(() => {});
+  }
+
+  showToast(`Copied ${code}`);
+}
+
+couponGrid.addEventListener("click", handleCouponAction);
+endingGrid.addEventListener("click", handleCouponAction);
+
 searchForm.addEventListener("submit", (event) => {
   event.preventDefault();
   searchQuery = searchInput.value.trim().toLowerCase();
@@ -521,3 +590,4 @@ renderCoupons();
 renderCashbackStores();
 renderEndingCoupons();
 renderOffers();
+updateProfitCalculator();
