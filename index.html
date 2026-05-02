@@ -15,6 +15,11 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./styles.css" />
+    <script
+      defer
+      src="https://static.cloudflareinsights.com/beacon.min.js"
+      data-cf-beacon='{"token":"YOUR_CLOUDFLARE_WEB_ANALYTICS_TOKEN"}'
+    ></script>
   </head>
   <body id="top">
     <div class="announcement">
@@ -27,11 +32,12 @@
         <img class="brand-mark" src="./logo.png" alt="CouponsWorld.in logo" />
         <div class="brand-copy">
           <p class="brand-name">CouponsWorld.in</p>
-          <p class="brand-tag">Affiliate coupons, deals, and cashback</p>
+          <p class="brand-tag">Share deals, earn profit, and track cashback</p>
         </div>
       </a>
 
       <nav class="header-nav" aria-label="Primary">
+        <a href="#earn">Share & Earn</a>
         <a href="#coupons">Browse Coupons</a>
         <a href="#stores">Stores</a>
         <a href="#categories">Categories</a>
@@ -40,17 +46,17 @@
 
       <div class="header-actions">
         <a class="button button-ghost" href="#stores">Top Stores</a>
-        <a class="button button-primary" href="#submit">Submit Coupon</a>
+        <a class="button button-primary" href="#earn">Create Profit Link</a>
       </div>
     </header>
 
     <main>
       <section class="hero">
         <div class="hero-copy">
-          <p class="eyebrow">Discover The Best Affiliate Coupons</p>
-          <h1>CouponsWorld.in keeps coupons, categories, stores, and cashback together.</h1>
+          <p class="eyebrow">Join Free. Share Deals. Earn Profit.</p>
+          <h1>CouponsWorld.in turns coupons into profit links you can share.</h1>
           <p class="hero-text">
-            Search verified offers, open store listings, and jump into trending deals with a clean coupon site layout built for affiliate traffic.
+            Search verified offers, open store listings, and share links on WhatsApp, Telegram, or social channels to earn from every confirmed order.
           </p>
 
           <form class="search-bar" id="search-form">
@@ -64,26 +70,26 @@
           </form>
 
           <div class="browse-tabs" aria-label="Browse options">
+            <a href="#earn">Join Free</a>
+            <a href="#earn">Share Links</a>
             <a href="#coupons">Browse Coupons</a>
-            <a href="#coupons">Top Coupons</a>
-            <a href="#offers">Featured Discounts</a>
-            <a href="#offers">Exclusive Offers</a>
-            <a href="#stores">Trending Deals</a>
-            <a href="#ending">Best Deals</a>
+            <a href="#offers">Profit Picks</a>
+            <a href="#stores">Top Stores</a>
+            <a href="#ending">Ending Soon</a>
           </div>
 
           <div class="hero-stats">
             <article class="stat-card">
-              <strong>500+</strong>
-              <span>Total categories</span>
+              <strong>200+</strong>
+              <span>brands to share</span>
             </article>
             <article class="stat-card">
-              <strong>4.9</strong>
-              <span>Avg reviews</span>
+              <strong>₹10</strong>
+              <span>minimum payout style</span>
             </article>
             <article class="stat-card">
-              <strong>20% OFF</strong>
-              <span>For all coupons</span>
+              <strong>Share</strong>
+              <span>earn from each link</span>
             </article>
           </div>
         </div>
@@ -91,20 +97,20 @@
         <aside class="hero-panel">
           <article class="featured-coupon">
             <p class="panel-label">Today's spotlight</p>
-            <h2>Flat 20% off on selected styles</h2>
-            <p>Combine coupon code savings with cashback offers and store rewards.</p>
+            <h2>Make a profit link and share it fast</h2>
+            <p>Turn a deal into a shareable link, send it to your network, and track confirmed profit in one place.</p>
             <div class="featured-coupon__meta">
-              <span>STYLE20</span>
-              <span>Ends tonight</span>
+              <span>Profit Link</span>
+              <span>Confirmed Profit</span>
             </div>
             <div class="featured-coupon__actions">
-              <a class="button button-secondary" href="#coupons">Copy code</a>
-              <a class="button button-ghost" href="#stores">Open store</a>
+              <a class="button button-secondary" href="#earn">Create link</a>
+              <a class="button button-ghost" href="#stores">Explore brands</a>
             </div>
           </article>
 
           <div class="side-box">
-            <p class="panel-label">Top cashback stores</p>
+            <p class="panel-label">Top profit stores</p>
             <div class="side-list">
               <article class="side-list__item">
                 <span class="side-list__logo">
@@ -112,7 +118,7 @@
                 </span>
                 <div>
                   <strong>Amazon</strong>
-                  <span>Up to 6% rewards</span>
+                  <span>Up to 6% profit</span>
                 </div>
               </article>
               <article class="side-list__item">
@@ -121,7 +127,7 @@
                 </span>
                 <div>
                   <strong>Flipkart</strong>
-                  <span>Price drop on gadgets</span>
+                  <span>High-converting gadgets</span>
                 </div>
               </article>
               <article class="side-list__item">
@@ -130,21 +136,80 @@
                 </span>
                 <div>
                   <strong>MakeMyTrip</strong>
-                  <span>Up to 8% cashback</span>
+                  <span>Travel profit links</span>
                 </div>
               </article>
             </div>
           </div>
+
+          <div class="profit-calculator">
+            <p class="panel-label">Monthly profit calculator</p>
+            <div class="profit-calculator__row">
+              <label for="orders-electronics">Electronics orders</label>
+              <input id="orders-electronics" type="range" min="0" max="50" value="7" data-rate="150" />
+              <strong data-value-for="orders-electronics">₹1,050</strong>
+            </div>
+            <div class="profit-calculator__row">
+              <label for="orders-fashion">Fashion orders</label>
+              <input id="orders-fashion" type="range" min="0" max="80" value="15" data-rate="80" />
+              <strong data-value-for="orders-fashion">₹1,200</strong>
+            </div>
+            <div class="profit-calculator__row">
+              <label for="orders-grocery">Grocery orders</label>
+              <input id="orders-grocery" type="range" min="0" max="100" value="20" data-rate="35" />
+              <strong data-value-for="orders-grocery">₹700</strong>
+            </div>
+            <div class="profit-calculator__row">
+              <label for="orders-travel">Travel orders</label>
+              <input id="orders-travel" type="range" min="0" max="20" value="3" data-rate="250" />
+              <strong data-value-for="orders-travel">₹750</strong>
+            </div>
+            <div class="profit-calculator__total">
+              <span>Estimated monthly profit</span>
+              <strong id="profit-total">₹3,700</strong>
+            </div>
+          </div>
         </aside>
+      </section>
+
+      <section class="section earn-section" id="earn">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Share & Earn</p>
+            <h2>Turn every deal into a profit link</h2>
+            <p class="section-copy">
+              Pick a brand, create a profit link, share it with your network, and watch confirmed profit build up over time.
+            </p>
+          </div>
+          <a href="#faq" class="link-arrow">How payouts work</a>
+        </div>
+
+        <div class="earn-steps">
+          <article class="earn-step">
+            <span>1</span>
+            <h3>Join free</h3>
+            <p>Create your account and pick brands from 200+ stores.</p>
+          </article>
+          <article class="earn-step">
+            <span>2</span>
+            <h3>Share profit links</h3>
+            <p>Send deals on WhatsApp, Telegram, Instagram, or YouTube.</p>
+          </article>
+          <article class="earn-step">
+            <span>3</span>
+            <h3>Get confirmed profit</h3>
+            <p>Track pending and confirmed profit until it is ready to withdraw.</p>
+          </article>
+        </div>
       </section>
 
       <section class="section" id="coupons">
         <div class="section-head">
           <div>
             <p class="section-kicker">Browse Coupons</p>
-            <h2>Popular coupons ready to copy and use</h2>
+            <h2>Popular coupons ready to copy and share</h2>
             <p class="section-copy">
-              Clear coupons, short descriptions, and direct call-to-action buttons keep the browsing flow simple.
+              Clear coupons, short descriptions, and direct call-to-action buttons keep the sharing flow simple.
             </p>
           </div>
           <a href="#stores" class="link-arrow">See stores</a>
@@ -157,9 +222,9 @@
         <div class="section-head">
           <div>
             <p class="section-kicker">Top Stores</p>
-            <h2>Stores shoppers visit first</h2>
+            <h2>Stores with the best profit potential</h2>
             <p class="section-copy">
-              Browse store pages with filters, logo badges, cashback labels, and quick offer links.
+              Browse store pages with filters, logo badges, profit labels, and quick offer links.
             </p>
           </div>
           <a href="#categories" class="link-arrow">Trending categories</a>
@@ -244,7 +309,7 @@
         <div class="section-head">
           <div>
             <p class="section-kicker">Ending Soon Coupons</p>
-            <h2>Coupons that should be used first</h2>
+            <h2>Coupons that should be used first for profit</h2>
           </div>
           <a href="#offers" class="link-arrow">See all coupons</a>
         </div>
@@ -256,7 +321,7 @@
         <div class="section-head">
           <div>
             <p class="section-kicker">Popular Offers</p>
-            <h2>Offer categories users keep opening</h2>
+            <h2>Offer categories users keep opening to earn more</h2>
           </div>
         </div>
 
@@ -274,7 +339,7 @@
         <div class="newsletter">
           <div>
             <p class="section-kicker">Deal Alerts</p>
-            <h2>Let visitors come back for new coupons every day</h2>
+            <h2>Let visitors come back for new deals every day</h2>
             <p class="section-copy">
               This section can later be connected to email alerts, Telegram, or WhatsApp updates without changing the layout.
             </p>
@@ -298,7 +363,7 @@
           <details class="faq-item">
             <summary>What is CouponsWorld.in?</summary>
             <p>
-              A coupon, deal, cashback, and store listing website built for affiliate traffic and repeat visits.
+              A coupon, deal, cashback, and store listing website built for affiliate traffic, profit links, and repeat visits.
             </p>
           </details>
           <details class="faq-item">
@@ -321,7 +386,7 @@
       <div>
         <p class="brand-name">CouponsWorld.in</p>
         <p class="footer-copy">
-          Built as a static affiliate coupons hub with stores, categories, offers, and cashback blocks.
+          Built as a static share-and-earn coupons hub with stores, categories, offers, and profit blocks.
         </p>
       </div>
       <div class="footer-links">
