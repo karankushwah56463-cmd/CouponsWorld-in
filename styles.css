@@ -48,6 +48,29 @@ img {
   max-width: 100%;
 }
 
+@keyframes riseFade {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.985);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes softPulse {
+  0%,
+  100% {
+    box-shadow: 0 12px 26px rgba(45, 156, 255, 0.18);
+  }
+
+  50% {
+    box-shadow: 0 16px 30px rgba(45, 156, 255, 0.28);
+  }
+}
+
 .announcement,
 .site-header,
 .hero,
@@ -69,6 +92,7 @@ img {
   color: var(--muted);
   font-size: 0.9rem;
   box-shadow: 0 10px 24px rgba(24, 59, 122, 0.04);
+  animation: riseFade 0.55s ease both;
 }
 
 .site-header {
@@ -86,6 +110,7 @@ img {
   background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(14px);
   box-shadow: var(--shadow-strong);
+  animation: riseFade 0.65s ease both;
 }
 
 .brand {
@@ -146,7 +171,10 @@ img {
 .header-nav a {
   padding: 8px 10px;
   border-radius: 999px;
-  transition: background 0.15s ease, color 0.15s ease;
+  transition:
+    background 0.18s ease,
+    color 0.18s ease,
+    transform 0.18s ease;
 }
 
 .header-nav a:hover {
@@ -171,18 +199,23 @@ img {
   padding: 12px 18px;
   font-weight: 700;
   cursor: pointer;
-  transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+  transition:
+    transform 0.18s ease,
+    background 0.18s ease,
+    color 0.18s ease,
+    box-shadow 0.18s ease;
 }
 
 .button:hover,
 .chip:hover {
-  transform: translateY(-1px);
+  transform: translateY(-2px);
 }
 
 .button-primary {
   background: linear-gradient(135deg, var(--primary), var(--primary-3));
   color: #fff;
   box-shadow: 0 12px 26px rgba(45, 156, 255, 0.25);
+  animation: softPulse 2.8s ease-in-out infinite;
 }
 
 .button-secondary {
@@ -203,6 +236,7 @@ img {
   gap: 26px;
   align-items: stretch;
   padding: 28px 0 34px;
+  animation: riseFade 0.7s ease both;
 }
 
 .hero-copy,
@@ -224,6 +258,7 @@ img {
 .hero-copy,
 .hero-panel {
   border-radius: 26px;
+  animation: riseFade 0.7s ease both;
 }
 
 .hero-copy {
@@ -231,6 +266,7 @@ img {
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(250, 244, 236, 0.94)),
     var(--surface);
+  animation-delay: 0.08s;
 }
 
 .eyebrow,
@@ -248,6 +284,8 @@ img {
   font-size: clamp(2.35rem, 4.2vw, 4.35rem);
   line-height: 0.97;
   color: #102042;
+  animation: riseFade 0.75s ease both;
+  animation-delay: 0.12s;
 }
 
 .hero-text {
@@ -255,6 +293,8 @@ img {
   margin: 0;
   font-size: 1.04rem;
   line-height: 1.72;
+  animation: riseFade 0.75s ease both;
+  animation-delay: 0.18s;
 }
 
 .search-bar {
@@ -265,6 +305,8 @@ img {
   border-radius: 18px;
   background: #f3f8ff;
   border: 1px solid var(--border);
+  animation: riseFade 0.75s ease both;
+  animation-delay: 0.22s;
 }
 
 .search-bar input {
@@ -286,6 +328,8 @@ img {
 
 .browse-tabs {
   margin-top: 18px;
+  animation: riseFade 0.75s ease both;
+  animation-delay: 0.28s;
 }
 
 .browse-tabs a {
@@ -316,6 +360,7 @@ img {
   border-radius: 18px;
   background: linear-gradient(180deg, #ffffff 0%, #f7fbff 100%);
   border: 1px solid rgba(217, 230, 245, 0.95);
+  animation: riseFade 0.75s ease both;
 }
 
 .stat-card strong {
@@ -338,6 +383,7 @@ img {
   background:
     radial-gradient(circle at top right, rgba(255, 139, 43, 0.08), transparent 26%),
     linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(247, 241, 231, 0.98));
+  animation-delay: 0.14s;
 }
 
 .featured-coupon {
@@ -345,6 +391,8 @@ img {
   padding: 22px;
   background: linear-gradient(180deg, #fff7ee 0%, #ffffff 100%);
   border-color: #f0d8bd;
+  animation: riseFade 0.7s ease both;
+  animation-delay: 0.12s;
 }
 
 .featured-coupon h2,
@@ -385,6 +433,8 @@ img {
   border-radius: 22px;
   padding: 20px;
   background: linear-gradient(180deg, #ffffff 0%, #f9fbff 100%);
+  animation: riseFade 0.7s ease both;
+  animation-delay: 0.18s;
 }
 
 .side-list {
@@ -400,6 +450,7 @@ img {
   padding: 12px;
   border-radius: 16px;
   background: #f6f9ff;
+  animation: riseFade 0.65s ease both;
 }
 
 .side-list__logo {
@@ -435,6 +486,7 @@ img {
 
 .section {
   padding: 34px 0 8px;
+  animation: riseFade 0.55s ease both;
 }
 
 .section-soft {
@@ -443,6 +495,7 @@ img {
   background: linear-gradient(180deg, rgba(255, 248, 240, 0.95), rgba(247, 241, 231, 0.98));
   border: 1px solid rgba(241, 216, 189, 0.6);
   box-shadow: var(--shadow);
+  animation: riseFade 0.65s ease both;
 }
 
 .section-head {
@@ -534,6 +587,7 @@ img {
   position: relative;
   overflow: hidden;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
+  animation: riseFade 0.65s ease both;
 }
 
 .coupon-card:hover,
@@ -542,7 +596,8 @@ img {
 .category-card:hover,
 .offer-card:hover,
 .faq-item:hover {
-  transform: translateY(-2px);
+  transform: translateY(-5px);
+  box-shadow: 0 22px 42px rgba(24, 59, 122, 0.14);
 }
 
 .coupon-card::before,
@@ -914,6 +969,70 @@ img {
   background: linear-gradient(180deg, #fff7f5 0%, #ffffff 100%);
 }
 
+.coupon-grid .coupon-card:nth-child(1),
+.store-grid .store-card:nth-child(1),
+.cashback-grid .cashback-card:nth-child(1),
+.category-grid .category-card:nth-child(1),
+.offer-grid .offer-card:nth-child(1) {
+  animation-delay: 0.04s;
+}
+
+.coupon-grid .coupon-card:nth-child(2),
+.store-grid .store-card:nth-child(2),
+.cashback-grid .cashback-card:nth-child(2),
+.category-grid .category-card:nth-child(2),
+.offer-grid .offer-card:nth-child(2) {
+  animation-delay: 0.08s;
+}
+
+.coupon-grid .coupon-card:nth-child(3),
+.store-grid .store-card:nth-child(3),
+.cashback-grid .cashback-card:nth-child(3),
+.category-grid .category-card:nth-child(3),
+.offer-grid .offer-card:nth-child(3) {
+  animation-delay: 0.12s;
+}
+
+.coupon-grid .coupon-card:nth-child(4),
+.store-grid .store-card:nth-child(4),
+.cashback-grid .cashback-card:nth-child(4),
+.category-grid .category-card:nth-child(4),
+.offer-grid .offer-card:nth-child(4) {
+  animation-delay: 0.16s;
+}
+
+.coupon-grid .coupon-card:nth-child(5),
+.store-grid .store-card:nth-child(5),
+.cashback-grid .cashback-card:nth-child(5),
+.category-grid .category-card:nth-child(5),
+.offer-grid .offer-card:nth-child(5) {
+  animation-delay: 0.2s;
+}
+
+.coupon-grid .coupon-card:nth-child(6),
+.store-grid .store-card:nth-child(6),
+.cashback-grid .cashback-card:nth-child(6),
+.category-grid .category-card:nth-child(6),
+.offer-grid .offer-card:nth-child(6) {
+  animation-delay: 0.24s;
+}
+
+.coupon-grid .coupon-card:nth-child(7),
+.store-grid .store-card:nth-child(7),
+.cashback-grid .cashback-card:nth-child(7),
+.category-grid .category-card:nth-child(7),
+.offer-grid .offer-card:nth-child(7) {
+  animation-delay: 0.28s;
+}
+
+.coupon-grid .coupon-card:nth-child(8),
+.store-grid .store-card:nth-child(8),
+.cashback-grid .cashback-card:nth-child(8),
+.category-grid .category-card:nth-child(8),
+.offer-grid .offer-card:nth-child(8) {
+  animation-delay: 0.32s;
+}
+
 .newsletter {
   display: flex;
   justify-content: space-between;
@@ -924,12 +1043,45 @@ img {
   background:
     radial-gradient(circle at top right, rgba(45, 156, 255, 0.08), transparent 30%),
     linear-gradient(180deg, #ffffff 0%, #f4f8ff 100%);
+  animation: riseFade 0.65s ease both;
 }
 
 .newsletter-actions {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
+}
+
+.toast-stack {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 50;
+  display: grid;
+  gap: 10px;
+  pointer-events: none;
+}
+
+.toast {
+  min-width: 180px;
+  max-width: min(320px, calc(100vw - 32px));
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: rgba(24, 59, 122, 0.96);
+  color: #fff;
+  font-size: 0.92rem;
+  font-weight: 700;
+  box-shadow: 0 16px 30px rgba(24, 59, 122, 0.24);
+  opacity: 0;
+  transform: translateY(14px) scale(0.96);
+  transition:
+    opacity 0.22s ease,
+    transform 0.22s ease;
+}
+
+.toast.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
 }
 
 .faq-list {
@@ -954,6 +1106,7 @@ img {
   align-items: center;
   gap: 18px;
   padding: 30px 0 40px;
+  animation: riseFade 0.55s ease both;
 }
 
 .footer-links {
@@ -1196,5 +1349,27 @@ img {
   .coupon-card__footer,
   .featured-coupon__actions {
     flex-wrap: wrap;
+  }
+
+  .toast-stack {
+    right: 12px;
+    left: 12px;
+    bottom: 12px;
+  }
+
+  .toast {
+    max-width: none;
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
