@@ -104,35 +104,66 @@
                 <a class="button button-ghost" href="#register-form">Create Account</a>
               </div>
             </form>
+
+            <div class="auth-actions" style="margin-top: 12px;">
+              <button class="button button-ghost" type="button" id="google-login-button">
+                Continue with Gmail
+              </button>
+            </div>
+
+            <div class="auth-note" style="margin-top: 14px;">
+              <strong>Gmail quick sign-in</strong>
+              <p style="margin: 6px 0 0;">
+                If you create an account with Gmail below, you can come back and sign in with that same email on this page.
+              </p>
+            </div>
           </article>
 
           <article class="auth-card">
             <p class="section-kicker">Create Account</p>
             <h2>Start from a fresh profile</h2>
             <form class="form-stack" id="register-form" autocomplete="on">
-              <div class="field">
-                <label for="register-name">Full name</label>
-                <input id="register-name" type="text" placeholder="Your name" required />
+              <div class="field-grid">
+                <div class="field">
+                  <label for="register-first-name">First name</label>
+                  <input id="register-first-name" type="text" placeholder="Your first name" required />
+                </div>
+                <div class="field">
+                  <label for="register-surname">Surname</label>
+                  <input id="register-surname" type="text" placeholder="Your surname" required />
+                </div>
               </div>
+
+              <div class="field">
+                <label for="register-phone">Mobile number</label>
+                <input id="register-phone" type="tel" placeholder="10-digit mobile number" inputmode="tel" required />
+              </div>
+
               <div class="field">
                 <label for="register-email">Email</label>
                 <input id="register-email" type="email" placeholder="name@example.com" required />
               </div>
+
               <div class="field">
                 <label for="register-password">Password</label>
                 <input id="register-password" type="password" placeholder="Create password" required />
               </div>
+
               <div class="field">
                 <label for="register-confirm">Confirm password</label>
                 <input id="register-confirm" type="password" placeholder="Repeat password" required />
               </div>
+
               <label class="auth-check" for="register-remember">
                 <input id="register-remember" type="checkbox" checked />
                 <span>Create and keep my account on this device</span>
               </label>
+
               <div class="auth-actions">
                 <button class="button button-secondary" type="submit">Create Account</button>
-                <a class="button button-ghost" href="./index.html#earn">See earning flow</a>
+                <button class="button button-ghost" type="button" id="google-register-button">
+                  Continue with Gmail
+                </button>
               </div>
             </form>
           </article>
@@ -146,6 +177,8 @@
             <h2 id="session-title">Not signed in</h2>
             <div class="page-list">
               <div class="page-list__item" id="session-email">Email not saved yet.</div>
+              <div class="page-list__item" id="session-phone">Mobile number not saved yet.</div>
+              <div class="page-list__item" id="session-provider">Provider not set yet.</div>
               <div class="page-list__item" id="session-since">Sign in or create an account to activate this area.</div>
             </div>
             <div class="auth-actions" style="margin-top: 14px;">
