@@ -38,17 +38,17 @@
 
       <nav class="header-nav" aria-label="Primary">
         <a href="./index.html">Home</a>
-        <a href="./earn.html">Share & Earn</a>
-        <a href="./coupons.html">Coupons</a>
-        <a href="./stores.html">Stores</a>
-        <a href="./offers.html">Offers</a>
-        <a href="./faq.html">FAQ</a>
+        <a href="./index.html#earn">Share & Earn</a>
+        <a href="./index.html#coupons">Coupons</a>
+        <a href="./index.html#stores">Stores</a>
+        <a href="./index.html#offers">Offers</a>
+        <a href="./index.html#faq">FAQ</a>
       </nav>
 
       <div class="header-actions">
         <a class="button button-ghost" href="./login.html">Login</a>
-        <a class="button button-ghost" href="./stores.html">Top Stores</a>
-        <a class="button button-primary" href="./earn.html">Create Profit Link</a>
+        <a class="button button-ghost" href="./index.html#stores">Top Stores</a>
+        <a class="button button-primary" href="./index.html#earn">Create Profit Link</a>
       </div>
     </header>
 
@@ -58,13 +58,13 @@
           <p class="eyebrow">Login</p>
           <h1>Keep the account entry simple and out of the way.</h1>
           <p class="hero-text">
-            This page is a clean front-end placeholder for now, so the rest of the site can feel complete while we wire the real account flow later.
+            This login system stores accounts locally in your browser for now, so we can move fast without needing a backend yet.
           </p>
 
           <div class="page-badges">
             <span>Sign in</span>
-            <span>Create free account</span>
-            <span>Dashboard later</span>
+            <span>Create account</span>
+            <span>Logout</span>
           </div>
         </div>
 
@@ -73,6 +73,10 @@
             <p class="panel-label">Why sign in?</p>
             <h2>Save your stores, links, and earnings in one place</h2>
             <p>We can wire the real auth later. For now, the shape is here and the rest of the site stays usable.</p>
+            <div class="featured-coupon__meta">
+              <span>Local storage</span>
+              <span>Demo auth</span>
+            </div>
           </article>
         </aside>
       </section>
@@ -82,23 +86,75 @@
           <article class="auth-card">
             <p class="section-kicker">Sign In</p>
             <h2>Use your existing account</h2>
-            <div class="form-stack">
+            <form class="form-stack" id="login-form" autocomplete="on">
               <div class="field">
-                <label for="login-email">Email or username</label>
-                <input id="login-email" type="email" placeholder="name@example.com" />
+                <label for="login-email">Email</label>
+                <input id="login-email" type="email" placeholder="name@example.com" required />
               </div>
               <div class="field">
                 <label for="login-password">Password</label>
-                <input id="login-password" type="password" placeholder="Enter password" />
+                <input id="login-password" type="password" placeholder="Enter password" required />
               </div>
+              <label class="auth-check" for="login-remember">
+                <input id="login-remember" type="checkbox" checked />
+                <span>Keep me signed in on this device</span>
+              </label>
               <div class="auth-actions">
-                <button class="button button-primary" type="button">Sign In</button>
-                <a class="button button-ghost" href="./earn.html">Create Account</a>
+                <button class="button button-primary" type="submit">Sign In</button>
+                <a class="button button-ghost" href="./index.html">Go Home</a>
               </div>
-            </div>
+            </form>
           </article>
 
           <article class="auth-card">
+            <p class="section-kicker">Create Account</p>
+            <h2>Start from a fresh profile</h2>
+            <form class="form-stack" id="register-form" autocomplete="on">
+              <div class="field">
+                <label for="register-name">Full name</label>
+                <input id="register-name" type="text" placeholder="Your name" required />
+              </div>
+              <div class="field">
+                <label for="register-email">Email</label>
+                <input id="register-email" type="email" placeholder="name@example.com" required />
+              </div>
+              <div class="field">
+                <label for="register-password">Password</label>
+                <input id="register-password" type="password" placeholder="Create password" required />
+              </div>
+              <div class="field">
+                <label for="register-confirm">Confirm password</label>
+                <input id="register-confirm" type="password" placeholder="Repeat password" required />
+              </div>
+              <label class="auth-check" for="register-remember">
+                <input id="register-remember" type="checkbox" checked />
+                <span>Create and keep my account on this device</span>
+              </label>
+              <div class="auth-actions">
+                <button class="button button-secondary" type="submit">Create Account</button>
+                <a class="button button-ghost" href="./index.html#earn">See earning flow</a>
+              </div>
+            </form>
+          </article>
+        </div>
+      </section>
+
+      <section class="section section-soft">
+        <div class="page-grid">
+          <article class="page-card">
+            <p class="section-kicker">Current Session</p>
+            <h2 id="session-title">Not signed in</h2>
+            <div class="page-list">
+              <div class="page-list__item" id="session-email">Email not saved yet.</div>
+              <div class="page-list__item" id="session-since">Sign in or create an account to activate this area.</div>
+            </div>
+            <div class="auth-actions" style="margin-top: 14px;">
+              <button class="button button-ghost" type="button" id="logout-button">Logout</button>
+              <a class="button button-primary" href="./index.html">Back to Home</a>
+            </div>
+          </article>
+
+          <article class="page-card">
             <p class="section-kicker">What you get</p>
             <h2>Account space for the next stage</h2>
             <div class="step-list">
@@ -132,11 +188,11 @@
     <footer class="footer">
       <div>
         <p class="brand-name">CouponsWorld.in</p>
-        <p class="footer-copy">Login page placeholder for the future account flow.</p>
+        <p class="footer-copy">Login page placeholder for a browser-based account flow.</p>
       </div>
       <div class="footer-links">
         <a href="./index.html">Home</a>
-        <a href="./earn.html">Earn</a>
+        <a href="./index.html#earn">Earn</a>
         <a href="#top" class="link-arrow">Back to top</a>
       </div>
     </footer>
