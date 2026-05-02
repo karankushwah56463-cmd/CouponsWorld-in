@@ -9,10 +9,27 @@ const storeFilters = [...document.querySelectorAll("#store-filters .chip")];
 const offerTabs = [...document.querySelectorAll("#offer-tabs .chip")];
 const profitInputs = [...document.querySelectorAll(".profit-calculator input[type='range']")];
 const profitTotal = document.querySelector("#profit-total");
+const loginForm = document.querySelector("#login-form");
+const registerForm = document.querySelector("#register-form");
+const logoutButton = document.querySelector("#logout-button");
+const sessionTitle = document.querySelector("#session-title");
+const sessionEmail = document.querySelector("#session-email");
+const sessionPhone = document.querySelector("#session-phone");
+const sessionProvider = document.querySelector("#session-provider");
+const sessionSince = document.querySelector("#session-since");
+const headerLoginLink = document.querySelector('.header-actions a[href="./login.html"]');
+const googleLoginButton = document.querySelector("#google-login-button");
+const googleRegisterButton = document.querySelector("#google-register-button");
 
 const toastLayer = document.createElement("div");
 toastLayer.className = "toast-stack";
 document.body.appendChild(toastLayer);
+
+const authKeys = {
+  users: "cw_users_v1",
+  session: "cw_session_v1",
+  tempSession: "cw_session_temp_v1",
+};
 
 function showToast(message) {
   const toast = document.createElement("div");
@@ -28,6 +45,94 @@ function showToast(message) {
     toast.classList.remove("is-visible");
     window.setTimeout(() => toast.remove(), 220);
   }, 1800);
+}
+
+function showAuthPopup(title, message) {
+  const popup = document.createElement("div");
+  popup.className = "toast auth-popup";
+  const heading = document.createElement("strong");
+  heading.textContent = title;
+  const body = document.createElement("span");
+  body.textContent = message;
+  popup.append(heading, body);
+  toastLayer.appendChild(popup);
+
+  requestAnimationFrame(() => {
+    popup.classList.add("is-visible");
+  });
+
+  window.setTimeout(() => {
+    popup.classList.remove("is-visible");
+    window.setTimeout(() => popup.remove(), 220);
+  }, 2200);
+}
+
+function safeReadJSON(key, fallback) {
+  try {
+    const raw = window.localStorage.getItem(key);
+    return raw ? JSON.parse(raw) : fallback;
+  } catch {
+    return fallback;
+  }
+}
+
+function safeWriteJSON(key, value) {
+  window.localStorage.setItem(key, JSON.stringify(value));
+}
+
+function normalizeEmail(value) {
+  return value.trim().toLowerCase();
+}
+
+function isGmailAddress(value) {
+  return /@gmail\.com$/i.test(value);
+}
+
+function composeDisplayName(firstName, surname) {
+  return [firstName, surname].filter(Boolean).join(" ").trim();
+}
+
+function getUsers() {
+  return safeReadJSON(authKeys.users, []);
+}
+
+function saveUsers(users) {
+  safeWriteJSON(authKeys.users, users);
+}
+
+function getSession() {
+  return safeReadJSON(authKeys.session, null) || safeReadJSON(authKeys.tempSession, null);
+}
+
+function saveSession(session, remember = true) {
+  if (remember) {
+    window.localStorage.removeItem(authKeys.tempSession);
+    safeWriteJSON(authKeys.session, session);
+    return;
+  }
+
+  window.localStorage.removeItem(authKeys.session);
+  safeWriteJSON(authKeys.tempSession, session);
+}
+
+function clearSession() {
+  window.localStorage.removeItem(authKeys.session);
+  window.localStorage.removeItem(authKeys.tempSession);
+}
+
+function formatSessionDate(isoString) {
+  if (!isoString) {
+    return "Session time unavailable";
+  }
+
+  try {
+    return new Intl.DateTimeFormat("en-IN", {
+      dateStyle: "medium",
+      timeStyle: "short",
+    }).format(new Date(isoString));
+  } catch {
+    return isoString;
+  }
 }
 
 function formatRupees(value) {
@@ -564,6 +669,339 @@ function renderOffers() {
     .join("");
 }
 
+function updateHeaderAuthState() {
+  if (!headerLoginLink) {
+    return;
+  }
+
+  const session = getSession();
+
+  if (session) {
+    const profileName = session.name ? session.name.split(" ")[0] : "Profile";
+    headerLoginLink.textContent = `Profile · ${profileName}`;
+    headerLoginLink.href = "./login.html#session-title";
+    delete headerLoginLink.dataset.authAction;
+    headerLoginLink.setAttribute("aria-label", `Open profile for ${session.name || "current user"}`);
+  } else {
+    headerLoginLink.textContent = "Login";
+    headerLoginLink.href = "./login.html";
+    delete headerLoginLink.dataset.authAction;
+    headerLoginLink.removeAttribute("aria-label");
+  }
+}
+
+function renderAuthStatus() {
+  const session = getSession();
+
+  if (sessionTitle) {
+    sessionTitle.textContent = session ? `Signed in as ${session.name}` : "Not signed in";
+  }
+
+  if (sessionEmail) {
+    sessionEmail.textContent = session ? `Email: ${session.email}` : "Email not saved yet.";
+  }
+
+  if (sessionPhone) {
+    sessionPhone.textContent = session && session.phone ? `Mobile: ${session.phone}` : "Mobile number not saved yet.";
+  }
+
+  if (sessionProvider) {
+    const providerLabel = session?.provider === "google" ? "Gmail quick signup" : "Email/password signup";
+    sessionProvider.textContent = session ? `Provider: ${providerLabel}` : "Provider not set yet.";
+  }
+
+  if (sessionSince) {
+    sessionSince.textContent = session
+      ? `Signed in on ${formatSessionDate(session.createdAt)}`
+      : "Sign in or create an account to activate this area.";
+  }
+
+  if (logoutButton) {
+    logoutButton.textContent = "Logout";
+    logoutButton.disabled = !session;
+  }
+}
+
+function handleLogout(event) {
+  if (event) {
+    event.preventDefault();
+  }
+
+  const session = getSession();
+  if (!session) {
+    showToast("No active session");
+    return;
+  }
+
+  clearSession();
+  updateHeaderAuthState();
+  renderAuthStatus();
+  showToast("Logged out");
+}
+
+function handleRegister(event) {
+  event.preventDefault();
+
+  if (!registerForm) {
+    return;
+  }
+
+  const firstName = document.querySelector("#register-first-name")?.value.trim();
+  const surname = document.querySelector("#register-surname")?.value.trim();
+  const phone = document.querySelector("#register-phone")?.value.trim();
+  const email = document.querySelector("#register-email")?.value.trim();
+  const password = document.querySelector("#register-password")?.value;
+  const confirm = document.querySelector("#register-confirm")?.value;
+  const remember = document.querySelector("#register-remember")?.checked ?? true;
+  const displayName = composeDisplayName(firstName, surname);
+
+  if (!firstName || !surname || !phone || !email || !password || !confirm) {
+    showToast("Fill all account fields");
+    return;
+  }
+
+  if (!/^[0-9+\-\s()]{8,}$/.test(phone)) {
+    showToast("Enter a valid mobile number");
+    return;
+  }
+
+  if (password.length < 4) {
+    showToast("Use at least 4 characters");
+    return;
+  }
+
+  if (password !== confirm) {
+    showToast("Passwords do not match");
+    return;
+  }
+
+  const normalizedEmail = normalizeEmail(email);
+  const users = getUsers();
+  const existing = users.find((user) => user.email === normalizedEmail);
+
+  if (existing) {
+    showToast("Account already exists, please sign in");
+    return;
+  }
+
+  const user = {
+    firstName,
+    surname,
+    name: displayName,
+    phone,
+    email: normalizedEmail,
+    password,
+    provider: "email",
+    createdAt: new Date().toISOString(),
+  };
+
+  users.push(user);
+  saveUsers(users);
+  saveSession({
+    name: user.name,
+    email: user.email,
+    phone: user.phone,
+    provider: user.provider,
+    createdAt: user.createdAt,
+  }, remember);
+
+  updateHeaderAuthState();
+  renderAuthStatus();
+  showAuthPopup("Account created", `${user.name}, your profile is ready. Start earning now.`);
+
+  window.setTimeout(() => {
+    window.location.href = "./index.html";
+  }, 1300);
+}
+
+function handleLogin(event) {
+  event.preventDefault();
+
+  if (!loginForm) {
+    return;
+  }
+
+  const email = document.querySelector("#login-email")?.value.trim();
+  const password = document.querySelector("#login-password")?.value;
+  const remember = document.querySelector("#login-remember")?.checked ?? true;
+
+  if (!email || !password) {
+    showToast("Enter email and password");
+    return;
+  }
+
+  const normalizedEmail = normalizeEmail(email);
+  const user = getUsers().find(
+    (item) => item.email === normalizedEmail && item.password === password
+  );
+
+  if (!user) {
+    showToast("Account not found");
+    return;
+  }
+
+  saveSession({
+    name: user.name,
+    email: user.email,
+    phone: user.phone,
+    provider: user.provider || "email",
+    createdAt: user.createdAt || new Date().toISOString(),
+  }, remember);
+
+  updateHeaderAuthState();
+  renderAuthStatus();
+  showAuthPopup("Signed in", `${user.name}, your profile is ready.`);
+
+  window.setTimeout(() => {
+    window.location.href = "./index.html";
+  }, 1100);
+}
+
+function handleGoogleRegister() {
+  if (!registerForm) {
+    return;
+  }
+
+  const firstName = document.querySelector("#register-first-name")?.value.trim();
+  const surname = document.querySelector("#register-surname")?.value.trim();
+  const phone = document.querySelector("#register-phone")?.value.trim();
+  const email = document.querySelector("#register-email")?.value.trim();
+  const password = document.querySelector("#register-password")?.value?.trim() || "";
+  const remember = document.querySelector("#register-remember")?.checked ?? true;
+  const displayName = composeDisplayName(firstName, surname);
+
+  if (!firstName || !surname || !phone || !email) {
+    showToast("Fill name, surname, number, and email");
+    return;
+  }
+
+  if (!isGmailAddress(email)) {
+    showToast("Use a Gmail address for Google signup");
+    return;
+  }
+
+  if (!/^[0-9+\-\s()]{8,}$/.test(phone)) {
+    showToast("Enter a valid mobile number");
+    return;
+  }
+
+  const normalizedEmail = normalizeEmail(email);
+  const users = getUsers();
+  const existing = users.find((user) => user.email === normalizedEmail);
+
+  if (existing) {
+    showToast("Account already exists, please sign in");
+    return;
+  }
+
+  const user = {
+    firstName,
+    surname,
+    name: displayName,
+    phone,
+    email: normalizedEmail,
+    password,
+    provider: "google",
+    createdAt: new Date().toISOString(),
+  };
+
+  users.push(user);
+  saveUsers(users);
+  saveSession({
+    name: user.name,
+    email: user.email,
+    phone: user.phone,
+    provider: user.provider,
+    createdAt: user.createdAt,
+  }, remember);
+
+  updateHeaderAuthState();
+  renderAuthStatus();
+  showAuthPopup("Account created", `${user.name}, your Gmail profile is ready. Start earning now.`);
+
+  window.setTimeout(() => {
+    window.location.href = "./index.html";
+  }, 1300);
+}
+
+function handleGoogleLogin() {
+  if (!loginForm) {
+    return;
+  }
+
+  const email = document.querySelector("#login-email")?.value.trim();
+  const remember = document.querySelector("#login-remember")?.checked ?? true;
+
+  if (!email) {
+    showToast("Enter your Gmail address");
+    return;
+  }
+
+  if (!isGmailAddress(email)) {
+    showToast("Use a Gmail address here");
+    return;
+  }
+
+  const normalizedEmail = normalizeEmail(email);
+  const user = getUsers().find((item) => item.email === normalizedEmail);
+
+  if (!user || user.provider !== "google") {
+    showToast("Create your Gmail account first");
+    return;
+  }
+
+  saveSession({
+    name: user.name,
+    email: user.email,
+    phone: user.phone,
+    provider: user.provider,
+    createdAt: user.createdAt || new Date().toISOString(),
+  }, remember);
+
+  updateHeaderAuthState();
+  renderAuthStatus();
+  showAuthPopup("Signed in", `${user.name}, your profile is ready.`);
+
+  window.setTimeout(() => {
+    window.location.href = "./index.html";
+  }, 1100);
+}
+
+function bindAuthState() {
+  updateHeaderAuthState();
+  renderAuthStatus();
+
+  if (loginForm) {
+    loginForm.addEventListener("submit", handleLogin);
+  }
+
+  if (registerForm) {
+    registerForm.addEventListener("submit", handleRegister);
+  }
+
+  if (googleRegisterButton) {
+    googleRegisterButton.addEventListener("click", handleGoogleRegister);
+  }
+
+  if (googleLoginButton) {
+    googleLoginButton.addEventListener("click", handleGoogleLogin);
+  }
+
+  if (logoutButton) {
+    logoutButton.addEventListener("click", handleLogout);
+  }
+
+  document.addEventListener("click", (event) => {
+    const logoutLink = event.target.closest('[data-auth-action="logout"]');
+    if (!logoutLink) {
+      return;
+    }
+
+    event.preventDefault();
+    handleLogout();
+  });
+}
+
 if (storeFilters.length) {
   storeFilters.forEach((chip) => {
     chip.addEventListener("click", () => {
@@ -625,6 +1063,8 @@ if (searchForm && searchInput) {
     renderOffers();
   });
 }
+
+bindAuthState();
 
 renderStores();
 renderCoupons();

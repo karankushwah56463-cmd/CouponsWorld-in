@@ -211,6 +211,13 @@ img {
   transform: translateY(-2px);
 }
 
+.button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
 .button-primary {
   background: linear-gradient(135deg, var(--primary), var(--primary-3));
   color: #fff;
@@ -1177,6 +1184,23 @@ img {
     transform 0.22s ease;
 }
 
+.auth-popup {
+  min-width: 240px;
+  background: rgba(20, 93, 63, 0.97);
+  display: grid;
+  gap: 6px;
+}
+
+.auth-popup strong {
+  font-size: 0.98rem;
+}
+
+.auth-popup span {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
 .toast.is-visible {
   opacity: 1;
   transform: translateY(0) scale(1);
@@ -1263,6 +1287,10 @@ img {
   border: 1px solid rgba(217, 230, 245, 0.95);
 }
 
+.auth-note strong {
+  color: var(--text);
+}
+
 .step-list__item {
   display: flex;
   gap: 12px;
@@ -1304,6 +1332,12 @@ img {
   gap: 12px;
 }
 
+.field-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 12px;
+}
+
 .field label {
   font-size: 0.88rem;
   font-weight: 700;
@@ -1336,6 +1370,60 @@ img {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
+}
+
+.auth-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.4;
+}
+
+.auth-check input {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: var(--primary-3);
+}
+
+.auth-session-chip {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: #edf5ff;
+  color: var(--primary-3);
+  font-weight: 800;
+}
+
+.auth-session-chip.is-active {
+  background: #ecfdf3;
+  color: var(--success);
+}
+
+.auth-empty {
+  color: var(--muted);
+}
+
+.auth-metadata {
+  display: grid;
+  gap: 10px;
+}
+
+.auth-muted {
+  color: var(--muted);
+}
+
+.auth-status-panel {
+  display: grid;
+  gap: 12px;
+}
+
+.auth-status-panel .page-list__item {
+  background: #ffffff;
 }
 
 .sr-only {
@@ -1463,6 +1551,10 @@ img {
   .hero-copy,
   .section-soft {
     padding: 18px;
+  }
+
+  .field-grid {
+    grid-template-columns: 1fr;
   }
 
   .hero {
