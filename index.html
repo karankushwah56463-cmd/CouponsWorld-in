@@ -22,11 +22,6 @@
     ></script>
   </head>
   <body id="top">
-    <div class="announcement">
-      <span>Discover the best affiliate coupons</span>
-      <span>CouponsWorld.in - deals, discounts, and cashback in one place</span>
-    </div>
-
     <header class="site-header">
       <a class="brand" href="#top" aria-label="CouponsWorld.in home">
         <img class="brand-mark" src="./logo.png" alt="CouponsWorld.in logo" />
@@ -48,7 +43,7 @@
       <div class="header-actions">
         <a class="button button-ghost" href="./login.html">Login</a>
         <a class="button button-ghost" href="#stores">Top Stores</a>
-        <a class="button button-primary" href="#earn">Create Profit Link</a>
+        <a class="button button-primary" href="#profit-link-builder">Create Profit Link</a>
       </div>
     </header>
 
@@ -106,7 +101,7 @@
               <span>Confirmed Profit</span>
             </div>
             <div class="featured-coupon__actions">
-              <a class="button button-secondary" href="#earn">Create link</a>
+              <a class="button button-secondary" href="#profit-link-builder">Create link</a>
               <a class="button button-ghost" href="#stores">Explore brands</a>
             </div>
           </article>
@@ -201,6 +196,73 @@
             <span>3</span>
             <h3>Get confirmed profit</h3>
             <p>Track pending and confirmed profit until it is ready to withdraw.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section section-soft" id="profit-link-builder">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Create Profit Link</p>
+            <h2>Build a shareable link in one step</h2>
+            <p class="section-copy">
+              Pick a store, add a campaign name, and generate a trackable link that you can copy and share right away.
+            </p>
+          </div>
+          <a href="#stores" class="link-arrow">Choose a store</a>
+        </div>
+
+        <div class="link-builder">
+          <form class="link-builder__form" id="profit-link-form">
+            <div class="field">
+              <label for="profit-link-store">Store</label>
+              <select id="profit-link-store">
+                <option value="amazon">Amazon</option>
+                <option value="flipkart">Flipkart</option>
+                <option value="myntra">Myntra</option>
+                <option value="ajio">Ajio</option>
+                <option value="makemytrip">MakeMyTrip</option>
+                <option value="zomato">Zomato</option>
+                <option value="bigbasket">BigBasket</option>
+                <option value="nykaa">Nykaa</option>
+                <option value="godaddy">GoDaddy</option>
+                <option value="croma">Croma</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="profit-link-campaign">Campaign name</label>
+              <input id="profit-link-campaign" type="text" placeholder="summer-sale, weekend-deal, etc." />
+            </div>
+
+            <div class="field">
+              <label for="profit-link-ref">Referral name</label>
+              <input id="profit-link-ref" type="text" placeholder="your profile name" />
+            </div>
+
+            <div class="field">
+              <label for="profit-link-destination">Where should it open?</label>
+              <select id="profit-link-destination">
+                <option value="">Home page</option>
+                <option value="stores">Stores section</option>
+                <option value="coupons">Coupons section</option>
+                <option value="offers">Offers section</option>
+                <option value="earn">Earn section</option>
+              </select>
+            </div>
+
+            <div class="auth-actions">
+              <button class="button button-primary" type="submit">Generate Profit Link</button>
+              <button class="button button-ghost" type="button" id="profit-link-copy">Copy Link</button>
+            </div>
+          </form>
+
+          <article class="link-builder__preview">
+            <p class="panel-label">Generated link</p>
+            <input id="profit-link-output" class="link-output" type="text" readonly value="" />
+            <p class="link-helper" id="profit-link-note">
+              We’ll add your store, campaign, and referral name into a shareable URL.
+            </p>
           </article>
         </div>
       </section>
