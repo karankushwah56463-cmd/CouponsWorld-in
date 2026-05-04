@@ -21,7 +21,9 @@ const headerLoginLink = document.querySelector('.header-actions a[href="./login.
 const googleLoginButton = document.querySelector("#google-login-button");
 const googleRegisterButton = document.querySelector("#google-register-button");
 const profitLinkForm = document.querySelector("#profit-link-form");
+const profitLinkSource = document.querySelector("#profit-link-source");
 const profitLinkStore = document.querySelector("#profit-link-store");
+const profitLinkAmazonTag = document.querySelector("#profit-link-amazon-tag");
 const profitLinkCampaign = document.querySelector("#profit-link-campaign");
 const profitLinkRef = document.querySelector("#profit-link-ref");
 const profitLinkDestination = document.querySelector("#profit-link-destination");
@@ -111,6 +113,84 @@ function slugify(value) {
     .replace(/^-+|-+$/g, "");
 }
 
+function normalizeProductUrl(value) {
+  const raw = value.trim();
+  if (!raw) {
+    return "";
+  }
+
+  const candidate = /^[a-z][a-z0-9+.-]*:\/\//i.test(raw) ? raw : `https://${raw}`;
+
+  try {
+    const url = new URL(candidate);
+    if (url.protocol !== "http:" && url.protocol !== "https:") {
+      return "";
+    }
+    return url.href;
+  } catch {
+    return "";
+  }
+}
+
+function detectStoreFromUrl(value) {
+  if (!value) {
+    return "";
+  }
+
+  try {
+    const host = new URL(value).hostname.toLowerCase();
+    const storeMap = [
+      ["amazon", ["amazon.", "amzn."]],
+      ["flipkart", ["flipkart."]],
+      ["myntra", ["myntra."]],
+      ["ajio", ["ajio."]],
+      ["makemytrip", ["makemytrip.", "goibibo."]],
+      ["zomato", ["zomato."]],
+      ["bigbasket", ["bigbasket."]],
+      ["nykaa", ["nykaa."]],
+      ["godaddy", ["godaddy."]],
+      ["croma", ["croma."]],
+    ];
+
+    for (const [store, patterns] of storeMap) {
+      if (patterns.some((pattern) => host.includes(pattern))) {
+        return store;
+      }
+    }
+  } catch {
+    return "";
+  }
+
+  return "";
+}
+
+function sanitizeAmazonTag(value) {
+  return value
+    .trim()
+    .replace(/[^a-z0-9._-]/gi, "")
+    .slice(0, 64);
+}
+
+function applyAmazonTrackingTag(urlValue, tagValue) {
+  const tag = sanitizeAmazonTag(tagValue || "");
+  if (!tag) {
+    return urlValue;
+  }
+
+  try {
+    const url = new URL(urlValue);
+    const host = url.hostname.toLowerCase();
+    if (!host.includes("amazon.") && !host.includes("amzn.")) {
+      return urlValue;
+    }
+
+    url.searchParams.set("tag", tag);
+    return url.href;
+  } catch {
+    return urlValue;
+  }
+}
+
 function getShareBaseUrl() {
   return new URL("./index.html", window.location.href);
 }
@@ -126,16 +206,31 @@ function getProfitLinkDefaults() {
 function buildProfitLink() {
   const baseUrl = getShareBaseUrl();
   const defaults = getProfitLinkDefaults();
-  const store = profitLinkStore?.value?.trim() || "amazon";
+  const sourceUrl = normalizeProductUrl(profitLinkSource?.value || "");
+  const detectedStore = detectStoreFromUrl(sourceUrl);
+  const store = detectedStore || profitLinkStore?.value?.trim() || "amazon";
+  const amazonTag = sanitizeAmazonTag(profitLinkAmazonTag?.value || "");
   const campaign = slugify(profitLinkCampaign?.value || defaults.campaign);
   const ref = slugify(profitLinkRef?.value || defaults.ref);
   const destination = profitLinkDestination?.value || "";
+  const targetUrl =
+    sourceUrl
+      ? applyAmazonTrackingTag(sourceUrl, amazonTag)
+      : store === "amazon"
+        ? applyAmazonTrackingTag("https://www.amazon.in/", amazonTag)
+        : `https://www.${store}.com/`;
+
+  baseUrl.searchParams.set("to", targetUrl);
 
   baseUrl.searchParams.set("store", store);
+  if (amazonTag) {
+    baseUrl.searchParams.set("tag", amazonTag);
+  }
   baseUrl.searchParams.set("campaign", campaign);
   baseUrl.searchParams.set("ref", ref);
   baseUrl.searchParams.set("src", "profit-link");
-  baseUrl.hash = destination;
+  baseUrl.searchParams.set("kind", sourceUrl ? "product" : "store");
+  baseUrl.hash = destination || "profit-link-builder";
 
   return baseUrl.href;
 }
@@ -149,8 +244,8 @@ function updateProfitLinkOutput(message) {
   profitLinkOutput.value = link;
 
   if (profitLinkNote) {
-    profitLinkNote.textContent =
-      message || "Copy this link and share it to track the campaign.";
+    profitLinkNote.textContent = message
+      || "Paste a product link and we’ll wrap it with your Amazon tag, store, campaign, and referral name.";
   }
 
   return link;
@@ -175,6 +270,36 @@ async function copyProfitLink() {
   profitLinkOutput.focus();
   profitLinkOutput.select();
   showToast("Select and copy the link");
+}
+
+function handleIncomingProfitLink() {
+  const params = new URL(window.location.href).searchParams;
+  const target = params.get("to");
+  if (!target) {
+    return;
+  }
+
+  let destination = target;
+  try {
+    destination = decodeURIComponent(target);
+  } catch {
+    destination = target;
+  }
+
+  try {
+    const parsed = new URL(destination);
+    if (parsed.protocol !== "http:" && parsed.protocol !== "https:") {
+      return;
+    }
+    destination = parsed.href;
+  } catch {
+    return;
+  }
+
+  showAuthPopup("Profit link opened", "Redirecting to your product page.");
+  window.setTimeout(() => {
+    window.location.assign(destination);
+  }, 1300);
 }
 
 function syncSignupToGoogleSheets(payload) {
@@ -1147,7 +1272,17 @@ function bindAuthState() {
     });
   }
 
-  [profitLinkStore, profitLinkCampaign, profitLinkRef, profitLinkDestination].forEach((field) => {
+  if (profitLinkSource) {
+    profitLinkSource.addEventListener("input", () => {
+      const detectedStore = detectStoreFromUrl(normalizeProductUrl(profitLinkSource.value));
+      if (detectedStore && profitLinkStore) {
+        profitLinkStore.value = detectedStore;
+      }
+      updateProfitLinkOutput();
+    });
+  }
+
+  [profitLinkStore, profitLinkAmazonTag, profitLinkCampaign, profitLinkRef, profitLinkDestination].forEach((field) => {
     field?.addEventListener("input", () => updateProfitLinkOutput());
     field?.addEventListener("change", () => updateProfitLinkOutput());
   });
@@ -1230,6 +1365,8 @@ bindAuthState();
 if (profitLinkOutput) {
   updateProfitLinkOutput();
 }
+
+handleIncomingProfitLink();
 
 renderStores();
 renderCoupons();

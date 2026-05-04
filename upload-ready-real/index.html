@@ -204,16 +204,25 @@
         <div class="section-head">
           <div>
             <p class="section-kicker">Create Profit Link</p>
-            <h2>Build a shareable link in one step</h2>
+            <h2>Make your own Profit Links in Seconds</h2>
             <p class="section-copy">
-              Pick a store, add a campaign name, and generate a trackable link that you can copy and share right away.
+              Paste a homepage or product link, pick a store, and we’ll turn it into a shareable profit link.
             </p>
           </div>
-          <a href="#stores" class="link-arrow">Choose a store</a>
+          <a href="#stores" class="link-arrow">See partners & profit rates</a>
         </div>
 
         <div class="link-builder">
           <form class="link-builder__form" id="profit-link-form">
+            <div class="field">
+              <label for="profit-link-source">Product link</label>
+              <input
+                id="profit-link-source"
+                type="url"
+                placeholder="Paste homepage or product link here"
+              />
+            </div>
+
             <div class="field">
               <label for="profit-link-store">Store</label>
               <select id="profit-link-store">
@@ -231,12 +240,25 @@
             </div>
 
             <div class="field">
-              <label for="profit-link-campaign">Campaign name</label>
-              <input id="profit-link-campaign" type="text" placeholder="summer-sale, weekend-deal, etc." />
+              <label for="profit-link-amazon-tag">Amazon tracking ID / tag</label>
+              <input
+                id="profit-link-amazon-tag"
+                type="text"
+                placeholder="yourtag-21"
+              />
             </div>
 
             <div class="field">
-              <label for="profit-link-ref">Referral name</label>
+              <label for="profit-link-campaign">Campaign / note</label>
+              <input
+                id="profit-link-campaign"
+                type="text"
+                placeholder="summer-sale, weekend-deal, etc."
+              />
+            </div>
+
+            <div class="field">
+              <label for="profit-link-ref">Your profile name</label>
               <input id="profit-link-ref" type="text" placeholder="your profile name" />
             </div>
 
@@ -252,16 +274,16 @@
             </div>
 
             <div class="auth-actions">
-              <button class="button button-primary" type="submit">Generate Profit Link</button>
+              <button class="button button-primary" type="submit">Make Profit Link</button>
               <button class="button button-ghost" type="button" id="profit-link-copy">Copy Link</button>
             </div>
           </form>
 
           <article class="link-builder__preview">
             <p class="panel-label">Generated link</p>
-            <input id="profit-link-output" class="link-output" type="text" readonly value="" />
+            <textarea id="profit-link-output" class="link-output" readonly></textarea>
             <p class="link-helper" id="profit-link-note">
-              We’ll add your store, campaign, and referral name into a shareable URL.
+              Paste a product link and we’ll wrap it with your store, campaign, and referral name.
             </p>
           </article>
         </div>
