@@ -1,0 +1,72 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">CouponsWorld.in coupon badge</title>
+  <desc id="desc">A premium coupon ticket icon with a percent sign for CouponsWorld.in.</desc>
+  <defs>
+    <linearGradient id="bg" x1="120" y1="120" x2="920" y2="920" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#050505"/>
+      <stop offset="1" stop-color="#6B6B6B"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(512 430) rotate(90) scale(310 310)">
+      <stop stop-color="#FFFFFF" stop-opacity="0.14"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="shadow" x="156" y="190" width="712" height="690" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#000000" flood-opacity="0.28"/>
+    </filter>
+  </defs>
+
+  <rect width="1024" height="1024" fill="url(#bg)"/>
+  <circle cx="512" cy="420" r="310" fill="url(#glow)"/>
+
+  <g filter="url(#shadow)">
+    <path
+      d="M292 328H732C756 328 776 348 776 372V402C735 402 703 434 703 475C703 516 735 548 776 548V652C735 652 703 684 703 725C703 766 735 798 776 798V828C776 852 756 872 732 872H292C268 872 248 852 248 828V798C289 798 321 766 321 725C321 684 289 652 248 652V548C289 548 321 516 321 475C321 434 289 402 248 402V372C248 348 268 328 292 328Z"
+      fill="#2A2A2A"
+      stroke="#F8F8F8"
+      stroke-width="18"
+      stroke-linejoin="round"
+    />
+
+    <rect x="392" y="422" width="240" height="224" rx="4" fill="#FF3131"/>
+
+    <rect x="376" y="406" width="272" height="256" rx="6" fill="none" stroke="#F8F8F8" stroke-width="12" stroke-dasharray="16 16" stroke-linejoin="round"/>
+
+    <g fill="#F8F8F8">
+      <rect x="384" y="414" width="14" height="14" />
+      <rect x="422" y="414" width="14" height="14" />
+      <rect x="460" y="414" width="14" height="14" />
+      <rect x="498" y="414" width="14" height="14" />
+      <rect x="536" y="414" width="14" height="14" />
+      <rect x="574" y="414" width="14" height="14" />
+      <rect x="612" y="414" width="14" height="14" />
+
+      <rect x="384" y="632" width="14" height="14" />
+      <rect x="422" y="632" width="14" height="14" />
+      <rect x="460" y="632" width="14" height="14" />
+      <rect x="498" y="632" width="14" height="14" />
+      <rect x="536" y="632" width="14" height="14" />
+      <rect x="574" y="632" width="14" height="14" />
+      <rect x="612" y="632" width="14" height="14" />
+
+      <rect x="376" y="422" width="14" height="14" />
+      <rect x="376" y="460" width="14" height="14" />
+      <rect x="376" y="498" width="14" height="14" />
+      <rect x="376" y="536" width="14" height="14" />
+      <rect x="376" y="574" width="14" height="14" />
+      <rect x="376" y="612" width="14" height="14" />
+
+      <rect x="634" y="422" width="14" height="14" />
+      <rect x="634" y="460" width="14" height="14" />
+      <rect x="634" y="498" width="14" height="14" />
+      <rect x="634" y="536" width="14" height="14" />
+      <rect x="634" y="574" width="14" height="14" />
+      <rect x="634" y="612" width="14" height="14" />
+    </g>
+
+    <path d="M470 575L555 481L584 508L499 602L470 575Z" fill="#F8F8F8"/>
+    <circle cx="485" cy="492" r="34" fill="#F8F8F8"/>
+    <circle cx="538" cy="591" r="34" fill="#F8F8F8"/>
+    <circle cx="485" cy="492" r="14" fill="#FF3131"/>
+    <circle cx="538" cy="591" r="14" fill="#FF3131"/>
+  </g>
+</svg>

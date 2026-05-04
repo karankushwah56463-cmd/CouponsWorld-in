@@ -1,0 +1,7 @@
+<svg width="256" height="256" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Myntra logo</title>
+  <desc id="desc">Local brand style logo for Myntra.</desc>
+  <rect width="256" height="256" rx="52" fill="#111111"/>
+  <text x="128" y="148" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="56" font-weight="900" fill="#FF6FA3">MY</text>
+  <path d="M58 72H198" stroke="#FF6FA3" stroke-width="10" stroke-linecap="round"/>
+</svg>

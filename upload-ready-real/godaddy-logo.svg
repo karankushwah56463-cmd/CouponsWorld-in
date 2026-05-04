@@ -1,0 +1,7 @@
+<svg width="256" height="256" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">GoDaddy logo</title>
+  <desc id="desc">Local brand style logo for GoDaddy.</desc>
+  <rect width="256" height="256" rx="52" fill="#111111"/>
+  <text x="128" y="143" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="46" font-weight="900" fill="#8EDB3A">GD</text>
+  <path d="M72 180C98 154 158 154 184 180" fill="none" stroke="#8EDB3A" stroke-width="10" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,8 @@
+<svg width="256" height="256" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Croma logo</title>
+  <desc id="desc">Local brand style logo for Croma.</desc>
+  <rect width="256" height="256" rx="52" fill="#0B2F6A"/>
+  <circle cx="128" cy="128" r="74" fill="none" stroke="#FFD93D" stroke-width="14"/>
+  <path d="M157 89C147 82 135 79 122 79C96 79 78 96 78 128C78 160 97 177 123 177C136 177 148 173 158 165" fill="none" stroke="#FFFFFF" stroke-width="12" stroke-linecap="round"/>
+  <circle cx="173" cy="89" r="10" fill="#FFD93D"/>
+</svg>
