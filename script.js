@@ -22,7 +22,8 @@ const googleLoginButton = document.querySelector("#google-login-button");
 const googleRegisterButton = document.querySelector("#google-register-button");
 const sheetsEndpoint =
   window.CW_SHEETS_WEBAPP_URL ||
-  "https://script.google.com/macros/s/AKfycbztIckf0ahDvT37VPiMtoq61QZTla_aBgE72svCKV_GjHAioMUVBPNqDwC6SwdrLEsF/exec";
+  "  "https://script.google.com/macros/s/AKfycbztIckf0ahDvT37VPiMtoq61QZTla_aBgE72svCKV_GjHAioMUVBPNqDwC6SwdrLEsF/exec";
+
 
 const toastLayer = document.createElement("div");
 toastLayer.className = "toast-stack";
