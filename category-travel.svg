@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-label="Flights and Hotels">
+  <defs>
+    <radialGradient id="g" cx="35%" cy="30%" r="75%">
+      <stop offset="0%" stop-color="#e5ebf3"/>
+      <stop offset="100%" stop-color="#aab5c7"/>
+    </radialGradient>
+  </defs>
+  <circle cx="120" cy="120" r="118" fill="url(#g)"/>
+  <path d="M68 136l104-44 4 12-38 24 16 28-12 6-20-24-28 14-8-16 20-18z" fill="#fff"/>
+  <circle cx="166" cy="84" r="10" fill="#7a8598"/>
+  <text x="120" y="198" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#405066">TRAVEL</text>
+</svg>

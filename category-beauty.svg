@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-label="Beauty and Grooming">
+  <defs>
+    <radialGradient id="g" cx="35%" cy="30%" r="75%">
+      <stop offset="0%" stop-color="#ffcdcf"/>
+      <stop offset="100%" stop-color="#c97c73"/>
+    </radialGradient>
+  </defs>
+  <circle cx="120" cy="120" r="118" fill="url(#g)"/>
+  <path d="M92 150l18-68 10 20 10-20 18 68z" fill="#fff"/>
+  <path d="M110 82h20l-10 22z" fill="#f8e1e0"/>
+  <circle cx="120" cy="150" r="8" fill="#c97c73"/>
+  <text x="120" y="198" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#fff">BEAUTY</text>
+</svg>

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-label="Fashion">
+  <defs>
+    <radialGradient id="g" cx="35%" cy="30%" r="75%">
+      <stop offset="0%" stop-color="#f2c7ad"/>
+      <stop offset="100%" stop-color="#c8885b"/>
+    </radialGradient>
+  </defs>
+  <circle cx="120" cy="120" r="118" fill="url(#g)"/>
+  <path d="M82 88l24-20 14 18 14-18 24 20-14 28v62H96v-62z" fill="#fff6ef" stroke="#8a4f26" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M106 88c8 10 20 10 28 0" fill="none" stroke="#8a4f26" stroke-width="4" stroke-linecap="round"/>
+  <text x="120" y="198" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#fff">FASHION</text>
+</svg>

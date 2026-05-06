@@ -1,1630 +1,293 @@
-const searchForm = document.querySelector("#search-form");
-const searchInput = document.querySelector("#search-input");
-const storeGrid = document.querySelector("#store-grid");
-const couponGrid = document.querySelector("#coupon-grid");
-const endingGrid = document.querySelector("#ending-grid");
-const cashbackGrid = document.querySelector("#cashback-grid");
-const offerGrid = document.querySelector("#offer-grid");
-const storeFilters = [...document.querySelectorAll("#store-filters .chip")];
-const offerTabs = [...document.querySelectorAll("#offer-tabs .chip")];
-const profitInputs = [...document.querySelectorAll("#earnings-calculator input[type='range']")];
-const profitTotal = document.querySelector("#earnings-total");
-const loanAmountInput = document.querySelector("#loan-amount");
-const loanRateInput = document.querySelector("#loan-rate");
-const loanTenureInput = document.querySelector("#loan-tenure");
-const loanAmountValue = document.querySelector("#loan-amount-value");
-const loanRateValue = document.querySelector("#loan-rate-value");
-const loanTenureValue = document.querySelector("#loan-tenure-value");
-const loanEmiValue = document.querySelector("#loan-emi");
-const loanInterestValue = document.querySelector("#loan-interest");
-const loanPayableValue = document.querySelector("#loan-payable");
-const loanTypeButtons = [...document.querySelectorAll(".loan-type")];
-const promoPopup = document.querySelector("#promo-popup");
-const promoPopupCloseButtons = [...document.querySelectorAll("[data-popup-close]")];
-const heroSlider = document.querySelector("#hero-slider");
-const heroSlideTrack = document.querySelector(".hero-slider__track");
-const heroSlides = [...document.querySelectorAll("[data-hero-slide]")];
-const heroDotsContainer = document.querySelector("[data-hero-dots]");
-const heroPrevButton = document.querySelector("[data-hero-prev]");
-const heroNextButton = document.querySelector("[data-hero-next]");
-const heroSlideIndex = document.querySelector("#hero-slide-index");
-const loginForm = document.querySelector("#login-form");
-const registerForm = document.querySelector("#register-form");
-const logoutButton = document.querySelector("#logout-button");
-const sessionTitle = document.querySelector("#session-title");
-const sessionEmail = document.querySelector("#session-email");
-const sessionPhone = document.querySelector("#session-phone");
-const sessionProvider = document.querySelector("#session-provider");
-const sessionSince = document.querySelector("#session-since");
-const headerLoginLink = document.querySelector('.header-actions a[href="./login.html"]');
-const googleLoginButton = document.querySelector("#google-login-button");
-const googleRegisterButton = document.querySelector("#google-register-button");
-const profitLinkForm = document.querySelector("#profit-link-form");
-const profitLinkSource = document.querySelector("#profit-link-source");
-const profitLinkStore = document.querySelector("#profit-link-store");
-const profitLinkAmazonTag = document.querySelector("#profit-link-amazon-tag");
-const profitLinkCampaign = document.querySelector("#profit-link-campaign");
-const profitLinkRef = document.querySelector("#profit-link-ref");
-const profitLinkDestination = document.querySelector("#profit-link-destination");
-const profitLinkOutput = document.querySelector("#profit-link-output");
-const profitLinkCopyButton = document.querySelector("#profit-link-copy");
-const profitLinkNote = document.querySelector("#profit-link-note");
-const sheetsEndpoint =
-  window.CW_SHEETS_WEBAPP_URL ||
-  "https://script.google.com/macros/s/AKfycbztIckf0ahDvT37VPiMtoq61QZTla_aBgE72svCKV_GjHAioMUVBPNqDwC6SwdrLEsF/exec";
+const spotlightRail = document.getElementById("spotlight-rail");
+const latestList = document.getElementById("latest-list");
+const builderForm = document.getElementById("builder-form");
+const productLinkInput = document.getElementById("product-link");
+const affiliateTagInput = document.getElementById("affiliate-tag");
+const storeSelect = document.getElementById("store-select");
+const campaignInput = document.getElementById("campaign-name");
+const outputLink = document.getElementById("output-link");
+const copyLinkButton = document.getElementById("copy-link");
+const welcomeModal = document.getElementById("welcome-modal");
+const closeModalButtons = document.querySelectorAll("[data-close-modal]");
+const filterButtons = document.querySelectorAll(".chip");
+const searchInput = document.getElementById("search-input");
 
-const toastLayer = document.createElement("div");
-toastLayer.className = "toast-stack";
-document.body.appendChild(toastLayer);
-
-const authKeys = {
-  users: "cw_users_v1",
-  session: "cw_session_v1",
-  tempSession: "cw_session_temp_v1",
+const storeData = {
+  amazon: {
+    label: "Amazon",
+    logo: "./amazon.png",
+    accent: "Up to 70% cashback",
+    url: "https://www.amazon.in/",
+  },
+  flipkart: {
+    label: "Flipkart",
+    logo: "./flipkart.png",
+    accent: "Up to 10% cashback",
+    url: "https://www.flipkart.com/",
+  },
+  myntra: {
+    label: "Myntra",
+    logo: "./myntra-logo.svg",
+    accent: "Up to 8% cashback",
+    url: "https://www.myntra.com/",
+  },
+  ajio: {
+    label: "Ajio",
+    logo: "./ajio-logo.svg",
+    accent: "Up to 15% cashback",
+    url: "https://www.ajio.com/",
+  },
+  cashback: {
+    label: "Cashback",
+    logo: "./logo.svg",
+    accent: "Best profit picks",
+    url: "#builder",
+  },
 };
 
-const uiKeys = {
-  promoPopupSeen: "cw_promo_popup_seen_v1",
-};
+const spotlightDeals = [
+  {
+    store: "amazon",
+    title: "boAt Airdopes 161 Bluetooth Earbuds",
+    price: "₹699",
+    oldPrice: "₹1,999",
+    tag: "70% OFF",
+    image: "./amazon.png",
+    filter: "amazon",
+  },
+  {
+    store: "flipkart",
+    title: "Skybags Casual Backpack",
+    price: "₹849",
+    oldPrice: "₹1,599",
+    tag: "32% OFF",
+    image: "./flipkart.png",
+    filter: "flipkart",
+  },
+  {
+    store: "myntra",
+    title: "U.S. Polo Green Solid T-Shirt",
+    price: "₹599",
+    oldPrice: "₹1,499",
+    tag: "DON'T MISS",
+    image: "./myntra-logo.svg",
+    filter: "myntra",
+  },
+];
 
-let heroSlidePosition = 0;
-let heroSlideTimer = null;
+const latestDeals = [
+  {
+    store: "amazon",
+    title: "Noise ColorFit Pulse 3 Smart Watch",
+    price: "₹1,299",
+    oldPrice: "₹2,999",
+    tag: "LIVE NOW",
+    image: "./amazon.png",
+    filter: "amazon",
+  },
+  {
+    store: "flipkart",
+    title: "Boat Bassheads Earphones",
+    price: "₹399",
+    oldPrice: "₹799",
+    tag: "TRENDING",
+    image: "./flipkart.png",
+    filter: "flipkart",
+  },
+  {
+    store: "ajio",
+    title: "Men's Casual Sneakers",
+    price: "₹999",
+    oldPrice: "₹2,499",
+    tag: "HOT DEAL",
+    image: "./ajio-logo.svg",
+    filter: "ajio",
+  },
+  {
+    store: "myntra",
+    title: "Women’s Summer Dress",
+    price: "₹799",
+    oldPrice: "₹1,899",
+    tag: "TOP PICK",
+    image: "./myntra-logo.svg",
+    filter: "myntra",
+  },
+];
 
-function showToast(message) {
-  const toast = document.createElement("div");
-  toast.className = "toast";
-  toast.textContent = message;
-  toastLayer.appendChild(toast);
+let currentFilter = "all";
 
-  requestAnimationFrame(() => {
-    toast.classList.add("is-visible");
-  });
-
-  window.setTimeout(() => {
-    toast.classList.remove("is-visible");
-    window.setTimeout(() => toast.remove(), 220);
-  }, 1800);
-}
-
-function showAuthPopup(title, message) {
-  const popup = document.createElement("div");
-  popup.className = "toast auth-popup";
-  const heading = document.createElement("strong");
-  heading.textContent = title;
-  const body = document.createElement("span");
-  body.textContent = message;
-  popup.append(heading, body);
-  toastLayer.appendChild(popup);
-
-  requestAnimationFrame(() => {
-    popup.classList.add("is-visible");
-  });
-
-  window.setTimeout(() => {
-    popup.classList.remove("is-visible");
-    window.setTimeout(() => popup.remove(), 220);
-  }, 2200);
-}
-
-function openPromoPopup() {
-  if (!promoPopup) {
-    return;
-  }
-
-  promoPopup.classList.add("is-open");
-  promoPopup.setAttribute("aria-hidden", "false");
-}
-
-function closePromoPopup() {
-  if (!promoPopup) {
-    return;
-  }
-
-  promoPopup.classList.remove("is-open");
-  promoPopup.setAttribute("aria-hidden", "true");
-  try {
-    window.sessionStorage.setItem(uiKeys.promoPopupSeen, "1");
-  } catch {
-    // ignore
-  }
-}
-
-function initPromoPopup() {
-  if (!promoPopup) {
-    return;
-  }
-
-  try {
-    if (window.sessionStorage.getItem(uiKeys.promoPopupSeen) === "1") {
-      promoPopup.setAttribute("aria-hidden", "true");
-      return;
-    }
-  } catch {
-    // ignore
-  }
-
-  window.setTimeout(openPromoPopup, 900);
-
-  promoPopupCloseButtons.forEach((button) => {
-    button.addEventListener("click", closePromoPopup);
-  });
-}
-
-function setHeroSlide(nextIndex) {
-  if (!heroSlides.length || !heroSlideTrack) {
-    return;
-  }
-
-  heroSlidePosition = (nextIndex + heroSlides.length) % heroSlides.length;
-  heroSlideTrack.style.transform = `translateX(-${heroSlidePosition * 100}%)`;
-
-  heroSlides.forEach((slide, index) => {
-    slide.classList.toggle("is-active", index === heroSlidePosition);
-  });
-
-  const dots = heroDotsContainer ? [...heroDotsContainer.querySelectorAll(".hero-dot")] : [];
-  dots.forEach((dot, index) => {
-    dot.classList.toggle("is-active", index === heroSlidePosition);
-    dot.setAttribute("aria-pressed", index === heroSlidePosition ? "true" : "false");
-  });
-
-  if (heroSlideIndex) {
-    heroSlideIndex.textContent = String(heroSlidePosition + 1).padStart(2, "0");
-  }
-}
-
-function advanceHeroSlide(direction = 1) {
-  setHeroSlide(heroSlidePosition + direction);
-}
-
-function startHeroAutoplay() {
-  if (heroSlideTimer || !heroSlides.length) {
-    return;
-  }
-
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (reduceMotion) {
-    return;
-  }
-
-  heroSlideTimer = window.setInterval(() => {
-    advanceHeroSlide(1);
-  }, 5200);
-}
-
-function stopHeroAutoplay() {
-  if (heroSlideTimer) {
-    window.clearInterval(heroSlideTimer);
-    heroSlideTimer = null;
-  }
-}
-
-function initHeroSlider() {
-  if (!heroSlides.length || !heroDotsContainer || !heroSlideTrack) {
-    return;
-  }
-
-  heroDotsContainer.innerHTML = heroSlides
-    .map(
-      (_, index) => `
-        <button
-          type="button"
-          class="hero-dot${index === 0 ? " is-active" : ""}"
-          aria-label="Go to slide ${index + 1}"
-          aria-pressed="${index === 0 ? "true" : "false"}"
-        ></button>
-      `
-    )
-    .join("");
-
-  const dots = [...heroDotsContainer.querySelectorAll(".hero-dot")];
-  dots.forEach((dot, index) => {
-    dot.addEventListener("click", () => {
-      setHeroSlide(index);
-      stopHeroAutoplay();
-      startHeroAutoplay();
-    });
-  });
-
-  heroPrevButton?.addEventListener("click", () => {
-    advanceHeroSlide(-1);
-    stopHeroAutoplay();
-    startHeroAutoplay();
-  });
-
-  heroNextButton?.addEventListener("click", () => {
-    advanceHeroSlide(1);
-    stopHeroAutoplay();
-    startHeroAutoplay();
-  });
-
-  heroSlider.addEventListener("mouseenter", stopHeroAutoplay);
-  heroSlider.addEventListener("mouseleave", startHeroAutoplay);
-  heroSlider.addEventListener("focusin", stopHeroAutoplay);
-  heroSlider.addEventListener("focusout", startHeroAutoplay);
-
-  setHeroSlide(0);
-  startHeroAutoplay();
-}
-
-function safeReadJSON(key, fallback) {
-  try {
-    const raw = window.localStorage.getItem(key);
-    return raw ? JSON.parse(raw) : fallback;
-  } catch {
-    return fallback;
-  }
-}
-
-function safeWriteJSON(key, value) {
-  window.localStorage.setItem(key, JSON.stringify(value));
-}
-
-function normalizeEmail(value) {
-  return value.trim().toLowerCase();
-}
-
-function isGmailAddress(value) {
-  return /@gmail\.com$/i.test(value);
-}
-
-function composeDisplayName(firstName, surname) {
-  return [firstName, surname].filter(Boolean).join(" ").trim();
-}
-
-function slugify(value) {
-  return value
+function slugify(text) {
+  return (text || "")
+    .toString()
     .trim()
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
 }
 
-function normalizeProductUrl(value) {
-  const raw = value.trim();
-  if (!raw) {
-    return "";
-  }
-
-  const candidate = /^[a-z][a-z0-9+.-]*:\/\//i.test(raw) ? raw : `https://${raw}`;
-
-  try {
-    const url = new URL(candidate);
-    if (url.protocol !== "http:" && url.protocol !== "https:") {
-      return "";
-    }
-    return url.href;
-  } catch {
-    return "";
-  }
+function createSpotlightCard(item) {
+  const store = storeData[item.store];
+  return `
+    <article class="spotlight-card" data-filter="${item.filter}">
+      <div class="spotlight-card__top">
+        <div class="spotlight-card__brand">
+          <img src="${store.logo}" alt="${store.label}" />
+          <span>${store.label}</span>
+        </div>
+        <span class="spotlight-card__badge">${item.tag}</span>
+      </div>
+      <div class="spotlight-card__art">
+        <img src="${item.image}" alt="${item.title}" loading="lazy" />
+      </div>
+      <h3>${item.title}</h3>
+      <div class="deal-meta">
+        <div>
+          <div class="deal-price">${item.price}</div>
+          <div class="deal-old">${item.oldPrice}</div>
+        </div>
+        <strong>${store.accent}</strong>
+      </div>
+      <div class="deal-actions">
+        <a class="btn btn--primary" href="#builder">View Deal & Earn</a>
+        <a class="btn btn--ghost" href="#stores">Open Store</a>
+      </div>
+    </article>
+  `;
 }
 
-function detectStoreFromUrl(value) {
-  if (!value) {
-    return "";
-  }
-
-  try {
-    const host = new URL(value).hostname.toLowerCase();
-    const storeMap = [
-      ["amazon", ["amazon.", "amzn."]],
-      ["flipkart", ["flipkart."]],
-      ["myntra", ["myntra."]],
-      ["ajio", ["ajio."]],
-      ["makemytrip", ["makemytrip.", "goibibo."]],
-      ["zomato", ["zomato."]],
-      ["bigbasket", ["bigbasket."]],
-      ["nykaa", ["nykaa."]],
-      ["godaddy", ["godaddy."]],
-      ["croma", ["croma."]],
-    ];
-
-    for (const [store, patterns] of storeMap) {
-      if (patterns.some((pattern) => host.includes(pattern))) {
-        return store;
-      }
-    }
-  } catch {
-    return "";
-  }
-
-  return "";
+function createLatestCard(item) {
+  const store = storeData[item.store];
+  return `
+    <article class="latest-card" data-filter="${item.filter}">
+      <div class="latest-card__top">
+        <div class="spotlight-card__brand">
+          <img src="${store.logo}" alt="${store.label}" />
+          <span>${store.label}</span>
+        </div>
+        <span class="latest-card__badge">${item.tag}</span>
+      </div>
+      <div class="latest-card__art">
+        <img src="${item.image}" alt="${item.title}" loading="lazy" />
+      </div>
+      <div class="latest-card__body">
+        <h3>${item.title}</h3>
+        <p>${store.accent} • direct share link</p>
+        <div class="deal-meta">
+          <div>
+            <div class="deal-price">${item.price}</div>
+            <div class="deal-old">${item.oldPrice}</div>
+          </div>
+          <a class="btn btn--ghost" href="#builder">Copy Deal</a>
+        </div>
+      </div>
+    </article>
+  `;
 }
 
-function sanitizeAmazonTag(value) {
-  return value
-    .trim()
-    .replace(/[^a-z0-9._-]/gi, "")
-    .slice(0, 64);
+function renderDeals() {
+  const query = searchInput.value.trim().toLowerCase();
+
+  spotlightRail.innerHTML = spotlightDeals
+    .filter((item) => currentFilter === "all" || item.filter === currentFilter)
+    .filter((item) => !query || item.title.toLowerCase().includes(query) || item.store.includes(query))
+    .map(createSpotlightCard)
+    .join("");
+
+  latestList.innerHTML = latestDeals
+    .filter((item) => currentFilter === "all" || item.filter === currentFilter)
+    .filter((item) => !query || item.title.toLowerCase().includes(query) || item.store.includes(query))
+    .map(createLatestCard)
+    .join("");
 }
 
-function applyAmazonTrackingTag(urlValue, tagValue) {
-  const tag = sanitizeAmazonTag(tagValue || "");
-  if (!tag) {
-    return urlValue;
-  }
-
-  try {
-    const url = new URL(urlValue);
-    const host = url.hostname.toLowerCase();
-    if (!host.includes("amazon.") && !host.includes("amzn.")) {
-      return urlValue;
-    }
-
-    url.searchParams.set("tag", tag);
-    return url.href;
-  } catch {
-    return urlValue;
-  }
+function setModalVisibility(hidden) {
+  if (!welcomeModal) return;
+  welcomeModal.classList.toggle("is-hidden", hidden);
+  welcomeModal.setAttribute("aria-hidden", hidden ? "true" : "false");
 }
 
-function getShareBaseUrl() {
-  return new URL("./index.html", window.location.href);
-}
+function buildAffiliateLink() {
+  const productLink = productLinkInput.value.trim();
+  const affiliateTag = affiliateTagInput.value.trim() || "yourtag-21";
+  const store = storeSelect.value;
+  const campaign = slugify(campaignInput.value) || "daily-deal";
 
-function getProfitLinkDefaults() {
-  const session = getSession();
-  return {
-    ref: session?.name || "guest",
-    campaign: "profit-link",
-  };
-}
+  let finalUrl = "";
 
-function buildProfitLink() {
-  const baseUrl = getShareBaseUrl();
-  const defaults = getProfitLinkDefaults();
-  const sourceUrl = normalizeProductUrl(profitLinkSource?.value || "");
-  const detectedStore = detectStoreFromUrl(sourceUrl);
-  const store = detectedStore || profitLinkStore?.value?.trim() || "amazon";
-  const amazonTag = sanitizeAmazonTag(profitLinkAmazonTag?.value || "");
-  const campaign = slugify(profitLinkCampaign?.value || defaults.campaign);
-  const ref = slugify(profitLinkRef?.value || defaults.ref);
-  const destination = profitLinkDestination?.value || "";
-  const targetUrl =
-    sourceUrl
-      ? applyAmazonTrackingTag(sourceUrl, amazonTag)
-      : store === "amazon"
-        ? applyAmazonTrackingTag("https://www.amazon.in/", amazonTag)
-        : `https://www.${store}.com/`;
-
-  baseUrl.searchParams.set("to", targetUrl);
-
-  baseUrl.searchParams.set("store", store);
-  if (amazonTag) {
-    baseUrl.searchParams.set("tag", amazonTag);
-  }
-  baseUrl.searchParams.set("campaign", campaign);
-  baseUrl.searchParams.set("ref", ref);
-  baseUrl.searchParams.set("src", "profit-link");
-  baseUrl.searchParams.set("kind", sourceUrl ? "product" : "store");
-  baseUrl.hash = destination || "profit-link-builder";
-
-  return baseUrl.href;
-}
-
-function updateProfitLinkOutput(message) {
-  if (!profitLinkOutput) {
-    return "";
-  }
-
-  const link = buildProfitLink();
-  profitLinkOutput.value = link;
-
-  if (profitLinkNote) {
-    profitLinkNote.textContent = message
-      || "Paste a product link and we’ll wrap it with your Amazon tag, store, campaign, and referral name.";
-  }
-
-  return link;
-}
-
-async function copyProfitLink() {
-  const link = updateProfitLinkOutput();
-  if (!link) {
-    return;
-  }
-
-  if (navigator.clipboard) {
+  if (store === "amazon") {
+    const target = productLink || storeData.amazon.url;
     try {
-      await navigator.clipboard.writeText(link);
-      showToast("Profit link copied");
-      return;
+      const url = new URL(target);
+      url.searchParams.set("tag", affiliateTag);
+      if (campaign) url.searchParams.set("campaign", campaign);
+      finalUrl = url.toString();
     } catch {
-      // fall through
+      finalUrl = `${storeData.amazon.url}?tag=${encodeURIComponent(affiliateTag)}&campaign=${encodeURIComponent(campaign)}`;
     }
-  }
-
-  profitLinkOutput.focus();
-  profitLinkOutput.select();
-  showToast("Select and copy the link");
-}
-
-function handleIncomingProfitLink() {
-  const params = new URL(window.location.href).searchParams;
-  const target = params.get("to");
-  if (!target) {
-    return;
-  }
-
-  let destination = target;
-  try {
-    destination = decodeURIComponent(target);
-  } catch {
-    destination = target;
-  }
-
-  try {
-    const parsed = new URL(destination);
-    if (parsed.protocol !== "http:" && parsed.protocol !== "https:") {
-      return;
+  } else if (productLink) {
+    try {
+      const url = new URL(productLink);
+      url.searchParams.set("ref", affiliateTag);
+      url.searchParams.set("campaign", campaign);
+      finalUrl = url.toString();
+    } catch {
+      finalUrl = productLink;
     }
-    destination = parsed.href;
-  } catch {
-    return;
-  }
-
-  showAuthPopup("Profit link opened", "Redirecting to your product page.");
-  window.setTimeout(() => {
-    window.location.assign(destination);
-  }, 1300);
-}
-
-function syncSignupToGoogleSheets(payload) {
-  if (!sheetsEndpoint) {
-    return false;
-  }
-
-  const body = new Blob([JSON.stringify(payload)], { type: "application/json" });
-
-  if (navigator.sendBeacon) {
-    return navigator.sendBeacon(sheetsEndpoint, body);
-  }
-
-  void fetch(sheetsEndpoint, {
-    method: "POST",
-    mode: "no-cors",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(payload),
-  }).catch(() => {});
-
-  return true;
-}
-
-function getUsers() {
-  return safeReadJSON(authKeys.users, []);
-}
-
-function saveUsers(users) {
-  safeWriteJSON(authKeys.users, users);
-}
-
-function getSession() {
-  return safeReadJSON(authKeys.session, null) || safeReadJSON(authKeys.tempSession, null);
-}
-
-function saveSession(session, remember = true) {
-  if (remember) {
-    window.localStorage.removeItem(authKeys.tempSession);
-    safeWriteJSON(authKeys.session, session);
-    return;
-  }
-
-  window.localStorage.removeItem(authKeys.session);
-  safeWriteJSON(authKeys.tempSession, session);
-}
-
-function clearSession() {
-  window.localStorage.removeItem(authKeys.session);
-  window.localStorage.removeItem(authKeys.tempSession);
-}
-
-function formatSessionDate(isoString) {
-  if (!isoString) {
-    return "Session time unavailable";
-  }
-
-  try {
-    return new Intl.DateTimeFormat("en-IN", {
-      dateStyle: "medium",
-      timeStyle: "short",
-    }).format(new Date(isoString));
-  } catch {
-    return isoString;
-  }
-}
-
-function formatRupees(value) {
-  return `₹${new Intl.NumberFormat("en-IN").format(value)}`;
-}
-
-function updateProfitCalculator() {
-  if (!profitInputs.length || !profitTotal) {
-    return;
-  }
-
-  let total = 0;
-
-  profitInputs.forEach((input) => {
-    const count = Number.parseInt(input.value, 10) || 0;
-    const rate = Number.parseInt(input.dataset.rate, 10) || 0;
-    const subtotal = count * rate;
-    const output = document.querySelector(`[data-value-for="${input.id}"]`);
-
-    if (output) {
-      output.textContent = formatRupees(subtotal);
-    }
-
-    total += subtotal;
-  });
-
-  if (profitTotal) {
-    profitTotal.textContent = formatRupees(total);
-  }
-}
-
-function formatLoanCurrency(value) {
-  return `₹${new Intl.NumberFormat("en-IN").format(Math.round(value))}`;
-}
-
-function calculateEmi(principal, annualRate, months) {
-  const monthlyRate = annualRate / 12 / 100;
-  if (!principal || !months) {
-    return 0;
-  }
-
-  if (monthlyRate === 0) {
-    return principal / months;
-  }
-
-  const factor = Math.pow(1 + monthlyRate, months);
-  return (principal * monthlyRate * factor) / (factor - 1);
-}
-
-function applyLoanPreset(type) {
-  if (!loanAmountInput || !loanRateInput || !loanTenureInput) {
-    return;
-  }
-
-  const presets = {
-    personal: { amount: 500000, rate: 12.5, tenure: 60 },
-    home: { amount: 2500000, rate: 8.4, tenure: 240 },
-    business: { amount: 1500000, rate: 13.2, tenure: 72 },
-    education: { amount: 800000, rate: 10.1, tenure: 84 },
-  };
-
-  const preset = presets[type] || presets.personal;
-  loanAmountInput.value = String(preset.amount);
-  loanRateInput.value = String(preset.rate);
-  loanTenureInput.value = String(preset.tenure);
-  updateLoanCalculator();
-}
-
-function updateLoanCalculator() {
-  if (
-    !loanAmountInput ||
-    !loanRateInput ||
-    !loanTenureInput ||
-    !loanAmountValue ||
-    !loanRateValue ||
-    !loanTenureValue ||
-    !loanEmiValue ||
-    !loanInterestValue ||
-    !loanPayableValue
-  ) {
-    return;
-  }
-
-  const principal = Number.parseFloat(loanAmountInput.value) || 0;
-  const annualRate = Number.parseFloat(loanRateInput.value) || 0;
-  const tenureMonths = Number.parseInt(loanTenureInput.value, 10) || 0;
-  const emi = calculateEmi(principal, annualRate, tenureMonths);
-  const totalPayable = emi * tenureMonths;
-  const totalInterest = totalPayable - principal;
-
-  loanAmountValue.textContent = formatLoanCurrency(principal);
-  loanRateValue.textContent = `${annualRate.toFixed(1)}%`;
-  loanTenureValue.textContent = `${tenureMonths} months`;
-  loanEmiValue.textContent = formatLoanCurrency(emi);
-  loanInterestValue.textContent = formatLoanCurrency(totalInterest);
-  loanPayableValue.textContent = formatLoanCurrency(totalPayable);
-}
-
-const stores = [
-  {
-    name: "Amazon",
-    badge: "AM",
-    logo: "./amazon.png",
-    category: "fashion",
-    offer: "Up to 6% rewards",
-    detail: "Electronics, fashion, home",
-    summary: "Big-ticket purchases, daily essentials, and seasonal deals.",
-    status: "Verified today",
-    kpi: "2.4k shoppers checked this week",
-    cashback: "6%",
-  },
-  {
-    name: "Myntra",
-    badge: "MY",
-    logo: "./myntra-logo.svg",
-    category: "fashion",
-    offer: "Flat 15% on ethnic wear",
-    detail: "Fashion, footwear, accessories",
-    summary: "Trend-led apparel picks and return-friendly fashion offers.",
-    status: "Hot now",
-    kpi: "1.8k shoppers checked this week",
-    cashback: "15%",
-  },
-  {
-    name: "MakeMyTrip",
-    badge: "MM",
-    logo: "./makemytrip.png",
-    category: "travel",
-    offer: "Up to 8% cashback",
-    detail: "Flights, hotels, holiday packages",
-    summary: "Trips, stays, and bundled travel savings for planners.",
-    status: "Travel live",
-    kpi: "1.2k trip searches",
-    cashback: "8%",
-  },
-  {
-    name: "Zomato",
-    badge: "ZO",
-    logo: "./zomato-logo.svg",
-    category: "food",
-    offer: "Free delivery coupons",
-    detail: "Food, grocery, dining",
-    summary: "Quick orders, late-night bites, and repeat food delivery savings.",
-    status: "Delivery offers",
-    kpi: "980 order clicks",
-    cashback: "12%",
-    endingSoon: true,
-  },
-  {
-    name: "GoDaddy",
-    badge: "GD",
-    logo: "./godaddy-logo.svg",
-    category: "tech",
-    offer: "75% off plans",
-    detail: "Domains, hosting, websites",
-    summary: "Useful for creators, small businesses, and landing pages.",
-    status: "Starter deal",
-    kpi: "1.1k web visits",
-    cashback: "75%",
-    endingSoon: true,
-  },
-  {
-    name: "BigBasket",
-    badge: "BB",
-    logo: "./bigbasket.png",
-    category: "grocery",
-    offer: "Weekly grocery cashback",
-    detail: "Groceries, staples, household",
-    summary: "Everyday basket savings with repeat-use household offers.",
-    status: "Verified today",
-    kpi: "1.5k grocery views",
-    cashback: "5%",
-    endingSoon: true,
-  },
-  {
-    name: "Ajio",
-    badge: "AJ",
-    logo: "./ajio-logo.svg",
-    category: "fashion",
-    offer: "Extra 10% on new arrivals",
-    detail: "Streetwear, footwear, lifestyle",
-    summary: "New season fashion with sharp visual sale moments.",
-    status: "Popular now",
-    kpi: "900 style clicks",
-    cashback: "10%",
-  },
-  {
-    name: "Flipkart",
-    badge: "FK",
-    logo: "./flipkart.png",
-    category: "tech",
-    offer: "Price drop on gadgets",
-    detail: "Mobiles, laptops, electronics",
-    summary: "Gadgets, upgrades, and high-intent tech searches.",
-    status: "Top store",
-    kpi: "2.1k gadget views",
-    cashback: "18%",
-  },
-  {
-    name: "Croma",
-    badge: "CR",
-    logo: "./croma-logo.svg",
-    category: "tech",
-    offer: "Bank discount on appliances",
-    detail: "TV, AC, kitchen and audio",
-    summary: "Home appliances and electronics with bank-led savings.",
-    status: "Bank offer",
-    kpi: "770 appliance clicks",
-    cashback: "12%",
-  },
-  {
-    name: "Nykaa",
-    badge: "NK",
-    logo: "./nykaa-logo.svg",
-    category: "beauty",
-    offer: "Beauty sale with gifts",
-    detail: "Makeup, skincare, fragrance",
-    summary: "Beauty baskets, combo offers, and premium brand drops.",
-    status: "Beauty live",
-    kpi: "1.7k beauty clicks",
-    cashback: "20%",
-    endingSoon: true,
-  },
-];
-
-const coupons = [
-  {
-    category: "fashion",
-    label: "Exclusive",
-    title: "$20 Off Any Purchase Over $100 - Online Only",
-    text: "Great for style shoppers looking for a quick saving opportunity.",
-    code: "STYLE20",
-    store: "Myntra",
-    expiry: "25 Nov, 24",
-    tags: ["Copy Coupon", "Fashion deal"],
-    action: "Copy Link",
-  },
-  {
-    category: "tech",
-    label: "Exclusive",
-    title: "15% Off Web Hosting Plans",
-    text: "Good for creators, SaaS founders, and landing page projects.",
-    code: "BUILDFAST",
-    store: "GoDaddy",
-    expiry: "25 Nov, 24",
-    tags: ["Copy Coupon", "Tech deal"],
-    action: "Copy Link",
-  },
-  {
-    category: "tech",
-    label: "Exclusive",
-    title: "20% Off All Electronics - Limited Time Offer",
-    text: "Best for gadgets, devices, and accessories on sale.",
-    code: "TECH20",
-    store: "Flipkart",
-    expiry: "25 Nov, 24",
-    tags: ["Copy Coupon", "Gadget savings"],
-    action: "Copy Link",
-  },
-  {
-    category: "food",
-    label: "Popular",
-    title: "Free Delivery On Quick Orders",
-    text: "Ideal for lunch hours, late nights, and repeat usage.",
-    code: "FOODNOW",
-    store: "Zomato",
-    expiry: "25 Nov, 24",
-    tags: ["Copy Coupon", "Food saving"],
-    action: "Copy Link",
-  },
-  {
-    category: "grocery",
-    label: "Weekly",
-    title: "Weekly Grocery Cashback Picks",
-    text: "Useful recurring savings for family and home shopping.",
-    code: "BASKET5",
-    store: "BigBasket",
-    expiry: "25 Nov, 24",
-    tags: ["Copy Coupon", "Basket deal"],
-    action: "Copy Link",
-  },
-  {
-    category: "beauty",
-    label: "Beauty",
-    title: "Buy 1 Get 1 and Gift Combos",
-    text: "Beauty and care offers for regular shoppers.",
-    code: "GLOWBOGO",
-    store: "Nykaa",
-    expiry: "25 Nov, 24",
-    tags: ["Copy Coupon", "Beauty combo"],
-    action: "Copy Link",
-  },
-  {
-    category: "fashion",
-    label: "New",
-    title: "Extra 10% On New Arrivals",
-    text: "Fresh looks without paying full price.",
-    code: "NEW10",
-    store: "Ajio",
-    expiry: "25 Nov, 24",
-    tags: ["Copy Coupon", "New arrival"],
-    action: "Copy Link",
-  },
-  {
-    category: "travel",
-    label: "Travel",
-    title: "Up To 8% Cashback On Bookings",
-    text: "Hotels, flights, and staycation bundles for trip planners.",
-    code: "TRAVELX",
-    store: "MakeMyTrip",
-    expiry: "25 Nov, 24",
-    tags: ["Copy Coupon", "Travel cashback"],
-    action: "Copy Link",
-  },
-  {
-    category: "travel",
-    label: "Weekend",
-    title: "Weekend Getaway Booking Offer",
-    text: "Plan a short trip with extra hotel and flight savings.",
-    code: "WEEKEND25",
-    store: "MakeMyTrip",
-    expiry: "25 Nov, 24",
-    tags: ["Copy Coupon", "Weekend offer"],
-    action: "Open Link",
-  },
-  {
-    category: "grocery",
-    label: "Fresh",
-    title: "Fresh Basket Savings Every Week",
-    text: "Simple savings for household repeat buying.",
-    code: "WEEKSAVE",
-    store: "BigBasket",
-    expiry: "25 Nov, 24",
-    tags: ["Copy Coupon", "Every week"],
-    action: "Copy Link",
-  },
-];
-
-const offers = [
-  {
-    tab: "today",
-    category: "fashion",
-    title: "Flat 20% Off On Selected Styles",
-    text: "Strong click-through deal for style shoppers.",
-    tag: "Today's Best Offer",
-  },
-  {
-    tab: "today",
-    category: "tech",
-    title: "Web Hosting And Domain Discounts",
-    text: "Great for creators and business landing pages.",
-    tag: "Featured Discount",
-  },
-  {
-    tab: "upcoming",
-    category: "travel",
-    title: "Weekend Getaway Booking Offer",
-    text: "Good for planners waiting to book later this week.",
-    tag: "Upcoming Offer",
-  },
-  {
-    tab: "using",
-    category: "food",
-    title: "Free Delivery On Quick Orders",
-    text: "Simple everyday offer for repeat usage.",
-    tag: "Currently Using",
-  },
-  {
-    tab: "using",
-    category: "beauty",
-    title: "Buy 1 Get 1 And Gift Combos",
-    text: "Works well for regular shopping behavior.",
-    tag: "Currently Using",
-  },
-  {
-    tab: "upcoming",
-    category: "grocery",
-    title: "Fresh Basket Savings Every Week",
-    text: "Useful recurring savings for families.",
-    tag: "Upcoming Offer",
-  },
-];
-
-let activeStoreFilter = "all";
-let activeOfferTab = "all";
-let searchQuery = "";
-
-function matchesQuery(text) {
-  return !searchQuery || text.toLowerCase().includes(searchQuery);
-}
-
-function setActive(collection, activeItem) {
-  collection.forEach((item) => item.classList.toggle("active", item === activeItem));
-}
-
-function renderStores() {
-  if (!storeGrid) {
-    return;
-  }
-
-  const filtered = stores.filter((store) => {
-    const categoryMatch = activeStoreFilter === "all" || store.category === activeStoreFilter;
-    const queryMatch = matchesQuery(`${store.name} ${store.offer} ${store.detail} ${store.summary}`);
-    return categoryMatch && queryMatch;
-  });
-
-  storeGrid.innerHTML = filtered
-    .map(
-      (store) => `
-        <article class="store-card" data-category="${store.category}">
-          <div class="store-card__top">
-            <div class="store-brand">
-              <div class="store-logo-wrap">
-                <img class="store-logo-img" src="${store.logo}" alt="${store.name} logo" loading="lazy" />
-                <span class="store-logo-fallback">${store.badge}</span>
-              </div>
-              <div>
-                <p class="store-name">${store.name}</p>
-                <span class="store-detail">${store.detail}</span>
-              </div>
-            </div>
-            <span class="store-status">${store.status}</span>
-          </div>
-          <div class="store-card__body">
-            <strong>${store.offer}</strong>
-            <p>${store.summary}</p>
-          </div>
-          <div class="store-meta">
-            <span>${store.kpi}</span>
-            <span>Cashback ${store.cashback}</span>
-          </div>
-          <div class="store-card__footer">
-            <a class="store-action" href="#coupons">Open link →</a>
-            <a class="button button-ghost" href="#ending">See ending soon</a>
-          </div>
-        </article>
-      `
-    )
-    .join("");
-
-  storeGrid.querySelectorAll(".store-logo-img").forEach((img) => {
-    const wrap = img.closest(".store-logo-wrap");
-    if (!wrap) return;
-
-    const showFallback = () => wrap.classList.add("is-fallback");
-    const showImage = () => wrap.classList.remove("is-fallback");
-
-    if (img.complete && img.naturalWidth > 0) {
-      showImage();
-    } else {
-      showFallback();
-      img.addEventListener("load", showImage, { once: true });
-      img.addEventListener("error", showFallback, { once: true });
-    }
-  });
-}
-
-function renderCouponCards(target, items) {
-  if (!target) {
-    return;
-  }
-
-  target.innerHTML = items
-    .map(
-      (coupon) => `
-        <article class="coupon-card" data-category="${coupon.category}">
-          <div class="coupon-top">
-            <p class="coupon-badge">${coupon.label}</p>
-            <span>${coupon.expiry}</span>
-          </div>
-          <div class="coupon-card__body">
-            <h3>${coupon.title}</h3>
-            <p>${coupon.text}</p>
-          </div>
-          <div class="coupon-meta">
-            <span>${coupon.store}</span>
-            <span>${coupon.tags[0]}</span>
-          </div>
-          <div class="coupon-card__footer">
-            <button class="button button-primary" type="button" data-code="${coupon.code}">
-              ${coupon.action}
-            </button>
-            <strong class="coupon-code">${coupon.code}</strong>
-          </div>
-        </article>
-      `
-    )
-    .join("");
-}
-
-function renderCoupons() {
-  if (!couponGrid) {
-    return;
-  }
-
-  const filtered = coupons.filter((coupon) => {
-    const categoryMatch = activeStoreFilter === "all" || coupon.category === activeStoreFilter;
-    const queryMatch = matchesQuery(`${coupon.title} ${coupon.text} ${coupon.store} ${coupon.code}`);
-    return categoryMatch && queryMatch;
-  });
-
-  renderCouponCards(couponGrid, filtered.slice(0, 6));
-}
-
-function renderEndingCoupons() {
-  if (!endingGrid) {
-    return;
-  }
-
-  const endingItems = coupons
-    .filter((coupon) => coupon.endingSoon)
-    .filter((coupon) => matchesQuery(`${coupon.title} ${coupon.text} ${coupon.store}`))
-    .slice(0, 6);
-
-  renderCouponCards(endingGrid, endingItems);
-}
-
-function renderCashbackStores() {
-  if (!cashbackGrid) {
-    return;
-  }
-
-  const sorted = [...stores]
-    .sort((a, b) => Number.parseInt(b.cashback, 10) - Number.parseInt(a.cashback, 10))
-    .slice(0, 8)
-    .filter((store) => matchesQuery(`${store.name} ${store.offer} ${store.detail}`));
-
-  cashbackGrid.innerHTML = sorted
-    .map(
-      (store) => `
-        <article class="cashback-card" data-category="${store.category}">
-          <div class="cashback-card__top">
-            <div class="cashback-card__logo">
-              <img src="${store.logo}" alt="${store.name} logo" loading="lazy" />
-            </div>
-            <div>
-              <p class="store-name">${store.name}</p>
-              <span class="store-detail">${store.detail}</span>
-            </div>
-          </div>
-          <div class="cashback-card__body">
-            <strong>${store.offer}</strong>
-            <p>${store.summary}</p>
-          </div>
-          <div class="cashback-meta">
-            <span>Flat ${store.cashback} cashback</span>
-            <span>${store.status}</span>
-          </div>
-        </article>
-      `
-    )
-    .join("");
-
-  cashbackGrid.querySelectorAll(".cashback-card__logo img").forEach((img) => {
-    const wrap = img.closest(".cashback-card__logo");
-    if (!wrap) return;
-
-    const showFallback = () => wrap.classList.add("is-fallback");
-    const showImage = () => wrap.classList.remove("is-fallback");
-
-    if (img.complete && img.naturalWidth > 0) {
-      showImage();
-    } else {
-      showFallback();
-      img.addEventListener("load", showImage, { once: true });
-      img.addEventListener("error", showFallback, { once: true });
-    }
-  });
-}
-
-function renderOffers() {
-  if (!offerGrid) {
-    return;
-  }
-
-  const filtered = offers.filter((offer) => {
-    const tabMatch = activeOfferTab === "all" || offer.tab === activeOfferTab;
-    const queryMatch = matchesQuery(`${offer.title} ${offer.text} ${offer.tag}`);
-    return tabMatch && queryMatch;
-  });
-
-  offerGrid.innerHTML = filtered
-    .map(
-      (offer) => `
-        <article class="offer-card" data-category="${offer.category}">
-          <div class="offer-card__top">
-            <p class="offer-badge">${offer.tag}</p>
-            <span class="offer-meta">${offer.category}</span>
-          </div>
-          <div class="offer-card__body">
-            <h3>${offer.title}</h3>
-            <p>${offer.text}</p>
-          </div>
-          <div class="offer-tags">
-            <span>${offer.tag}</span>
-            <span>Affiliate ready</span>
-          </div>
-          <div class="offer-card__footer">
-            <a class="offer-action" href="#stores">Open link →</a>
-            <a class="button button-ghost" href="#coupons">View deal</a>
-          </div>
-        </article>
-      `
-    )
-    .join("");
-}
-
-function updateHeaderAuthState() {
-  if (!headerLoginLink) {
-    return;
-  }
-
-  const session = getSession();
-
-  if (session) {
-    const profileName = session.name ? session.name.split(" ")[0] : "Profile";
-    headerLoginLink.textContent = `Profile · ${profileName}`;
-    headerLoginLink.href = "./login.html#session-title";
-    delete headerLoginLink.dataset.authAction;
-    headerLoginLink.setAttribute("aria-label", `Open profile for ${session.name || "current user"}`);
   } else {
-    headerLoginLink.textContent = "Login";
-    headerLoginLink.href = "./login.html";
-    delete headerLoginLink.dataset.authAction;
-    headerLoginLink.removeAttribute("aria-label");
+    const base = storeData[store]?.url || "https://example.com/";
+    finalUrl = `${base}${base.includes("?") ? "&" : "?"}ref=${encodeURIComponent(affiliateTag)}&campaign=${encodeURIComponent(campaign)}`;
   }
+
+  outputLink.value = finalUrl;
+  return finalUrl;
 }
 
-function renderAuthStatus() {
-  const session = getSession();
-
-  if (sessionTitle) {
-    sessionTitle.textContent = session ? `Signed in as ${session.name}` : "Not signed in";
-  }
-
-  if (sessionEmail) {
-    sessionEmail.textContent = session ? `Email: ${session.email}` : "Email not saved yet.";
-  }
-
-  if (sessionPhone) {
-    sessionPhone.textContent = session && session.phone ? `Mobile: ${session.phone}` : "Mobile number not saved yet.";
-  }
-
-  if (sessionProvider) {
-    const providerLabel = session?.provider === "google" ? "Gmail quick signup" : "Email/password signup";
-    sessionProvider.textContent = session ? `Provider: ${providerLabel}` : "Provider not set yet.";
-  }
-
-  if (sessionSince) {
-    sessionSince.textContent = session
-      ? `Signed in on ${formatSessionDate(session.createdAt)}`
-      : "Sign in or create an account to activate this area.";
-  }
-
-  if (profitLinkRef && (!profitLinkRef.value || profitLinkRef.value === "guest")) {
-    profitLinkRef.value = session?.name || "guest";
-  }
-
-  if (profitLinkOutput) {
-    updateProfitLinkOutput("Use these values to generate a shareable profit link.");
-  }
-
-  if (logoutButton) {
-    logoutButton.textContent = "Logout";
-    logoutButton.disabled = !session;
-  }
-}
-
-function handleLogout(event) {
-  if (event) {
-    event.preventDefault();
-  }
-
-  const session = getSession();
-  if (!session) {
-    showToast("No active session");
-    return;
-  }
-
-  clearSession();
-  updateHeaderAuthState();
-  renderAuthStatus();
-  showToast("Logged out");
-}
-
-function handleRegister(event) {
+builderForm.addEventListener("submit", (event) => {
   event.preventDefault();
+  buildAffiliateLink();
+});
 
-  if (!registerForm) {
-    return;
+copyLinkButton.addEventListener("click", async () => {
+  const link = outputLink.value || buildAffiliateLink();
+  try {
+    await navigator.clipboard.writeText(link);
+    copyLinkButton.textContent = "Copied";
+    setTimeout(() => {
+      copyLinkButton.textContent = "Copy Link";
+    }, 1200);
+  } catch {
+    outputLink.select();
+    document.execCommand("copy");
   }
+});
 
-  const firstName = document.querySelector("#register-first-name")?.value.trim();
-  const surname = document.querySelector("#register-surname")?.value.trim();
-  const phone = document.querySelector("#register-phone")?.value.trim();
-  const email = document.querySelector("#register-email")?.value.trim();
-  const password = document.querySelector("#register-password")?.value;
-  const confirm = document.querySelector("#register-confirm")?.value;
-  const remember = document.querySelector("#register-remember")?.checked ?? true;
-  const displayName = composeDisplayName(firstName, surname);
-
-  if (!firstName || !surname || !phone || !email || !password || !confirm) {
-    showToast("Fill all account fields");
-    return;
-  }
-
-  if (!/^[0-9+\-\s()]{8,}$/.test(phone)) {
-    showToast("Enter a valid mobile number");
-    return;
-  }
-
-  if (password.length < 4) {
-    showToast("Use at least 4 characters");
-    return;
-  }
-
-  if (password !== confirm) {
-    showToast("Passwords do not match");
-    return;
-  }
-
-  const normalizedEmail = normalizeEmail(email);
-  const users = getUsers();
-  const existing = users.find((user) => user.email === normalizedEmail);
-
-  if (existing) {
-    showToast("Account already exists, please sign in");
-    return;
-  }
-
-  const user = {
-    firstName,
-    surname,
-    name: displayName,
-    phone,
-    email: normalizedEmail,
-    password,
-    provider: "email",
-    createdAt: new Date().toISOString(),
-  };
-
-  users.push(user);
-  saveUsers(users);
-  syncSignupToGoogleSheets({
-    event: "signup",
-    provider: user.provider,
-    firstName: user.firstName,
-    surname: user.surname,
-    name: user.name,
-    phone: user.phone,
-    email: user.email,
-    createdAt: user.createdAt,
+filterButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    filterButtons.forEach((chip) => chip.classList.remove("is-active"));
+    button.classList.add("is-active");
+    currentFilter = button.dataset.filter || "all";
+    renderDeals();
   });
-  saveSession({
-    name: user.name,
-    email: user.email,
-    phone: user.phone,
-    provider: user.provider,
-    createdAt: user.createdAt,
-  }, remember);
+});
 
-  updateHeaderAuthState();
-  renderAuthStatus();
-  showAuthPopup("Account created", `${user.name}, your profile is ready. Start earning now.`);
+searchInput.addEventListener("input", renderDeals);
 
-  window.setTimeout(() => {
-    window.location.href = "./index.html";
-  }, 1300);
+closeModalButtons.forEach((button) => {
+  button.addEventListener("click", () => setModalVisibility(true));
+});
+
+document.querySelector(".modal__backdrop")?.addEventListener("click", () => setModalVisibility(true));
+
+if (localStorage.getItem("cw-modal-dismissed") === "1") {
+  setModalVisibility(true);
 }
 
-function handleLogin(event) {
-  event.preventDefault();
-
-  if (!loginForm) {
-    return;
+welcomeModal?.addEventListener("click", (event) => {
+  if (event.target.matches("[data-close-modal]")) {
+    localStorage.setItem("cw-modal-dismissed", "1");
+    setModalVisibility(true);
   }
+});
 
-  const email = document.querySelector("#login-email")?.value.trim();
-  const password = document.querySelector("#login-password")?.value;
-  const remember = document.querySelector("#login-remember")?.checked ?? true;
-
-  if (!email || !password) {
-    showToast("Enter email and password");
-    return;
-  }
-
-  const normalizedEmail = normalizeEmail(email);
-  const user = getUsers().find(
-    (item) => item.email === normalizedEmail && item.password === password
-  );
-
-  if (!user) {
-    showToast("Account not found");
-    return;
-  }
-
-  saveSession({
-    name: user.name,
-    email: user.email,
-    phone: user.phone,
-    provider: user.provider || "email",
-    createdAt: user.createdAt || new Date().toISOString(),
-  }, remember);
-
-  updateHeaderAuthState();
-  renderAuthStatus();
-  showAuthPopup("Signed in", `${user.name}, your profile is ready.`);
-
-  window.setTimeout(() => {
-    window.location.href = "./index.html";
-  }, 1100);
-}
-
-function handleGoogleRegister() {
-  if (!registerForm) {
-    return;
-  }
-
-  const firstName = document.querySelector("#register-first-name")?.value.trim();
-  const surname = document.querySelector("#register-surname")?.value.trim();
-  const phone = document.querySelector("#register-phone")?.value.trim();
-  const email = document.querySelector("#register-email")?.value.trim();
-  const password = document.querySelector("#register-password")?.value?.trim() || "";
-  const remember = document.querySelector("#register-remember")?.checked ?? true;
-  const displayName = composeDisplayName(firstName, surname);
-
-  if (!firstName || !surname || !phone || !email) {
-    showToast("Fill name, surname, number, and email");
-    return;
-  }
-
-  if (!isGmailAddress(email)) {
-    showToast("Use a Gmail address for Google signup");
-    return;
-  }
-
-  if (!/^[0-9+\-\s()]{8,}$/.test(phone)) {
-    showToast("Enter a valid mobile number");
-    return;
-  }
-
-  const normalizedEmail = normalizeEmail(email);
-  const users = getUsers();
-  const existing = users.find((user) => user.email === normalizedEmail);
-
-  if (existing) {
-    showToast("Account already exists, please sign in");
-    return;
-  }
-
-  const user = {
-    firstName,
-    surname,
-    name: displayName,
-    phone,
-    email: normalizedEmail,
-    password,
-    provider: "google",
-    createdAt: new Date().toISOString(),
-  };
-
-  users.push(user);
-  saveUsers(users);
-  syncSignupToGoogleSheets({
-    event: "signup",
-    provider: user.provider,
-    firstName: user.firstName,
-    surname: user.surname,
-    name: user.name,
-    phone: user.phone,
-    email: user.email,
-    createdAt: user.createdAt,
-  });
-  saveSession({
-    name: user.name,
-    email: user.email,
-    phone: user.phone,
-    provider: user.provider,
-    createdAt: user.createdAt,
-  }, remember);
-
-  updateHeaderAuthState();
-  renderAuthStatus();
-  showAuthPopup("Account created", `${user.name}, your Gmail profile is ready. Start earning now.`);
-
-  window.setTimeout(() => {
-    window.location.href = "./index.html";
-  }, 1300);
-}
-
-function handleGoogleLogin() {
-  if (!loginForm) {
-    return;
-  }
-
-  const email = document.querySelector("#login-email")?.value.trim();
-  const remember = document.querySelector("#login-remember")?.checked ?? true;
-
-  if (!email) {
-    showToast("Enter your Gmail address");
-    return;
-  }
-
-  if (!isGmailAddress(email)) {
-    showToast("Use a Gmail address here");
-    return;
-  }
-
-  const normalizedEmail = normalizeEmail(email);
-  const user = getUsers().find((item) => item.email === normalizedEmail);
-
-  if (!user || user.provider !== "google") {
-    showToast("Create your Gmail account first");
-    return;
-  }
-
-  saveSession({
-    name: user.name,
-    email: user.email,
-    phone: user.phone,
-    provider: user.provider,
-    createdAt: user.createdAt || new Date().toISOString(),
-  }, remember);
-
-  updateHeaderAuthState();
-  renderAuthStatus();
-  showAuthPopup("Signed in", `${user.name}, your profile is ready.`);
-
-  window.setTimeout(() => {
-    window.location.href = "./index.html";
-  }, 1100);
-}
-
-function bindAuthState() {
-  updateHeaderAuthState();
-  renderAuthStatus();
-
-  if (loginForm) {
-    loginForm.addEventListener("submit", handleLogin);
-  }
-
-  if (registerForm) {
-    registerForm.addEventListener("submit", handleRegister);
-  }
-
-  if (googleRegisterButton) {
-    googleRegisterButton.addEventListener("click", handleGoogleRegister);
-  }
-
-  if (googleLoginButton) {
-    googleLoginButton.addEventListener("click", handleGoogleLogin);
-  }
-
-  if (logoutButton) {
-    logoutButton.addEventListener("click", handleLogout);
-  }
-
-  if (profitLinkForm) {
-    profitLinkForm.addEventListener("submit", (event) => {
-      event.preventDefault();
-      const link = updateProfitLinkOutput("Profit link ready to copy.");
-      if (link) {
-        showAuthPopup("Link created", "Your profit link is ready to share.");
-      }
-    });
-  }
-
-  if (profitLinkCopyButton) {
-    profitLinkCopyButton.addEventListener("click", () => {
-      void copyProfitLink();
-    });
-  }
-
-  if (profitLinkSource) {
-    profitLinkSource.addEventListener("input", () => {
-      const detectedStore = detectStoreFromUrl(normalizeProductUrl(profitLinkSource.value));
-      if (detectedStore && profitLinkStore) {
-        profitLinkStore.value = detectedStore;
-      }
-      updateProfitLinkOutput();
-    });
-  }
-
-  [profitLinkStore, profitLinkAmazonTag, profitLinkCampaign, profitLinkRef, profitLinkDestination].forEach((field) => {
-    field?.addEventListener("input", () => updateProfitLinkOutput());
-    field?.addEventListener("change", () => updateProfitLinkOutput());
-  });
-
-  document.addEventListener("click", (event) => {
-    const logoutLink = event.target.closest('[data-auth-action="logout"]');
-    if (!logoutLink) {
-      return;
-    }
-
-    event.preventDefault();
-    handleLogout();
-  });
-}
-
-if (storeFilters.length) {
-  storeFilters.forEach((chip) => {
-    chip.addEventListener("click", () => {
-      activeStoreFilter = chip.dataset.filter;
-      setActive(storeFilters, chip);
-      renderStores();
-      renderCoupons();
-      renderEndingCoupons();
-      renderCashbackStores();
-    });
-  });
-}
-
-if (offerTabs.length) {
-  offerTabs.forEach((chip) => {
-    chip.addEventListener("click", () => {
-      activeOfferTab = chip.dataset.tab;
-      setActive(offerTabs, chip);
-      renderOffers();
-    });
-  });
-}
-
-if (profitInputs.length) {
-  profitInputs.forEach((input) => {
-    input.addEventListener("input", updateProfitCalculator);
-  });
-}
-
-if (loanAmountInput && loanRateInput && loanTenureInput) {
-  [loanAmountInput, loanRateInput, loanTenureInput].forEach((input) => {
-    input.addEventListener("input", updateLoanCalculator);
-  });
-}
-
-if (loanTypeButtons.length) {
-  loanTypeButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      loanTypeButtons.forEach((item) => item.classList.toggle("is-active", item === button));
-      applyLoanPreset(button.dataset.loanType || "personal");
-    });
-  });
-}
-
-function handleCouponAction(event) {
-  const button = event.target.closest("button[data-code]");
-  if (!button) return;
-
-  const code = button.dataset.code;
-
-  if (navigator.clipboard) {
-    navigator.clipboard.writeText(code).catch(() => {});
-  }
-
-  showToast(`Copied ${code}`);
-}
-
-if (couponGrid) {
-  couponGrid.addEventListener("click", handleCouponAction);
-}
-
-if (endingGrid) {
-  endingGrid.addEventListener("click", handleCouponAction);
-}
-
-if (searchForm && searchInput) {
-  searchForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-    searchQuery = searchInput.value.trim().toLowerCase();
-    renderStores();
-    renderCoupons();
-    renderEndingCoupons();
-    renderCashbackStores();
-    renderOffers();
-  });
-}
-
-bindAuthState();
-initHeroSlider();
-initPromoPopup();
-
-if (profitLinkOutput) {
-  updateProfitLinkOutput();
-}
-
-updateLoanCalculator();
-applyLoanPreset("personal");
-
-handleIncomingProfitLink();
-
-renderStores();
-renderCoupons();
-renderCashbackStores();
-renderEndingCoupons();
-renderOffers();
-updateProfitCalculator();
+renderDeals();
+buildAffiliateLink();
