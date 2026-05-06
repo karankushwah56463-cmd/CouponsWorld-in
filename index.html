@@ -1,306 +1,212 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CouponsWorld.in - Live Deals, Fast Links, Better Cards</title>
+    <title>CouponsWorld.in - Deals Feed</title>
     <meta
       name="description"
-      content="CouponsWorld.in is a clean deals dashboard with featured offers, top stores, and a profit link builder for affiliate sharing."
+      content="CouponsWorld.in is a clean deal feed with featured cards, categories, brands, top deals, credit cards, fashion, phones, and coupons."
     />
     <link rel="stylesheet" href="./styles.css" />
   </head>
-  <body>
-    <div class="modal" id="welcome-modal" aria-hidden="false">
-      <div class="modal__backdrop"></div>
-      <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="welcome-title">
-        <button class="modal__close" type="button" data-close-modal aria-label="Close popup">Ã—</button>
-        <p class="eyebrow">Today only</p>
-        <h1 id="welcome-title">Live deals, fast links, and better store cards.</h1>
-        <p class="modal__text">
-          Browse the freshest offers, open the best card, and share a trackable link in seconds.
+  <body class="cw-page">
+    <div class="cw-modal is-hidden" id="cw-builder-modal" aria-hidden="true">
+      <div class="cw-modal__backdrop" data-close-builder></div>
+      <div class="cw-modal__panel" role="dialog" aria-modal="true" aria-labelledby="cw-builder-title">
+        <button class="cw-modal__close" type="button" data-close-builder aria-label="Close popup">×</button>
+        <p class="cw-eyebrow">Create Profit Link</p>
+        <h1 id="cw-builder-title">Paste a product link and make it shareable.</h1>
+        <p class="cw-muted">
+          Use your affiliate tag, pick a store, and generate a clean share link in seconds.
         </p>
-        <div class="modal__actions">
-          <a class="btn btn--primary" href="#builder">Open builder</a>
-          <a class="btn btn--ghost" href="#stores">See stores</a>
-        </div>
+
+        <form class="cw-builder" id="cw-builder-form">
+          <label>
+            <span>Product / Store Link</span>
+            <input id="cw-product-link" type="url" placeholder="https://www.amazon.in/..." />
+          </label>
+
+          <label>
+            <span>Affiliate Tag</span>
+            <input id="cw-affiliate-tag" type="text" placeholder="yourtag-21" value="yourtag-21" />
+          </label>
+
+          <div class="cw-builder__grid">
+            <label>
+              <span>Store</span>
+              <select id="cw-store-select">
+                <option value="amazon">Amazon</option>
+                <option value="flipkart">Flipkart</option>
+                <option value="myntra">Myntra</option>
+                <option value="ajio">Ajio</option>
+              </select>
+            </label>
+            <label>
+              <span>Campaign</span>
+              <input id="cw-campaign-name" type="text" placeholder="summer-sale" />
+            </label>
+          </div>
+
+          <div class="cw-builder__actions">
+            <button class="cw-btn cw-btn--primary" type="submit">Generate Link</button>
+            <button class="cw-btn cw-btn--ghost" type="button" id="cw-copy-link">Copy Link</button>
+          </div>
+
+          <label class="cw-builder__output">
+            <span>Generated Link</span>
+            <input id="cw-output-link" type="text" readonly placeholder="Your generated link appears here" />
+          </label>
+        </form>
       </div>
     </div>
 
-    <header class="site-header">
-      <a class="brand" href="#top" aria-label="CouponsWorld.in home">
-        <img class="brand__logo" src="./logo-wordmark.svg" alt="CouponsWorld.in" />
-        <div class="brand__meta">
+    <header class="cw-header">
+      <a class="cw-brand" href="#top" aria-label="CouponsWorld.in home">
+        <div class="cw-brand__meta">
           <strong>CouponsWorld.in</strong>
-          <span>Save More, Earn More</span>
+          <span>Save more, earn more</span>
         </div>
       </a>
 
-      <label class="site-search" aria-label="Search stores or coupons">
+      <label class="cw-search" aria-label="Search deals, brands and sections">
         <span>Search</span>
-        <input id="search-input" type="search" placeholder="Search deals, stores & coupons..." />
+        <input id="cw-search" type="search" placeholder="Search deals, stores, and coupons..." />
       </label>
 
-      <nav class="site-nav" aria-label="Primary">
-        <a href="#stores">Stores</a>
-        <a href="#categories">Categories</a>
-        <a href="#latest">Blog</a>
-        <a href="#login">Login</a>
+      <nav class="cw-nav" aria-label="Primary">
+        <a href="#top">Home</a>
+        <a href="#top-selling-product">Top Selling Product</a>
+        <a href="#loan">Loan</a>
+        <a href="#best-card">Best Card</a>
+        <a href="./login.html">Login</a>
       </nav>
 
-      <a class="btn btn--primary header-cta" href="#builder">Create Profit Link</a>
+      <button class="cw-btn cw-btn--primary cw-header__cta" type="button" data-open-builder>
+        Create Profit Link
+      </button>
     </header>
 
-    <main id="top" class="page-shell">
-      <section class="live-strip" aria-label="Live deals strip">
-        <span class="live-strip__pill">LIVE</span>
-        <div class="live-strip__marquee">
-          <span>Live Deals: Flat 60% off on fashion</span>
-          <span>Amazon Summer Sale is live</span>
-          <span>Upto 70% off on smartphones</span>
-          <span>Flipkart Big Savings Days</span>
-        </div>
-        <a class="live-strip__link" href="#latest">View all Live Deals â†’</a>
-      </section>
-      <section class="filters" id="categories" aria-label="Quick filters">
-        <button class="chip is-active" data-filter="all" type="button">All</button>
-        <button class="chip" data-filter="amazon" type="button">Amazon</button>
-        <button class="chip" data-filter="flipkart" type="button">Flipkart</button>
-        <button class="chip" data-filter="myntra" type="button">Myntra</button>
-        <button class="chip" data-filter="ajio" type="button">Ajio</button>
-        <button class="chip" data-filter="cashback" type="button">Cashback</button>
-      </section>
-
-      <section class="dashboard">
-        <div class="dashboard__main">
-          <section class="panel hero-panel">
-            <div class="section-head">
-              <div>
-                <p class="eyebrow">Featured Deals</p>
-                <h2>Top stores, clean cards, and fast conversions</h2>
-              </div>
-              <a href="#stores" class="section-link">View all deals -></a>
-            </div>
-
-            <div class="spotlight-rail" id="spotlight-rail" aria-label="Featured spotlight"></div>
-          </section>
-
-          <section class="categories-rail-wrap" aria-label="Top categories">
-            <div class="section-head section-head--compact">
-              <div>
-                <p class="eyebrow">Top Categories</p>
-                <h2>Browse deals by intent, not just by store</h2>
-              </div>
-              <a class="section-link" href="#latest">See all categories -></a>
-            </div>
-
-            <div class="categories-rail">
-              <a class="category-pill category-pill--popular" href="#latest">
-                <img class="category-pill__icon" src="./brand-preview.png" alt="" />
-                <strong>Most Popular</strong>
-              </a>
-              <a class="category-pill category-pill--cards" href="#latest">
-                <img class="category-pill__icon" src="./logo-option1-premium-v2.png" alt="" />
-                <strong>Credit Cards</strong>
-              </a>
-              <a class="category-pill category-pill--fashion" href="#latest">
-                <img class="category-pill__icon" src="./myntra-logo.svg" alt="" />
-                <strong>Fashion</strong>
-              </a>
-              <a class="category-pill category-pill--beauty" href="#latest">
-                <img class="category-pill__icon" src="./nykaa-logo.svg" alt="" />
-                <strong>Beauty & Grooming</strong>
-              </a>
-              <a class="category-pill category-pill--electronics" href="#latest">
-                <img class="category-pill__icon" src="./croma-logo.svg" alt="" />
-                <strong>Electronics</strong>
-              </a>
-              <a class="category-pill category-pill--mobiles" href="#latest">
-                <img class="category-pill__icon" src="./flipkart.png" alt="" />
-                <strong>Mobiles</strong>
-              </a>
-              <a class="category-pill category-pill--home" href="#latest">
-                <img class="category-pill__icon" src="./bigbasket.png" alt="" />
-                <strong>Home & Kitchen</strong>
-              </a>
-              <a class="category-pill category-pill--cashback" href="#latest">
-                <img class="category-pill__icon" src="./logo-minimal-cw-preview.png" alt="" />
-                <strong>Min 50% Cashback</strong>
-              </a>
-              <a class="category-pill category-pill--travel" href="#latest">
-                <img class="category-pill__icon" src="./makemytrip.png" alt="" />
-                <strong>Flights & Hotels</strong>
-              </a>
-              <a class="category-pill category-pill--deals" href="#latest">
-                <img class="category-pill__icon" src="./logo-wordmark.svg" alt="" />
-                <strong>More Categories</strong>
-              </a>
-            </div>
-          </section>
-
-          <section class="panel">
-            <div class="section-head">
-              <div>
-                <p class="eyebrow">Best Card</p>
-                <h2>Highlighted store card</h2>
-              </div>
-              <a href="#builder" class="section-link">Open builder -></a>
-            </div>
-
-            <article class="best-card" id="best-card">
-              <div class="best-card__media">
-                <img src="./amazon.png" alt="Amazon" />
-              </div>
-              <div class="best-card__content">
-                <div class="best-card__badge">Up to 70% cashback</div>
-                <h3>Amazon Summer Sale</h3>
-                <p>Big discounts on gadgets, home, and fashion with a clean direct-affiliate flow.</p>
-                <div class="best-card__actions">
-                  <a class="btn btn--primary" href="#builder">View Deal & Earn</a>
-                  <a class="btn btn--ghost" href="#stores">Open store</a>
-                </div>
-              </div>
-            </article>
-          </section>
-
-          <section class="panel" id="latest">
-            <div class="section-head">
-              <div>
-                <p class="eyebrow">Latest Deals</p>
-                <h2>Fresh offers users can open right now</h2>
-              </div>
-              <a href="#stores" class="section-link">See stores -></a>
-            </div>
-
-            <div class="latest-list" id="latest-list"></div>
-          </section>
-        </div>
-
-        <aside class="dashboard__side">
-          <section class="panel panel--tight" id="stores">
-            <div class="section-head section-head--compact">
-              <div>
-                <p class="eyebrow">Top Stores</p>
-                <h2>Best profit potential</h2>
-              </div>
-              <a href="#builder" class="section-link">View all -></a>
-            </div>
-
-            <div class="store-list">
-              <a class="store-list__item" href="#builder">
-                <img src="./amazon.png" alt="" />
-                <span>Amazon</span>
-                <strong>Up to 6% cashback</strong>
-              </a>
-              <a class="store-list__item" href="#builder">
-                <img src="./flipkart.png" alt="" />
-                <span>Flipkart</span>
-                <strong>Up to 10% cashback</strong>
-              </a>
-              <a class="store-list__item" href="#builder">
-                <img src="./myntra-logo.svg" alt="" />
-                <span>Myntra</span>
-                <strong>Up to 8% cashback</strong>
-              </a>
-              <a class="store-list__item" href="#builder">
-                <img src="./ajio-logo.svg" alt="" />
-                <span>Ajio</span>
-                <strong>Up to 15% cashback</strong>
-              </a>
-            </div>
-          </section>
-
-          <section class="panel panel--tight">
-            <div class="section-head section-head--compact">
-              <div>
-                <p class="eyebrow">Trending Now</p>
-                <h2>Fresh pushes today</h2>
-              </div>
-            </div>
-
-            <ol class="trending-list">
-              <li>Amazon Summer Sale - live now</li>
-              <li>Flipkart Big Savings Days</li>
-              <li>Myntra fashion picks</li>
-              <li>Ajio best selling footwear</li>
-              <li>Cashback deals across stores</li>
-            </ol>
-          </section>
-
-          <section class="panel panel--builder" id="builder">
-            <div class="section-head section-head--compact">
-              <div>
-                <p class="eyebrow">Profit Link Builder</p>
-                <h2>Paste a product link, make it shareable</h2>
-              </div>
-            </div>
-
-            <form id="builder-form" class="builder-form">
-              <label>
-                <span>Product / Store Link</span>
-                <input id="product-link" type="url" placeholder="https://www.amazon.in/..." />
-              </label>
-
-              <label>
-                <span>Affiliate Tag</span>
-                <input id="affiliate-tag" type="text" placeholder="yourtag-21" value="yourtag-21" />
-              </label>
-
-              <div class="builder-grid">
-                <label>
-                  <span>Store</span>
-                  <select id="store-select">
-                    <option value="amazon">Amazon</option>
-                    <option value="flipkart">Flipkart</option>
-                    <option value="myntra">Myntra</option>
-                    <option value="ajio">Ajio</option>
-                  </select>
-                </label>
-                <label>
-                  <span>Campaign</span>
-                  <input id="campaign-name" type="text" placeholder="summer-sale" />
-                </label>
-              </div>
-
-              <div class="builder-actions">
-                <button class="btn btn--primary" type="submit">Generate Link</button>
-                <button class="btn btn--ghost" type="button" id="copy-link">Copy Link</button>
-              </div>
-
-              <label class="builder-output">
-                <span>Generated Link</span>
-                <input id="output-link" type="text" readonly placeholder="Your generated link appears here" />
-              </label>
-
-              <p class="builder-note">
-                Amazon links can use tracking tags directly. Other stores can use your approved deep link or wrapped tracking URL.
-              </p>
-            </form>
-          </section>
-        </aside>
-      </section>
-      <section class="panel" id="login">
-        <div class="section-head">
+    <main id="top" class="cw-shell">
+      <section class="cw-panel cw-section">
+        <div class="cw-section-head">
           <div>
-            <p class="eyebrow">Login</p>
-            <h2>Simple access panel for later account features</h2>
+            <p class="cw-eyebrow">Featured Deals</p>
+            <h2>Two big cards on screen, more waiting in the rail.</h2>
           </div>
-          <a href="./login.html" class="section-link">Open login â†’</a>
+          <button class="cw-link" type="button" data-open-builder>Open builder</button>
         </div>
+        <div class="cw-rail cw-rail--hero" id="cw-hero-rail"></div>
+      </section>
+
+      <section class="cw-panel cw-section" id="top-categories">
+        <div class="cw-section-head">
+          <div>
+            <p class="cw-eyebrow">Top Categories</p>
+            <h2>Browse deals by intent, not just by store.</h2>
+          </div>
+          <a class="cw-link" href="#discount-coupons">See all categories</a>
+        </div>
+        <div class="cw-category-rail" id="cw-category-rail"></div>
+      </section>
+
+      <section class="cw-panel cw-section" id="popular-brands">
+        <div class="cw-section-head">
+          <div>
+            <p class="cw-eyebrow">Most Popular Brands</p>
+            <h2>Brands users click most often.</h2>
+          </div>
+          <a class="cw-link" href="#amazon-deals">View brand deals</a>
+        </div>
+        <div class="cw-rail cw-rail--cards" id="cw-brand-rail"></div>
+      </section>
+
+      <section class="cw-panel cw-section" id="amazon-deals">
+        <div class="cw-section-head">
+          <div>
+            <p class="cw-eyebrow">Amazon - Top Deals</p>
+            <h2>Big discounts on gadgets, home, and daily needs.</h2>
+          </div>
+          <a class="cw-link" href="#top-categories">Back to categories</a>
+        </div>
+        <div class="cw-rail cw-rail--cards" id="cw-amazon-rail"></div>
+      </section>
+
+      <section class="cw-panel cw-section" id="flipkart-deals">
+        <div class="cw-section-head">
+          <div>
+            <p class="cw-eyebrow">Flipkart - Top Deals</p>
+            <h2>Fashion, bags, appliances, and smart savings.</h2>
+          </div>
+          <a class="cw-link" href="#popular-brands">See brands</a>
+        </div>
+        <div class="cw-rail cw-rail--cards" id="cw-flipkart-rail"></div>
+      </section>
+
+      <section class="cw-panel cw-section" id="best-card">
+        <div class="cw-section-head">
+          <div>
+            <p class="cw-eyebrow">Best Card</p>
+            <h2>Use the right shopping card for rewards and cashback.</h2>
+          </div>
+          <a class="cw-link" href="#amazon-deals">Open deals</a>
+        </div>
+        <div class="cw-rail cw-rail--cards" id="cw-cards-rail"></div>
+      </section>
+
+      <section class="cw-panel cw-section" id="fashion-buys">
+        <div class="cw-section-head">
+          <div>
+            <p class="cw-eyebrow">Get Cashback on Fashion Buys</p>
+            <h2>Style picks with cashback and trackable links.</h2>
+          </div>
+          <a class="cw-link" href="#flipkart-deals">See Flipkart deals</a>
+        </div>
+        <div class="cw-rail cw-rail--cards" id="cw-fashion-rail"></div>
+      </section>
+
+      <section class="cw-panel cw-section" id="top-selling-product">
+        <div class="cw-section-head">
+          <div>
+            <p class="cw-eyebrow">Top Selling Product</p>
+            <h2>Products users open and compare the most.</h2>
+          </div>
+          <a class="cw-link" href="#best-card">See best card</a>
+        </div>
+        <div class="cw-rail cw-rail--cards" id="cw-mobile-rail"></div>
+      </section>
+
+      <section class="cw-panel cw-section" id="loan">
+        <div class="cw-section-head">
+          <div>
+            <p class="cw-eyebrow">Loan</p>
+            <h2>Simple loan cards and quick comparison picks.</h2>
+          </div>
+          <a class="cw-link" href="#fashion-buys">See fashion</a>
+        </div>
+        <div class="cw-rail cw-rail--cards" id="cw-trendy-rail"></div>
+      </section>
+
+      <section class="cw-panel cw-section" id="discount-coupons">
+        <div class="cw-section-head">
+          <div>
+            <p class="cw-eyebrow">Best Discount Coupons</p>
+            <h2>Coupon blocks with clear offers and easy sharing.</h2>
+          </div>
+          <a class="cw-link" href="#top">Back to top</a>
+        </div>
+        <div class="cw-rail cw-rail--cards" id="cw-coupon-rail"></div>
       </section>
     </main>
 
-    <footer class="site-footer">
+    <footer class="cw-footer">
       <div>
         <strong>CouponsWorld.in</strong>
-        <p>Blue-green deal dashboard for stores, cashback, and profit-link sharing.</p>
+        <p>Deals feed for brands, categories, coupons, and profit link sharing.</p>
       </div>
-      <a href="#top" class="section-link">Back to top â†‘</a>
+      <a class="cw-link" href="#top">Back to top</a>
     </footer>
 
     <script src="./script.js"></script>
   </body>
 </html>
-
-
-
