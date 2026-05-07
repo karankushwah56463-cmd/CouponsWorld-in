@@ -1,8 +1,17 @@
+const SPREADSHEET_ID = "1LJAoyeyp-Gz6HhmAQay7PbaPSX--oIfjleX_2FSd2I8";
 const SHEET_NAME = "Signups";
 
 function doPost(e) {
-  const data = JSON.parse(e.postData.contents);
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const raw = (e && e.postData && e.postData.contents) ? e.postData.contents : "";
+  let data = {};
+
+  try {
+    data = raw ? JSON.parse(raw) : {};
+  } catch (error) {
+    data = (e && e.parameter) ? e.parameter : {};
+  }
+
+  const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
   const sheet = ss.getSheetByName(SHEET_NAME) || ss.insertSheet(SHEET_NAME);
 
   if (sheet.getLastRow() === 0) {
