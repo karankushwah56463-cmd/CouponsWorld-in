@@ -3,734 +3,208 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CouponsWorld.in - Share Deals & Earn Profit</title>
+    <title>CouponsWorld.in - Deals Feed</title>
     <meta
       name="description"
-      content="CouponsWorld.in helps users share deal links, earn profit, and explore top brands, coupons, and cashback offers in one clean affiliate hub."
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
-      rel="stylesheet"
+      content="CouponsWorld.in is a clean deal feed with featured cards, categories, brands, top deals, credit cards, fashion, phones, and coupons."
     />
     <link rel="stylesheet" href="./styles.css" />
-    <script
-      defer
-      src="https://static.cloudflareinsights.com/beacon.min.js"
-      data-cf-beacon='{"token":"YOUR_CLOUDFLARE_WEB_ANALYTICS_TOKEN"}'
-    ></script>
   </head>
-  <body id="top">
-    <div class="promo-popup" id="promo-popup" aria-hidden="true">
-      <div class="promo-popup__backdrop" data-popup-close></div>
-      <section class="promo-popup__card" role="dialog" aria-modal="true" aria-labelledby="promo-popup-title">
-        <button class="promo-popup__close" type="button" data-popup-close aria-label="Close promotion">×</button>
-        <p class="panel-label">Today only</p>
-        <h2 id="promo-popup-title">Live deals, fast links, and better store cards.</h2>
-        <p>
-          Browse the freshest offers, open the best card, and share a trackable link in seconds.
+  <body class="cw-page">
+    <div class="cw-modal is-hidden" id="cw-builder-modal" aria-hidden="true">
+      <div class="cw-modal__backdrop" data-close-builder></div>
+      <div class="cw-modal__panel" role="dialog" aria-modal="true" aria-labelledby="cw-builder-title">
+        <button class="cw-modal__close" type="button" data-close-builder aria-label="Close popup">×</button>
+        <p class="cw-eyebrow">Create Profit Link</p>
+        <h1 id="cw-builder-title">Paste a product link and make it shareable.</h1>
+        <p class="cw-muted">
+          Use your affiliate tag, pick a store, and generate a clean share link in seconds.
         </p>
-        <div class="promo-popup__actions">
-          <a class="button button-primary" href="#profit-link-builder">Open builder</a>
-          <a class="button button-ghost" href="#stores">See stores</a>
-        </div>
-      </section>
-    </div>
 
-    <header class="site-header">
-      <a class="brand" href="#top" aria-label="CouponsWorld.in home">
-        <img class="brand-mark" src="./logo.png" alt="CouponsWorld.in logo" />
-        <div class="brand-copy">
-          <p class="brand-name">CouponsWorld.in</p>
-          <p class="brand-tag">Share deals, earn profit, and track cashback</p>
-        </div>
-      </a>
+        <form class="cw-builder" id="cw-builder-form">
+          <label>
+            <span>Product / Store Link</span>
+            <input id="cw-product-link" type="url" placeholder="https://www.amazon.in/..." />
+          </label>
 
-      <nav class="header-nav" aria-label="Primary">
-        <a href="#earn">Share & Earn</a>
-        <a href="#coupons">Browse Coupons</a>
-        <a href="#stores">Stores</a>
-        <a href="#categories">Categories</a>
-        <a href="#offers">Popular Offers</a>
-        <a href="#faq">FAQ</a>
-      </nav>
+          <label>
+            <span>Affiliate Tag</span>
+            <input id="cw-affiliate-tag" type="text" placeholder="yourtag-21" value="yourtag-21" />
+          </label>
 
-      <div class="header-actions">
-        <a class="button button-ghost" href="./login.html">Login</a>
-        <a class="button button-ghost" href="#stores">Top Stores</a>
-        <a class="button button-primary" href="#profit-link-builder">Create Profit Link</a>
-      </div>
-    </header>
-
-    <main>
-      <section class="hero">
-        <div class="hero-copy">
-          <p class="eyebrow">Join Free. Share Deals. Earn Profit.</p>
-          <h1>CouponsWorld.in turns coupons into profit links you can share.</h1>
-          <p class="hero-text">
-            Search verified offers, open store listings, and share links on WhatsApp, Telegram, or social channels to earn from every confirmed order.
-          </p>
-
-          <form class="search-bar" id="search-form">
-            <label class="sr-only" for="search-input">Search coupons and stores</label>
-            <input
-              id="search-input"
-              type="search"
-              placeholder="Search stores, coupons, categories..."
-            />
-            <button class="button button-primary" type="submit">Search</button>
-          </form>
-
-          <div class="browse-tabs" aria-label="Browse options">
-            <a href="#earn">Join Free</a>
-            <a href="#earn">Share Links</a>
-            <a href="#coupons">Browse Coupons</a>
-            <a href="#offers">Profit Picks</a>
-            <a href="#stores">Top Stores</a>
-            <a href="#ending">Ending Soon</a>
-          </div>
-
-          <div class="hero-stats">
-            <article class="stat-card">
-              <strong>200+</strong>
-              <span>brands to share</span>
-            </article>
-            <article class="stat-card">
-              <strong>₹10</strong>
-              <span>minimum payout style</span>
-            </article>
-            <article class="stat-card">
-              <strong>Share</strong>
-              <span>earn from each link</span>
-            </article>
-          </div>
-        </div>
-
-        <aside class="hero-panel">
-          <article class="hero-slider" id="hero-slider">
-            <div class="hero-slider__head">
-              <div>
-                <p class="panel-label">Live feed</p>
-                <strong class="hero-slider__title">Hot deals moving right now</strong>
-              </div>
-              <div class="hero-slider__counter">
-                <span id="hero-slide-index">01</span>
-                <small>/04</small>
-              </div>
-            </div>
-
-            <div class="hero-slider__viewport">
-              <div class="hero-slider__track">
-                <article class="hero-slide is-active" data-hero-slide>
-                  <span class="hero-slide__eyebrow">Best card</span>
-                  <div class="hero-slide__top">
-                    <img src="./amazon.png" alt="Amazon logo" />
-                    <div>
-                      <strong>Amazon</strong>
-                      <span>Electronics, fashion, home</span>
-                    </div>
-                  </div>
-                  <h2>Open the highest trust store with a single tap.</h2>
-                  <p>Big-ticket shopping, daily essentials, and seasonal stock with a stable commission path.</p>
-                  <div class="hero-slide__meta">
-                    <span>Up to 6% profit</span>
-                    <span>Fast checkout</span>
-                  </div>
-                  <a class="button button-primary" href="#stores">Open Amazon</a>
-                </article>
-
-                <article class="hero-slide" data-hero-slide>
-                  <span class="hero-slide__eyebrow">Hot now</span>
-                  <div class="hero-slide__top">
-                    <img src="./flipkart.png" alt="Flipkart logo" />
-                    <div>
-                      <strong>Flipkart</strong>
-                      <span>Mobiles, laptops, gadgets</span>
-                    </div>
-                  </div>
-                  <h2>Tech-heavy cards that feel active and current.</h2>
-                  <p>Sharper conversion cards for phones, laptops, and trending electronics.</p>
-                  <div class="hero-slide__meta">
-                    <span>Up to 18% cashback</span>
-                    <span>Trending gear</span>
-                  </div>
-                  <a class="button button-secondary" href="#stores">Open Flipkart</a>
-                </article>
-
-                <article class="hero-slide" data-hero-slide>
-                  <span class="hero-slide__eyebrow">Style pick</span>
-                  <div class="hero-slide__top">
-                    <img src="./myntra-logo.svg" alt="Myntra logo" />
-                    <div>
-                      <strong>Myntra</strong>
-                      <span>Fashion, footwear, accessories</span>
-                    </div>
-                  </div>
-                  <h2>Fashion cards with a clean, premium feel.</h2>
-                  <p>Outfit-driven shopping moments with quick redirection and easy share actions.</p>
-                  <div class="hero-slide__meta">
-                    <span>Flat 15% off</span>
-                    <span>Style section</span>
-                  </div>
-                  <a class="button button-primary" href="#stores">Open Myntra</a>
-                </article>
-
-                <article class="hero-slide" data-hero-slide>
-                  <span class="hero-slide__eyebrow">Travel live</span>
-                  <div class="hero-slide__top">
-                    <img src="./makemytrip.png" alt="MakeMyTrip logo" />
-                    <div>
-                      <strong>MakeMyTrip</strong>
-                      <span>Flights, hotels, packages</span>
-                    </div>
-                  </div>
-                  <h2>Travel cards for high-value clicks and bookings.</h2>
-                  <p>Make the site feel alive with travel cards that sit apart from daily shopping.</p>
-                  <div class="hero-slide__meta">
-                    <span>Up to 8% cashback</span>
-                    <span>Trip deals</span>
-                  </div>
-                  <a class="button button-secondary" href="#stores">Open Travel</a>
-                </article>
-              </div>
-            </div>
-
-            <div class="hero-slider__footer">
-              <button class="slider-nav" type="button" data-hero-prev aria-label="Previous slide">←</button>
-              <div class="hero-dots" data-hero-dots></div>
-              <button class="slider-nav" type="button" data-hero-next aria-label="Next slide">→</button>
-            </div>
-          </article>
-
-          <article class="hero-featured-card">
-            <p class="panel-label">Highlighted</p>
-            <h2>One strong featured card sits above everything else.</h2>
-            <p>We are not just changing colors. The page now has a clearer hierarchy, a live card, and motion that pulls the eye where it should go.</p>
-
-            <div class="hero-featured-card__grid">
-              <div>
-                <strong>Fast trust</strong>
-                <span>Popup intro + clear CTA</span>
-              </div>
-              <div>
-                <strong>Live motion</strong>
-                <span>Auto slider with controls</span>
-              </div>
-              <div>
-                <strong>Best card</strong>
-                <span>Featured store spotlight</span>
-              </div>
-            </div>
-
-            <div class="hero-featured-card__actions">
-              <a class="button button-primary" href="#profit-link-builder">Create link</a>
-              <a class="button button-ghost" href="#stores">See stores</a>
-            </div>
-          </article>
-        </aside>
-      </section>
-
-      <section class="section">
-        <div class="live-strip">
-          <article class="live-chip">
-            <span>Trust</span>
-            <strong>200+ stores, live-feel cards</strong>
-          </article>
-          <article class="live-chip">
-            <span>Speed</span>
-            <strong>One tap from card to store</strong>
-          </article>
-          <article class="live-chip">
-            <span>Highlight</span>
-            <strong>Best deal is always visible first</strong>
-          </article>
-          <article class="live-chip">
-            <span>Motion</span>
-            <strong>Slider, popup, and subtle animation</strong>
-          </article>
-        </div>
-      </section>
-
-      <section class="section spotlight-section">
-        <div class="section-head">
-          <div>
-            <p class="section-kicker">Best Card</p>
-            <h2>A featured deal area that feels like a live product shelf</h2>
-            <p class="section-copy">
-              This block gives the page a stronger center of gravity, so it doesn’t read like a plain list of sections.
-            </p>
-          </div>
-          <a href="#offers" class="link-arrow">See featured offer</a>
-        </div>
-
-        <div class="spotlight-layout">
-          <article class="spotlight-main">
-            <span class="spotlight-badge">Top trust card</span>
-            <h3>Amazon. Flipkart. Myntra. Ajio. One clear shopping lane.</h3>
-            <p>
-              A big, confident lead card for the store users trust most, with quick summary, big CTA, and a premium feel.
-            </p>
-            <div class="spotlight-main__meta">
-              <span>Higher click depth</span>
-              <span>Better focus</span>
-              <span>Clear action</span>
-            </div>
-            <div class="spotlight-main__actions">
-              <a class="button button-secondary" href="#stores">Explore stores</a>
-              <a class="button button-ghost" href="#profit-link-builder">Build link</a>
-            </div>
-          </article>
-
-          <div class="spotlight-stack">
-            <article class="spotlight-mini">
-              <p class="panel-label">Popup</p>
-              <strong>Short welcome popup, not a boring bar.</strong>
-              <span>Creates the first trust signal instantly.</span>
-            </article>
-            <article class="spotlight-mini">
-              <p class="panel-label">Slider</p>
-              <strong>Four live slides with controls.</strong>
-              <span>Makes the page feel active and modern.</span>
-            </article>
-            <article class="spotlight-mini">
-              <p class="panel-label">Animation</p>
-              <strong>Soft motion on cards and buttons.</strong>
-              <span>Enough to feel premium, not flashy.</span>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="section section-soft finance-section" id="finance-hub">
-        <div class="section-head">
-          <div>
-            <p class="section-kicker">Finance Hub</p>
-            <h2>Calculator plus loan options in one clean block</h2>
-            <p class="section-copy">
-              The page now has real utility again: a monthly earning calculator, loan options, and an EMI estimate tool.
-            </p>
-          </div>
-          <a href="#profit-link-builder" class="link-arrow">Build a profit link</a>
-        </div>
-
-        <div class="finance-layout">
-          <article class="finance-panel finance-panel--earnings">
-            <div class="finance-panel__head">
-              <div>
-                <p class="panel-label">Earnings calculator</p>
-                <h3>Estimate monthly profit from store orders</h3>
-              </div>
-              <span class="finance-pill">Live total</span>
-            </div>
-
-            <div class="finance-rows" id="earnings-calculator">
-              <div class="profit-row">
-                <label for="earnings-electronics">Electronics orders</label>
-                <input id="earnings-electronics" type="range" min="0" max="50" value="7" data-rate="150" />
-                <strong data-value-for="earnings-electronics">₹1,050</strong>
-              </div>
-              <div class="profit-row">
-                <label for="earnings-fashion">Fashion orders</label>
-                <input id="earnings-fashion" type="range" min="0" max="80" value="15" data-rate="80" />
-                <strong data-value-for="earnings-fashion">₹1,200</strong>
-              </div>
-              <div class="profit-row">
-                <label for="earnings-grocery">Grocery orders</label>
-                <input id="earnings-grocery" type="range" min="0" max="100" value="20" data-rate="35" />
-                <strong data-value-for="earnings-grocery">₹700</strong>
-              </div>
-              <div class="profit-row">
-                <label for="earnings-travel">Travel orders</label>
-                <input id="earnings-travel" type="range" min="0" max="20" value="3" data-rate="250" />
-                <strong data-value-for="earnings-travel">₹750</strong>
-              </div>
-            </div>
-
-            <div class="finance-total">
-              <span>Estimated monthly profit</span>
-              <strong id="earnings-total">₹3,700</strong>
-            </div>
-          </article>
-
-          <article class="finance-panel finance-panel--loan">
-            <div class="finance-panel__head">
-              <div>
-                <p class="panel-label">Loan calculator</p>
-                <h3>Quick EMI preview for common loan types</h3>
-              </div>
-              <span class="finance-pill finance-pill--blue">EMI</span>
-            </div>
-
-            <div class="loan-types" role="tablist" aria-label="Loan options">
-              <button class="loan-type is-active" type="button" data-loan-type="personal">Personal</button>
-              <button class="loan-type" type="button" data-loan-type="home">Home</button>
-              <button class="loan-type" type="button" data-loan-type="business">Business</button>
-              <button class="loan-type" type="button" data-loan-type="education">Education</button>
-            </div>
-
-            <div class="finance-rows" id="loan-calculator">
-              <div class="profit-row">
-                <label for="loan-amount">Loan amount</label>
-                <input id="loan-amount" type="range" min="50000" max="5000000" step="50000" value="500000" />
-                <strong id="loan-amount-value">₹5,00,000</strong>
-              </div>
-              <div class="profit-row">
-                <label for="loan-rate">Interest rate</label>
-                <input id="loan-rate" type="range" min="7" max="24" step="0.1" value="12.5" />
-                <strong id="loan-rate-value">12.5%</strong>
-              </div>
-              <div class="profit-row">
-                <label for="loan-tenure">Tenure</label>
-                <input id="loan-tenure" type="range" min="6" max="240" step="1" value="60" />
-                <strong id="loan-tenure-value">60 months</strong>
-              </div>
-            </div>
-
-            <div class="loan-summary">
-              <div>
-                <span>Monthly EMI</span>
-                <strong id="loan-emi">₹11,243</strong>
-              </div>
-              <div>
-                <span>Total interest</span>
-                <strong id="loan-interest">₹174,580</strong>
-              </div>
-              <div>
-                <span>Total payable</span>
-                <strong id="loan-payable">₹6,74,580</strong>
-              </div>
-            </div>
-
-            <div class="loan-options">
-              <article class="loan-option-card">
-                <strong>Personal loan</strong>
-                <span>Fast approval, flexible use</span>
-              </article>
-              <article class="loan-option-card">
-                <strong>Home loan</strong>
-                <span>Lower rates, long tenure</span>
-              </article>
-              <article class="loan-option-card">
-                <strong>Business loan</strong>
-                <span>Working capital and expansion</span>
-              </article>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section class="section earn-section" id="earn">
-        <div class="section-head">
-          <div>
-            <p class="section-kicker">Share & Earn</p>
-            <h2>Turn every deal into a profit link</h2>
-            <p class="section-copy">
-              Pick a brand, create a profit link, share it with your network, and watch confirmed profit build up over time.
-            </p>
-          </div>
-          <a href="#faq" class="link-arrow">How payouts work</a>
-        </div>
-
-        <div class="earn-steps">
-          <article class="earn-step">
-            <span>1</span>
-            <h3>Join free</h3>
-            <p>Create your account and pick brands from 200+ stores.</p>
-          </article>
-          <article class="earn-step">
-            <span>2</span>
-            <h3>Share profit links</h3>
-            <p>Send deals on WhatsApp, Telegram, Instagram, or YouTube.</p>
-          </article>
-          <article class="earn-step">
-            <span>3</span>
-            <h3>Get confirmed profit</h3>
-            <p>Track pending and confirmed profit until it is ready to withdraw.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="section section-soft" id="profit-link-builder">
-        <div class="section-head">
-          <div>
-            <p class="section-kicker">Create Profit Link</p>
-            <h2>Make your own Profit Links in Seconds</h2>
-            <p class="section-copy">
-              Paste a homepage or product link, pick a store, and we’ll turn it into a shareable profit link.
-            </p>
-          </div>
-          <a href="#stores" class="link-arrow">See partners & profit rates</a>
-        </div>
-
-        <div class="link-builder">
-          <form class="link-builder__form" id="profit-link-form">
-            <div class="field">
-              <label for="profit-link-source">Product link</label>
-              <input
-                id="profit-link-source"
-                type="url"
-                placeholder="Paste homepage or product link here"
-              />
-            </div>
-
-            <div class="field">
-              <label for="profit-link-store">Store</label>
-              <select id="profit-link-store">
+          <div class="cw-builder__grid">
+            <label>
+              <span>Store</span>
+              <select id="cw-store-select">
                 <option value="amazon">Amazon</option>
                 <option value="flipkart">Flipkart</option>
                 <option value="myntra">Myntra</option>
                 <option value="ajio">Ajio</option>
-                <option value="makemytrip">MakeMyTrip</option>
-                <option value="zomato">Zomato</option>
-                <option value="bigbasket">BigBasket</option>
-                <option value="nykaa">Nykaa</option>
-                <option value="godaddy">GoDaddy</option>
-                <option value="croma">Croma</option>
               </select>
-            </div>
+            </label>
+            <label>
+              <span>Campaign</span>
+              <input id="cw-campaign-name" type="text" placeholder="summer-sale" />
+            </label>
+          </div>
 
-            <div class="field">
-              <label for="profit-link-amazon-tag">Amazon tracking ID / tag</label>
-              <input
-                id="profit-link-amazon-tag"
-                type="text"
-                placeholder="yourtag-21"
-              />
-            </div>
+          <div class="cw-builder__actions">
+            <button class="cw-btn cw-btn--primary" type="submit">Generate Link</button>
+            <button class="cw-btn cw-btn--ghost" type="button" id="cw-copy-link">Copy Link</button>
+          </div>
 
-            <div class="field">
-              <label for="profit-link-campaign">Campaign / note</label>
-              <input
-                id="profit-link-campaign"
-                type="text"
-                placeholder="summer-sale, weekend-deal, etc."
-              />
-            </div>
+          <label class="cw-builder__output">
+            <span>Generated Link</span>
+            <input id="cw-output-link" type="text" readonly placeholder="Your generated link appears here" />
+          </label>
+        </form>
+      </div>
+    </div>
 
-            <div class="field">
-              <label for="profit-link-ref">Your profile name</label>
-              <input id="profit-link-ref" type="text" placeholder="your profile name" />
-            </div>
-
-            <div class="field">
-              <label for="profit-link-destination">Where should it open?</label>
-              <select id="profit-link-destination">
-                <option value="">Home page</option>
-                <option value="stores">Stores section</option>
-                <option value="coupons">Coupons section</option>
-                <option value="offers">Offers section</option>
-                <option value="earn">Earn section</option>
-              </select>
-            </div>
-
-            <div class="auth-actions">
-              <button class="button button-primary" type="submit">Make Profit Link</button>
-              <button class="button button-ghost" type="button" id="profit-link-copy">Copy Link</button>
-            </div>
-          </form>
-
-          <article class="link-builder__preview">
-            <p class="panel-label">Generated link</p>
-            <textarea id="profit-link-output" class="link-output" readonly></textarea>
-            <p class="link-helper" id="profit-link-note">
-              Paste a product link and we’ll wrap it with your store, campaign, and referral name.
-            </p>
-          </article>
+    <header class="cw-header">
+      <a class="cw-brand" href="#top" aria-label="CouponsWorld.in home">
+        <div class="cw-brand__meta">
+          <strong>CouponsWorld.in</strong>
+          <span>Save more, earn more</span>
         </div>
+      </a>
+
+      <label class="cw-search" aria-label="Search deals, brands and sections">
+        <span>Search</span>
+        <input id="cw-search" type="search" placeholder="Search deals, stores, and coupons..." />
+      </label>
+
+      <nav class="cw-nav" aria-label="Primary">
+        <a href="#top">Home</a>
+        <a href="#top-selling-product">Top Selling Product</a>
+        <a href="#loan">Loan</a>
+        <a href="#best-card">Best Card</a>
+        <a href="./login.html">Login</a>
+      </nav>
+
+      <button class="cw-btn cw-btn--primary cw-header__cta" type="button" data-open-builder>
+        Create Profit Link
+      </button>
+    </header>
+
+    <main id="top" class="cw-shell">
+      <section class="cw-panel cw-section">
+        <div class="cw-section-head">
+          <div>
+            <p class="cw-eyebrow">Featured Deals</p>
+            <h2>Two big cards on screen, more waiting in the rail.</h2>
+          </div>
+          <button class="cw-link" type="button" data-open-builder>Open builder</button>
+        </div>
+        <div class="cw-rail cw-rail--hero" id="cw-hero-rail"></div>
       </section>
 
-      <section class="section" id="coupons">
-        <div class="section-head">
+      <section class="cw-panel cw-section" id="top-categories">
+        <div class="cw-section-head">
           <div>
-            <p class="section-kicker">Browse Coupons</p>
-            <h2>Popular coupons ready to copy and share</h2>
-            <p class="section-copy">
-              Clear coupons, short descriptions, and direct call-to-action buttons keep the sharing flow simple.
-            </p>
+            <p class="cw-eyebrow">Top Categories</p>
+            <h2>Browse deals by intent, not just by store.</h2>
           </div>
-          <a href="#stores" class="link-arrow">See stores</a>
+          <a class="cw-link" href="#discount-coupons">See all categories</a>
         </div>
-
-        <div class="coupon-grid" id="coupon-grid"></div>
+        <div class="cw-category-rail" id="cw-category-rail"></div>
       </section>
 
-      <section class="section section-soft" id="stores">
-        <div class="section-head">
+      <section class="cw-panel cw-section" id="popular-brands">
+        <div class="cw-section-head">
           <div>
-            <p class="section-kicker">Top Stores</p>
-            <h2>Stores with the best profit potential</h2>
-            <p class="section-copy">
-              Browse store pages with filters, logo badges, profit labels, and quick offer links.
-            </p>
+            <p class="cw-eyebrow">Most Popular Brands</p>
+            <h2>Brands users click most often.</h2>
           </div>
-          <a href="#categories" class="link-arrow">Trending categories</a>
+          <a class="cw-link" href="#amazon-deals">View brand deals</a>
         </div>
-
-        <div class="chip-row" id="store-filters" aria-label="Store filters">
-          <button class="chip active" data-filter="all" type="button">All</button>
-          <button class="chip" data-filter="fashion" type="button">Fashion</button>
-          <button class="chip" data-filter="travel" type="button">Travel</button>
-          <button class="chip" data-filter="food" type="button">Food</button>
-          <button class="chip" data-filter="tech" type="button">Tech</button>
-          <button class="chip" data-filter="grocery" type="button">Grocery</button>
-          <button class="chip" data-filter="beauty" type="button">Beauty</button>
-        </div>
-
-        <div class="store-grid" id="store-grid"></div>
+        <div class="cw-rail cw-rail--cards" id="cw-brand-rail"></div>
       </section>
 
-      <section class="section section-soft" id="categories">
-        <div class="section-head">
+      <section class="cw-panel cw-section" id="amazon-deals">
+        <div class="cw-section-head">
           <div>
-            <p class="section-kicker">Trending Categories</p>
-            <h2>Browse deals by category</h2>
+            <p class="cw-eyebrow">Amazon - Top Deals</p>
+            <h2>Big discounts on gadgets, home, and daily needs.</h2>
           </div>
-          <div class="category-tabs">
-            <span class="category-tabs__active">Accessories</span>
-            <span>Clothing</span>
-            <span>Electronics</span>
-            <span>Others</span>
-          </div>
+          <a class="cw-link" href="#top-categories">Back to categories</a>
         </div>
-
-        <div class="category-grid">
-          <article class="category-card accent-fashion">
-            <div class="category-card__top">
-              <img src="./amazon.png" alt="Amazon logo" />
-              <strong>Up to 70% off</strong>
-            </div>
-            <p>Accessories, style add-ons, and quick saving opportunities.</p>
-            <a href="#offers" class="card-link">View All Offers →</a>
-          </article>
-          <article class="category-card accent-fashion">
-            <div class="category-card__top">
-              <img src="./amazon.png" alt="Amazon logo" />
-              <strong>Up to 50% off</strong>
-            </div>
-            <p>Fashion deals, footwear, and seasonal sales for repeat visitors.</p>
-            <a href="#offers" class="card-link">View All Offers →</a>
-          </article>
-          <article class="category-card accent-tech">
-            <div class="category-card__top">
-              <img src="./myntra-logo.svg" alt="Brand icon" />
-              <strong>Up to 80% off</strong>
-            </div>
-            <p>Electronics and device savings with strong shopping intent.</p>
-            <a href="#offers" class="card-link">View All Offers →</a>
-          </article>
-          <article class="category-card accent-tech">
-            <div class="category-card__top">
-              <img src="./croma-logo.svg" alt="Croma logo" />
-              <strong>Up to 75% off</strong>
-            </div>
-            <p>Tech deals, appliances, and premium category offers.</p>
-            <a href="#offers" class="card-link">View All Offers →</a>
-          </article>
-        </div>
+        <div class="cw-rail cw-rail--cards" id="cw-amazon-rail"></div>
       </section>
 
-      <section class="section" id="cashback">
-        <div class="section-head">
+      <section class="cw-panel cw-section" id="flipkart-deals">
+        <div class="cw-section-head">
           <div>
-            <p class="section-kicker">High Cashback Stores</p>
-            <h2>Cashback-first stores worth checking</h2>
+            <p class="cw-eyebrow">Flipkart - Top Deals</p>
+            <h2>Fashion, bags, appliances, and smart savings.</h2>
           </div>
-          <a href="#ending" class="link-arrow">See all coupons</a>
+          <a class="cw-link" href="#popular-brands">See brands</a>
         </div>
-
-        <div class="cashback-grid" id="cashback-grid"></div>
+        <div class="cw-rail cw-rail--cards" id="cw-flipkart-rail"></div>
       </section>
 
-      <section class="section section-soft" id="ending">
-        <div class="section-head">
+      <section class="cw-panel cw-section" id="best-card">
+        <div class="cw-section-head">
           <div>
-            <p class="section-kicker">Ending Soon Coupons</p>
-            <h2>Coupons that should be used first for profit</h2>
+            <p class="cw-eyebrow">Best Card</p>
+            <h2>Use the right shopping card for rewards and cashback.</h2>
           </div>
-          <a href="#offers" class="link-arrow">See all coupons</a>
+          <a class="cw-link" href="#amazon-deals">Open deals</a>
         </div>
-
-        <div class="coupon-grid coupon-grid--urgent" id="ending-grid"></div>
+        <div class="cw-rail cw-rail--cards" id="cw-cards-rail"></div>
       </section>
 
-      <section class="section" id="offers">
-        <div class="section-head">
+      <section class="cw-panel cw-section" id="fashion-buys">
+        <div class="cw-section-head">
           <div>
-            <p class="section-kicker">Popular Offers</p>
-            <h2>Offer categories users keep opening to earn more</h2>
+            <p class="cw-eyebrow">Get Cashback on Fashion Buys</p>
+            <h2>Style picks with cashback and trackable links.</h2>
           </div>
+          <a class="cw-link" href="#flipkart-deals">See Flipkart deals</a>
         </div>
-
-        <div class="offer-tabs" id="offer-tabs">
-          <button class="chip active" data-tab="all" type="button">All Offer</button>
-          <button class="chip" data-tab="today" type="button">Today's Best Offer</button>
-          <button class="chip" data-tab="upcoming" type="button">Upcoming Offer</button>
-          <button class="chip" data-tab="using" type="button">Currently Using</button>
-        </div>
-
-        <div class="offer-grid" id="offer-grid"></div>
+        <div class="cw-rail cw-rail--cards" id="cw-fashion-rail"></div>
       </section>
 
-      <section class="section" id="submit">
-        <div class="newsletter">
+      <section class="cw-panel cw-section" id="top-selling-product">
+        <div class="cw-section-head">
           <div>
-            <p class="section-kicker">Deal Alerts</p>
-            <h2>Let visitors come back for new deals every day</h2>
-            <p class="section-copy">
-              This section can later be connected to email alerts, Telegram, or WhatsApp updates without changing the layout.
-            </p>
+            <p class="cw-eyebrow">Top Selling Product</p>
+            <h2>Products users open and compare the most.</h2>
           </div>
-          <div class="newsletter-actions">
-            <a class="button button-primary" href="#top">Get Deal Updates</a>
-            <a class="button button-ghost" href="#coupons">View coupons</a>
-          </div>
+          <a class="cw-link" href="#best-card">See best card</a>
         </div>
+        <div class="cw-rail cw-rail--cards" id="cw-mobile-rail"></div>
       </section>
 
-      <section class="section faq-section" id="faq">
-        <div class="section-head">
+      <section class="cw-panel cw-section" id="loan">
+        <div class="cw-section-head">
           <div>
-            <p class="section-kicker">FAQ</p>
-            <h2>Quick answers for first-time visitors</h2>
+            <p class="cw-eyebrow">Loan</p>
+            <h2>Simple loan cards and quick comparison picks.</h2>
           </div>
+          <a class="cw-link" href="#fashion-buys">See fashion</a>
         </div>
+        <div class="cw-rail cw-rail--cards" id="cw-trendy-rail"></div>
+      </section>
 
-        <div class="faq-list">
-          <details class="faq-item">
-            <summary>What is CouponsWorld.in?</summary>
-            <p>
-              A coupon, deal, cashback, and store listing website built for affiliate traffic, profit links, and repeat visits.
-            </p>
-          </details>
-          <details class="faq-item">
-            <summary>Can I add my own offers later?</summary>
-            <p>
-              Yes. The layout is built from static HTML, CSS, and JavaScript, so you can swap in real offers anytime.
-            </p>
-          </details>
-          <details class="faq-item">
-            <summary>Will this work on GitHub Pages?</summary>
-            <p>
-              Yes. The site is static and can be hosted directly on GitHub Pages or Cloudflare Pages.
-            </p>
-          </details>
+      <section class="cw-panel cw-section" id="discount-coupons">
+        <div class="cw-section-head">
+          <div>
+            <p class="cw-eyebrow">Best Discount Coupons</p>
+            <h2>Coupon blocks with clear offers and easy sharing.</h2>
+          </div>
+          <a class="cw-link" href="#top">Back to top</a>
         </div>
+        <div class="cw-rail cw-rail--cards" id="cw-coupon-rail"></div>
       </section>
     </main>
 
-    <footer class="footer">
+    <footer class="cw-footer">
       <div>
-        <p class="brand-name">CouponsWorld.in</p>
-        <p class="footer-copy">
-          Built as a static share-and-earn coupons hub with stores, categories, offers, and profit blocks.
-        </p>
+        <strong>CouponsWorld.in</strong>
+        <p>Deals feed for brands, categories, coupons, and profit link sharing.</p>
       </div>
-      <div class="footer-links">
-        <a href="#stores">Stores</a>
-        <a href="#coupons">Coupons</a>
-        <a href="#top" class="link-arrow">Back to top</a>
-      </div>
+      <a class="cw-link" href="#top">Back to top</a>
     </footer>
 
     <script src="./script.js"></script>

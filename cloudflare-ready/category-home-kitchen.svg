@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-label="Home and Kitchen">
+  <defs>
+    <radialGradient id="g" cx="35%" cy="30%" r="75%">
+      <stop offset="0%" stop-color="#ffdba4"/>
+      <stop offset="100%" stop-color="#f09d3d"/>
+    </radialGradient>
+  </defs>
+  <circle cx="120" cy="120" r="118" fill="url(#g)"/>
+  <path d="M76 130h88" stroke="#fff" stroke-width="14" stroke-linecap="round"/>
+  <path d="M92 130v40h56v-40" fill="#fff" stroke="#c96d1c" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M102 130l18-24 18 24" fill="none" stroke="#c96d1c" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="120" y="198" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#fff">HOME</text>
+</svg>

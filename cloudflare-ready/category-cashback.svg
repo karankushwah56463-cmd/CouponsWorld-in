@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-label="Cashback">
+  <defs>
+    <radialGradient id="g" cx="35%" cy="30%" r="75%">
+      <stop offset="0%" stop-color="#ff6767"/>
+      <stop offset="100%" stop-color="#b60000"/>
+    </radialGradient>
+  </defs>
+  <circle cx="120" cy="120" r="118" fill="url(#g)"/>
+  <text x="120" y="112" text-anchor="middle" font-family="Arial, sans-serif" font-size="74" font-weight="900" fill="#fff">50%</text>
+  <text x="120" y="150" text-anchor="middle" font-family="Arial, sans-serif" font-size="26" font-weight="700" fill="#fff">CASHBACK</text>
+</svg>
