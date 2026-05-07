@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CouponsWorld.in - Login</title>
+    <title>CouponsWorld.in - Secure Login</title>
     <meta
       name="description"
-      content="Login and account access screen for CouponsWorld.in."
+      content="Premium local login system for CouponsWorld.in with sign in, create account, Google, and GitHub quick access."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -15,204 +15,187 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./styles.css" />
-    <script
-      defer
-      src="https://static.cloudflareinsights.com/beacon.min.js"
-      data-cf-beacon='{"token":"YOUR_CLOUDFLARE_WEB_ANALYTICS_TOKEN"}'
-    ></script>
   </head>
-  <body id="top">
-    <header class="site-header">
-      <a class="brand" href="./index.html" aria-label="CouponsWorld.in home">
-        <img class="brand-mark" src="./logo.png" alt="CouponsWorld.in logo" />
-        <div class="brand-copy">
-          <p class="brand-name">CouponsWorld.in</p>
-          <p class="brand-tag">Share deals, earn profit, and track cashback</p>
-        </div>
+  <body class="cw-page cw-login-page">
+    <header class="cw-login-header">
+      <a class="cw-login-brand" href="./index.html" aria-label="CouponsWorld.in home">
+        <strong>CouponsWorld.in</strong>
+        <span>Premium sign in</span>
       </a>
 
-      <nav class="header-nav" aria-label="Primary">
-        <a href="./index.html">Home</a>
-        <a href="./index.html#earn">Share & Earn</a>
-        <a href="./index.html#coupons">Coupons</a>
-        <a href="./index.html#stores">Stores</a>
-        <a href="./index.html#offers">Offers</a>
-        <a href="./index.html#faq">FAQ</a>
-      </nav>
-
-      <div class="header-actions">
-        <a class="button button-ghost" href="./login.html">Login</a>
-        <a class="button button-ghost" href="./index.html#stores">Top Stores</a>
-        <a class="button button-primary" href="./index.html#profit-link-builder">Create Profit Link</a>
+      <div class="cw-login-header__actions">
+        <a class="cw-btn cw-btn--ghost" href="./index.html">Home</a>
+        <a class="cw-btn cw-btn--primary" href="./index.html#top-selling-product">Open Deals</a>
       </div>
     </header>
 
-    <main>
-      <section class="hero page-hero">
-        <div class="hero-copy">
-          <p class="eyebrow">Login</p>
-          <h1>Keep the account entry simple and out of the way.</h1>
-          <p class="hero-text">
-            This login system stores accounts locally in your browser for now, so we can move fast without needing a backend yet.
-          </p>
+    <main class="cw-login-layout">
+      <section class="cw-login-hero">
+        <p class="cw-eyebrow">Premium login</p>
+        <h1>One account for saved links, wallet updates, and quick sharing.</h1>
+        <p class="cw-login-hero__copy">
+          Sign in with email, Google, or GitHub and keep your session ready on this device. Create an account to save
+          your profile, phone number, and future earnings area in one place.
+        </p>
 
-          <div class="page-badges">
-            <span>Sign in</span>
-            <span>Create account</span>
-            <span>Logout</span>
-          </div>
+        <div class="cw-login-points">
+          <article class="cw-login-point">
+            <strong>Fast access</strong>
+            <span>One-click login flow with clean states.</span>
+          </article>
+          <article class="cw-login-point">
+            <strong>Local security</strong>
+            <span>Accounts stay on your browser unless you save them.</span>
+          </article>
+          <article class="cw-login-point">
+            <strong>Ready for growth</strong>
+            <span>Profile, wallet, and referral layers are already planned.</span>
+          </article>
         </div>
 
-        <aside class="hero-panel">
-          <article class="featured-coupon">
-            <p class="panel-label">Why sign in?</p>
-            <h2>Save your stores, links, and earnings in one place</h2>
-            <p>We can wire the real auth later. For now, the shape is here and the rest of the site stays usable.</p>
-            <div class="featured-coupon__meta">
-              <span>Local storage</span>
-              <span>Demo auth</span>
-            </div>
-          </article>
-        </aside>
+        <div class="cw-login-hero__stats">
+          <span>Google ready</span>
+          <span>GitHub ready</span>
+          <span>Remember me</span>
+          <span>Session cards</span>
+        </div>
       </section>
 
-      <section class="section">
-        <div class="auth-layout">
-          <article class="auth-card">
-            <p class="section-kicker">Sign In</p>
-            <h2>Use your existing account</h2>
-            <form class="form-stack" id="login-form" autocomplete="on">
-              <div class="field">
-                <label for="login-email">Email</label>
+      <section class="cw-login-stack">
+        <article class="cw-login-card">
+          <div class="cw-login-tabs" role="tablist" aria-label="Login modes">
+            <button class="cw-login-tab is-active" type="button" data-login-tab="signin">Sign in</button>
+            <button class="cw-login-tab" type="button" data-login-tab="signup">Create account</button>
+          </div>
+
+          <div class="cw-login-fast">
+            <button class="cw-btn cw-btn--ghost cw-login-fast__btn" type="button" data-social-provider="google">
+              Continue with Google
+            </button>
+            <button class="cw-btn cw-btn--ghost cw-login-fast__btn" type="button" data-social-provider="github">
+              Continue with GitHub
+            </button>
+          </div>
+
+          <div class="cw-login-alert is-hidden" id="cw-login-alert" aria-live="polite"></div>
+
+          <div class="cw-login-panels">
+            <form class="cw-login-form is-active" id="login-form" autocomplete="on" data-panel="signin">
+              <div class="cw-field">
+                <label for="login-email">Email address</label>
                 <input id="login-email" type="email" placeholder="name@example.com" required />
               </div>
-              <div class="field">
+
+              <div class="cw-field">
                 <label for="login-password">Password</label>
-                <input id="login-password" type="password" placeholder="Enter password" required />
+                <input id="login-password" type="password" placeholder="Enter your password" required />
               </div>
-              <label class="auth-check" for="login-remember">
-                <input id="login-remember" type="checkbox" checked />
-                <span>Keep me signed in on this device</span>
-              </label>
-              <div class="auth-actions">
-                <button class="button button-primary" type="submit">Sign In</button>
-                <a class="button button-ghost" href="#register-form">Create Account</a>
+
+              <div class="cw-login-row">
+                <label class="cw-check" for="login-remember">
+                  <input id="login-remember" type="checkbox" checked />
+                  <span>Keep me signed in on this device</span>
+                </label>
+                <a class="cw-login-link" href="#register-form" data-login-tab="signup">Need an account?</a>
+              </div>
+
+              <div class="cw-login-actions">
+                <button class="cw-btn cw-btn--primary" type="submit">Sign In</button>
+                <button class="cw-btn cw-btn--ghost" type="button" id="login-fill-email">Use saved email</button>
               </div>
             </form>
-            <div class="auth-actions" style="margin-top: 12px;">
-              <button class="button button-ghost" type="button" id="google-login-button">Continue with Gmail</button>
-            </div>
-            <div class="auth-note" style="margin-top: 14px;">
-              <strong>Gmail quick sign-in</strong>
-              <p style="margin: 6px 0 0;">
-                If you create an account with Gmail below, you can come back and sign in with that same email on this page.
-              </p>
-            </div>
-          </article>
 
-          <article class="auth-card">
-            <p class="section-kicker">Create Account</p>
-            <h2>Start from a fresh profile</h2>
-            <form class="form-stack" id="register-form" autocomplete="on">
-              <div class="field-grid">
-                <div class="field">
+            <form class="cw-login-form" id="register-form" autocomplete="on" data-panel="signup">
+              <div class="cw-field-grid">
+                <div class="cw-field">
                   <label for="register-first-name">First name</label>
                   <input id="register-first-name" type="text" placeholder="Your first name" required />
                 </div>
-                <div class="field">
+                <div class="cw-field">
                   <label for="register-surname">Surname</label>
                   <input id="register-surname" type="text" placeholder="Your surname" required />
                 </div>
               </div>
-              <div class="field">
+
+              <div class="cw-field">
                 <label for="register-phone">Mobile number</label>
                 <input id="register-phone" type="tel" placeholder="10-digit mobile number" inputmode="tel" required />
               </div>
-              <div class="field">
-                <label for="register-email">Email</label>
+
+              <div class="cw-field">
+                <label for="register-email">Email address</label>
                 <input id="register-email" type="email" placeholder="name@example.com" required />
               </div>
-              <div class="field">
-                <label for="register-password">Password</label>
-                <input id="register-password" type="password" placeholder="Create password" required />
+
+              <div class="cw-field">
+                <label for="register-provider">Account method</label>
+                <select id="register-provider">
+                  <option value="email">Email + password</option>
+                  <option value="google">Google</option>
+                  <option value="github">GitHub</option>
+                </select>
               </div>
-              <div class="field">
-                <label for="register-confirm">Confirm password</label>
-                <input id="register-confirm" type="password" placeholder="Repeat password" required />
+
+              <div class="cw-field-grid">
+                <div class="cw-field">
+                  <label for="register-password">Password</label>
+                  <input id="register-password" type="password" placeholder="Create password" required />
+                </div>
+                <div class="cw-field">
+                  <label for="register-confirm">Confirm password</label>
+                  <input id="register-confirm" type="password" placeholder="Repeat password" required />
+                </div>
               </div>
-              <label class="auth-check" for="register-remember">
+
+              <label class="cw-check" for="register-remember">
                 <input id="register-remember" type="checkbox" checked />
-                <span>Create and keep my account on this device</span>
+                <span>Keep my account on this device</span>
               </label>
-              <div class="auth-actions">
-                <button class="button button-secondary" type="submit">Create Account</button>
-                <button class="button button-ghost" type="button" id="google-register-button">Continue with Gmail</button>
+
+              <div class="cw-login-actions">
+                <button class="cw-btn cw-btn--primary" type="submit">Create Account</button>
+                <button class="cw-btn cw-btn--ghost" type="button" id="register-fill-google">Set Google mode</button>
               </div>
             </form>
-          </article>
-        </div>
-      </section>
+          </div>
+        </article>
 
-      <section class="section section-soft">
-        <div class="page-grid">
-          <article class="page-card">
-            <p class="section-kicker">Current Session</p>
+        <aside class="cw-login-side">
+          <article class="cw-login-summary">
+            <p class="cw-eyebrow">Current session</p>
             <h2 id="session-title">Not signed in</h2>
-            <div class="page-list">
-              <div class="page-list__item" id="session-email">Email not saved yet.</div>
-              <div class="page-list__item" id="session-phone">Mobile number not saved yet.</div>
-              <div class="page-list__item" id="session-provider">Provider not set yet.</div>
-              <div class="page-list__item" id="session-since">Sign in or create an account to activate this area.</div>
+            <div class="cw-login-summary__list">
+              <div class="cw-login-summary__item" id="session-email">Email not saved yet.</div>
+              <div class="cw-login-summary__item" id="session-phone">Mobile number not saved yet.</div>
+              <div class="cw-login-summary__item" id="session-provider">Provider not set yet.</div>
+              <div class="cw-login-summary__item" id="session-since">Sign in or create an account to activate this area.</div>
             </div>
-            <div class="auth-actions" style="margin-top: 14px;">
-              <button class="button button-ghost" type="button" id="logout-button">Logout</button>
-              <a class="button button-primary" href="./index.html">Back to Home</a>
+            <div class="cw-login-actions">
+              <button class="cw-btn cw-btn--ghost" type="button" id="logout-button">Logout</button>
+              <a class="cw-btn cw-btn--primary" href="./index.html">Back to Home</a>
             </div>
           </article>
 
-          <article class="page-card">
-            <p class="section-kicker">What you get</p>
-            <h2>Account space for the next stage</h2>
-            <div class="step-list">
-              <div class="step-list__item">
-                <span>1</span>
-                <div>
-                  <strong>Saved links</strong>
-                  <p>Keep your best share links in one place.</p>
-                </div>
-              </div>
-              <div class="step-list__item">
-                <span>2</span>
-                <div>
-                  <strong>Profit tracking</strong>
-                  <p>See what is pending and what has cleared.</p>
-                </div>
-              </div>
-              <div class="step-list__item">
-                <span>3</span>
-                <div>
-                  <strong>Faster sharing</strong>
-                  <p>Get back to sharing without hunting through the site.</p>
-                </div>
-              </div>
+          <article class="cw-login-summary cw-login-summary--accent">
+            <p class="cw-eyebrow">Why this login feels premium</p>
+            <div class="cw-login-summary__list">
+              <div class="cw-login-summary__item">Smooth sign in and account creation.</div>
+              <div class="cw-login-summary__item">Google and GitHub quick entry buttons.</div>
+              <div class="cw-login-summary__item">Account data stays local until you connect a backend.</div>
             </div>
           </article>
-        </div>
+        </aside>
       </section>
     </main>
 
-    <footer class="footer">
+    <footer class="cw-login-footer">
       <div>
-        <p class="brand-name">CouponsWorld.in</p>
-        <p class="footer-copy">Login page placeholder for a browser-based account flow.</p>
+        <strong>CouponsWorld.in</strong>
+        <p>Premium local login for saved deals, wallets, and future earnings.</p>
       </div>
-      <div class="footer-links">
-        <a href="./index.html">Home</a>
-        <a href="./index.html#earn">Earn</a>
-        <a href="#top" class="link-arrow">Back to top</a>
-      </div>
+      <a class="cw-login-link" href="./index.html">Return to home</a>
     </footer>
 
-    <script src="./script.js"></script>
+    <script src="./login.js"></script>
   </body>
 </html>

@@ -1,37 +1,31 @@
-# CouponsWorld.in
+# CouponsWorld Cloudflare Ready
 
-Static coupon and cashback website ready for GitHub Pages.
+This folder is the static site bundle for Cloudflare Pages.
 
-## Files
+## Deploy
+
+1. Go to Cloudflare Dashboard.
+2. Open `Pages`.
+3. Create a new project.
+4. Upload this folder or connect the repo.
+5. Set the build command to empty.
+6. Set the output directory to the folder root.
+
+## Included
 
 - `index.html`
+- `login.html`
+- `stores.html`
+- `coupons.html`
+- `offers.html`
+- `earn.html`
+- `categories.html`
+- `faq.html`
 - `styles.css`
 - `script.js`
+- images and logo assets
 
-## What it includes
+## Notes
 
-- Brand header for CouponsWorld.in
-- Search bar
-- Top stores section
-- Trending coupon cards
-- Category cards
-- Simple FAQ
-- Responsive layout for mobile and desktop
-
-## Run locally
-
-Open `index.html` in a browser, or host the folder with any static server.
-
-## GitHub Pages deploy
-
-1. Create a GitHub repository.
-2. Push these files to the repository root.
-3. Open `Settings` > `Pages`.
-4. Select the main branch and root folder.
-5. Save and wait for the Pages URL.
-
-## Customize
-
-- Replace the sample stores in `script.js`.
-- Edit the copy in `index.html`.
-- Change the color palette in `styles.css`.
+- This is a static site and does not need a framework build step.
+- The Google Sheets integration remains front-end only until you wire your backend or Apps Script endpoint.
