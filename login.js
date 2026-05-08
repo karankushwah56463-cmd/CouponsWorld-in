@@ -77,7 +77,6 @@ function providerLabel(provider) {
   const map = {
     email: "Email",
     google: "Google",
-    github: "GitHub",
   };
   return map[provider] || "Email";
 }

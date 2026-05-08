@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CouponsWorld.in - Wallet</title>
+    <meta
+      name="description"
+      content="Wallet dashboard for pending cashback, confirmed earnings, withdrawals, and referral bonuses."
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="cw-page cw-subpage">
+    <header class="cw-header cw-header--compact">
+      <a class="cw-brand" href="./index.html" aria-label="CouponsWorld.in home">
+        <div class="cw-brand__meta">
+          <strong>CouponsWorld.in</strong>
+          <span>Cashback wallet</span>
+        </div>
+      </a>
+
+      <nav class="cw-nav" aria-label="Primary">
+        <a href="./index.html">Home</a>
+        <a href="./top-selling.html">Top Selling</a>
+        <a href="./loan.html">Loan</a>
+        <a href="./best-credit-card.html">Best Credit Card</a>
+        <a href="./faq.html">FAQ</a>
+        <a href="./wallet.html">Wallet</a>
+        <a href="./login.html">Login</a>
+      </nav>
+
+      <a class="cw-btn cw-btn--primary cw-header__cta" href="./index.html#discount-coupons">Create Profit Link</a>
+    </header>
+
+    <main class="cw-shell cw-subpage-shell">
+      <section class="cw-panel cw-subpage-hero">
+        <div class="cw-subpage-hero__copy">
+          <p class="cw-eyebrow">Wallet</p>
+          <h1 id="cw-wallet-name">Your cashback wallet</h1>
+          <p class="cw-muted" id="cw-wallet-email">Login to see your saved activity.</p>
+          <div class="cw-badge-row" id="cw-wallet-badge">Local wallet demo</div>
+          <div class="cw-card-actions">
+            <a class="cw-btn cw-btn--primary" href="./top-selling.html">Open deals</a>
+            <a class="cw-btn cw-btn--ghost" href="./login.html">Manage account</a>
+          </div>
+        </div>
+
+        <div class="cw-stat-strip" id="cw-wallet-summary"></div>
+      </section>
+
+      <section class="cw-panel cw-section">
+        <div class="cw-section-head">
+          <div>
+            <p class="cw-eyebrow">Recent activity</p>
+            <h2>Pending, confirmed, and withdrawable entries.</h2>
+          </div>
+          <span class="cw-link">Demo ledger</span>
+        </div>
+        <div class="cw-wallet-activity" id="cw-wallet-activity"></div>
+      </section>
+
+      <section class="cw-grid-2">
+        <article class="cw-panel cw-section">
+          <div class="cw-section-head">
+            <div>
+              <p class="cw-eyebrow">Payout rules</p>
+              <h2>How the wallet is meant to behave.</h2>
+            </div>
+          </div>
+          <div class="cw-note-list">
+            <div class="cw-note-item">Pending cashback appears after a tracked order lands.</div>
+            <div class="cw-note-item">Confirmed cashback unlocks after retailer validation.</div>
+            <div class="cw-note-item">Withdrawable balance can later map to bank, UPI, or gift card payouts.</div>
+          </div>
+        </article>
+
+        <article class="cw-panel cw-section">
+          <div class="cw-section-head">
+            <div>
+              <p class="cw-eyebrow">Quick actions</p>
+              <h2>One-tap controls for the next step.</h2>
+            </div>
+          </div>
+          <div class="cw-action-grid">
+            <a class="cw-btn cw-btn--primary" href="./index.html#discount-coupons">Browse coupons</a>
+            <a class="cw-btn cw-btn--ghost" href="./best-credit-card.html">Compare cards</a>
+            <a class="cw-btn cw-btn--ghost" href="./faq.html">Read FAQ</a>
+            <a class="cw-btn cw-btn--ghost" href="./login.html">Sign in</a>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <footer class="cw-footer">
+      <div>
+        <strong>CouponsWorld.in</strong>
+        <p>Wallet dashboard for tracked cashback, referrals, and payouts.</p>
+      </div>
+      <a class="cw-link" href="./index.html">Back to home</a>
+    </footer>
+
+    <script src="./script.js"></script>
+  </body>
+</html>

@@ -6,7 +6,7 @@
     <title>CouponsWorld.in - Secure Login</title>
     <meta
       name="description"
-      content="Premium local login system for CouponsWorld.in with sign in, create account, Google, and GitHub quick access."
+      content="Premium local login system for CouponsWorld.in with sign in, create account, and Google quick access."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -25,7 +25,8 @@
 
       <div class="cw-login-header__actions">
         <a class="cw-btn cw-btn--ghost" href="./index.html">Home</a>
-        <a class="cw-btn cw-btn--primary" href="./index.html#top-selling-product">Open Deals</a>
+        <a class="cw-btn cw-btn--ghost" href="./wallet.html">Wallet</a>
+        <a class="cw-btn cw-btn--primary" href="./top-selling.html">Open Deals</a>
       </div>
     </header>
 
@@ -34,7 +35,7 @@
         <p class="cw-eyebrow">Premium login</p>
         <h1>One account for saved links, wallet updates, and quick sharing.</h1>
         <p class="cw-login-hero__copy">
-          Sign in with email, Google, or GitHub and keep your session ready on this device. Create an account to save
+          Sign in with email or Google and keep your session ready on this device. Create an account to save
           your profile, phone number, and future earnings area in one place.
         </p>
 
@@ -55,8 +56,8 @@
 
         <div class="cw-login-hero__stats">
           <span>Google ready</span>
-          <span>GitHub ready</span>
           <span>Remember me</span>
+          <span>Wallet sync</span>
           <span>Session cards</span>
         </div>
       </section>
@@ -69,11 +70,8 @@
           </div>
 
           <div class="cw-login-fast">
-            <button class="cw-btn cw-btn--ghost cw-login-fast__btn" type="button" data-social-provider="google">
+            <button class="cw-btn cw-btn--primary cw-login-fast__btn" type="button" data-social-provider="google">
               Continue with Google
-            </button>
-            <button class="cw-btn cw-btn--ghost cw-login-fast__btn" type="button" data-social-provider="github">
-              Continue with GitHub
             </button>
           </div>
 
@@ -132,7 +130,6 @@
                 <select id="register-provider">
                   <option value="email">Email + password</option>
                   <option value="google">Google</option>
-                  <option value="github">GitHub</option>
                 </select>
               </div>
 
@@ -154,7 +151,7 @@
 
               <div class="cw-login-actions">
                 <button class="cw-btn cw-btn--primary" type="submit">Create Account</button>
-                <button class="cw-btn cw-btn--ghost" type="button" id="register-fill-google">Set Google mode</button>
+                <button class="cw-btn cw-btn--ghost" type="button" id="register-fill-google">Use Google mode</button>
               </div>
             </form>
           </div>
@@ -180,7 +177,7 @@
             <p class="cw-eyebrow">Why this login feels premium</p>
             <div class="cw-login-summary__list">
               <div class="cw-login-summary__item">Smooth sign in and account creation.</div>
-              <div class="cw-login-summary__item">Google and GitHub quick entry buttons.</div>
+              <div class="cw-login-summary__item">Google quick entry button with saved-email support.</div>
               <div class="cw-login-summary__item">Account data stays local until you connect a backend.</div>
             </div>
           </article>

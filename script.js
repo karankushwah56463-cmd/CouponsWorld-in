@@ -8,6 +8,14 @@ const fashionRail = document.getElementById("cw-fashion-rail");
 const mobileRail = document.getElementById("cw-mobile-rail");
 const trendyRail = document.getElementById("cw-trendy-rail");
 const couponRail = document.getElementById("cw-coupon-rail");
+const topSellingRail = document.getElementById("cw-top-selling-rail");
+const loanPageRail = document.getElementById("cw-loan-rail");
+const creditCardRail = document.getElementById("cw-credit-card-rail");
+const storeGrid = document.getElementById("cw-store-grid");
+const cashbackGrid = document.getElementById("cw-cashback-grid");
+const couponGrid = document.getElementById("cw-coupon-grid");
+const endingGrid = document.getElementById("cw-ending-grid");
+const offerGrid = document.getElementById("cw-offer-grid");
 
 const modal = document.getElementById("cw-builder-modal");
 const builderForm = document.getElementById("cw-builder-form");
@@ -113,10 +121,10 @@ const fashionDeals = [
 ];
 
 const mobileDeals = [
-  { store: "amazon", title: "OnePlus Nord CE", subtitle: "Popular mid-range pick", price: "₹24,999", oldPrice: "₹29,999", badge: "HOT", image: "./amazon.png", theme: "theme-blue", url: "https://amzn.to/4tk4nXa" },
+  { store: "amazon", title: "OnePlus Nord CE", subtitle: "Popular mid-range pick", price: "₹24,999", oldPrice: "₹29,999", badge: "HOT", image: "./logo-preview.png", theme: "theme-blue", url: "https://amzn.to/4tk4nXa" },
   { store: "flipkart", title: "Redmi Note Series", subtitle: "Budget champion phones", price: "₹14,999", oldPrice: "₹17,999", badge: "BESTSELLER", image: "./flipkart.png", theme: "theme-flipkart" },
   { store: "croma", title: "Samsung Galaxy A55", subtitle: "Display and battery combo", price: "₹35,999", oldPrice: "₹39,999", badge: "TOP SELLING", image: "./croma-logo.svg", theme: "theme-indigo" },
-  { store: "amazon", title: "iPhone Accessories", subtitle: "Accessories and add-ons", price: "₹999", oldPrice: "₹1,999", badge: "UPSELL", image: "./logo-wordmark.svg", theme: "theme-orange" },
+  { store: "amazon", title: "iPhone Accessories", subtitle: "Accessories and add-ons", price: "₹999", oldPrice: "₹1,999", badge: "UPSELL", image: "./amazon.png", theme: "theme-orange" },
 ];
 
 const trendyDeals = [
@@ -131,6 +139,25 @@ const couponDeals = [
   { store: "flipkart", title: "CWF100", subtitle: "Extra ₹100 off on orders", price: "Use code CWF100", oldPrice: "Min spend applies", badge: "COUPON", image: "./flipkart.png", theme: "theme-flipkart" },
   { store: "myntra", title: "STYLE30", subtitle: "30% off on fashion", price: "Use code STYLE30", oldPrice: "Weekend only", badge: "COUPON", image: "./myntra-logo.svg", theme: "theme-myntra" },
   { store: "ajio", title: "AJIO50", subtitle: "Best savings on apparel", price: "Use code AJIO50", oldPrice: "Selected categories", badge: "COUPON", image: "./ajio-logo.svg", theme: "theme-ajio" },
+];
+
+const storeDirectoryData = [
+  { store: "amazon", title: "Amazon", subtitle: "All-day essentials and bestsellers", note: "Up to 6% cashback", image: "./amazon.png", theme: "theme-amazon", cta: "Activate cashback" },
+  { store: "flipkart", title: "Flipkart", subtitle: "Gadgets, bags, and fashion", note: "Up to 10% cashback", image: "./flipkart.png", theme: "theme-flipkart", cta: "Activate cashback" },
+  { store: "myntra", title: "Myntra", subtitle: "Fashion and grooming picks", note: "Up to 8% cashback", image: "./myntra-logo.svg", theme: "theme-myntra", cta: "Activate cashback" },
+  { store: "ajio", title: "Ajio", subtitle: "Style and footwear offers", note: "Up to 15% cashback", image: "./ajio-logo.svg", theme: "theme-ajio", cta: "Activate cashback" },
+  { store: "croma", title: "Croma", subtitle: "Gadgets and appliances", note: "Gadget savings", image: "./croma-logo.svg", theme: "theme-indigo", cta: "Activate cashback" },
+  { store: "nykaa", title: "Nykaa", subtitle: "Beauty and care products", note: "Beauty deals", image: "./nykaa-logo.svg", theme: "theme-rose", cta: "Activate cashback" },
+  { store: "bigbasket", title: "BigBasket", subtitle: "Home and grocery picks", note: "Kitchen picks", image: "./bigbasket.png", theme: "theme-orange", cta: "Activate cashback" },
+  { store: "makeMyTrip", title: "MakeMyTrip", subtitle: "Stays, flights, and travel", note: "Travel rewards", image: "./makemytrip.png", theme: "theme-slate", cta: "Activate cashback" },
+];
+
+const walletSeedData = [
+  { store: "Amazon", status: "Pending", amount: "₹184", date: "Today", note: "Tracked from a phone deal" },
+  { store: "Flipkart", status: "Confirmed", amount: "₹92", date: "Yesterday", note: "Fashion order confirmed" },
+  { store: "Myntra", status: "Withdrawable", amount: "₹510", date: "This week", note: "Ready for payout" },
+  { store: "Ajio", status: "Pending", amount: "₹64", date: "Today", note: "Waiting on retailer update" },
+  { store: "Refer & Earn", status: "Confirmed", amount: "₹120", date: "This week", note: "Referral bonus locked in" },
 ];
 
 function slugify(text) {
@@ -242,9 +269,99 @@ function dealCard(item) {
   `;
 }
 
+function storeDirectoryCard(item) {
+  const href = sectionForStore(item.store);
+  return `
+    <article class="cw-store-card ${item.theme}">
+      <div class="cw-store-card__top">
+        <img src="${item.image}" alt="${item.title}" loading="lazy" />
+        <div>
+          <span class="cw-pill cw-pill--soft">${storeFor(item).label}</span>
+          <h3>${item.title}</h3>
+        </div>
+      </div>
+      <p>${item.subtitle}</p>
+      <div class="cw-price-row">
+        <strong>${item.note}</strong>
+        <a class="cw-btn cw-btn--ghost" href="${href}">Open store</a>
+      </div>
+      <div class="cw-card-actions">
+        <button class="cw-btn cw-btn--primary" type="button" data-open-builder>${item.cta || "Activate cashback"}</button>
+      </div>
+    </article>
+  `;
+}
+
+function walletRow(item) {
+  const tone = (item.status || "").toLowerCase().replace(/\s+/g, "-");
+  return `
+    <article class="cw-wallet-row">
+      <div>
+        <strong>${item.store}</strong>
+        <p>${item.note}</p>
+      </div>
+      <span class="cw-pill cw-pill--soft cw-wallet-row__status cw-wallet-row__status--${tone}">${item.status}</span>
+      <strong>${item.amount}</strong>
+      <span>${item.date}</span>
+    </article>
+  `;
+}
+
 function renderRail(container, items, renderer) {
   if (!container) return;
   container.innerHTML = items.map(renderer).join("");
+}
+
+function renderGrid(container, items, renderer) {
+  if (!container) return;
+  container.innerHTML = items.map(renderer).join("");
+}
+
+function mountRailArrows(container) {
+  if (!container || container.parentElement?.classList.contains("cw-rail-shell")) return;
+
+  const shell = document.createElement("div");
+  shell.className = "cw-rail-shell";
+
+  const viewport = document.createElement("div");
+  viewport.className = "cw-rail-shell__viewport";
+
+  const prev = document.createElement("button");
+  prev.type = "button";
+  prev.className = "cw-rail-shell__btn cw-rail-shell__btn--prev";
+  prev.setAttribute("aria-label", "Scroll left");
+  prev.innerHTML = "<span>‹</span>";
+
+  const next = document.createElement("button");
+  next.type = "button";
+  next.className = "cw-rail-shell__btn cw-rail-shell__btn--next";
+  next.setAttribute("aria-label", "Scroll right");
+  next.innerHTML = "<span>›</span>";
+
+  const parent = container.parentNode;
+  parent.insertBefore(shell, container);
+  shell.appendChild(prev);
+  shell.appendChild(viewport);
+  shell.appendChild(next);
+  viewport.appendChild(container);
+
+  const updateArrows = () => {
+    const maxScroll = container.scrollWidth - container.clientWidth - 2;
+    prev.disabled = container.scrollLeft <= 2;
+    next.disabled = container.scrollLeft >= maxScroll;
+  };
+
+  prev.addEventListener("click", () => {
+    container.scrollBy({ left: -Math.max(280, container.clientWidth * 0.85), behavior: "smooth" });
+  });
+
+  next.addEventListener("click", () => {
+    container.scrollBy({ left: Math.max(280, container.clientWidth * 0.85), behavior: "smooth" });
+  });
+
+  container.addEventListener("scroll", updateArrows, { passive: true });
+  window.addEventListener("resize", updateArrows, { passive: true });
+  requestAnimationFrame(updateArrows);
 }
 
 function setModalVisibility(hidden) {
@@ -277,6 +394,81 @@ function buildAffiliateLink() {
   return finalUrl;
 }
 
+function loadWalletEntries() {
+  try {
+    const stored = localStorage.getItem("cw.wallet.entries");
+    if (stored) return JSON.parse(stored);
+  } catch {
+    // fall back below
+  }
+  return walletSeedData;
+}
+
+function loadSessionSummary() {
+  try {
+    const session = localStorage.getItem("cw.auth.session") || sessionStorage.getItem("cw.auth.session");
+    if (!session) return null;
+    return JSON.parse(session);
+  } catch {
+    return null;
+  }
+}
+
+function renderWalletDashboard() {
+  const walletSummary = document.getElementById("cw-wallet-summary");
+  const walletActivity = document.getElementById("cw-wallet-activity");
+  const walletName = document.getElementById("cw-wallet-name");
+  const walletEmail = document.getElementById("cw-wallet-email");
+  const walletBadge = document.getElementById("cw-wallet-badge");
+
+  const session = loadSessionSummary();
+  const entries = loadWalletEntries();
+  const totals = entries.reduce(
+    (acc, item) => {
+      const value = Number((item.amount || "0").replace(/[^0-9.]/g, "")) || 0;
+      const status = String(item.status || "").toLowerCase();
+      if (status.includes("pending")) acc.pending += value;
+      if (status.includes("confirmed")) acc.confirmed += value;
+      if (status.includes("withdrawable")) acc.withdrawable += value;
+      return acc;
+    },
+    { pending: 0, confirmed: 0, withdrawable: 0 }
+  );
+
+  if (walletName) {
+    walletName.textContent = session ? `Welcome back, ${session.email.split("@")[0]}` : "Your cashback wallet";
+  }
+  if (walletEmail) {
+    walletEmail.textContent = session ? session.email : "Login to see your saved activity.";
+  }
+  if (walletBadge) {
+    walletBadge.textContent = session?.provider ? `${session.provider} account` : "Local wallet demo";
+  }
+
+  if (walletSummary) {
+    walletSummary.innerHTML = [
+      { label: "Pending", value: `₹${totals.pending.toFixed(0)}`, note: "Waiting on retailer confirmation" },
+      { label: "Confirmed", value: `₹${totals.confirmed.toFixed(0)}`, note: "Ready when you are" },
+      { label: "Withdrawable", value: `₹${totals.withdrawable.toFixed(0)}`, note: "Available for payout" },
+      { label: "Tracked orders", value: String(entries.length), note: "Recent checks and referrals" },
+    ]
+      .map(
+        (item) => `
+          <article class="cw-wallet-card">
+            <span class="cw-pill cw-pill--soft">${item.label}</span>
+            <strong>${item.value}</strong>
+            <p>${item.note}</p>
+          </article>
+        `
+      )
+      .join("");
+  }
+
+  if (walletActivity) {
+    walletActivity.innerHTML = entries.map(walletRow).join("");
+  }
+}
+
 renderRail(document.getElementById("cw-hero-rail"), heroSlides, heroCard);
 renderRail(document.getElementById("cw-category-rail"), categoryData, categoryCard);
 renderRail(document.getElementById("cw-brand-rail"), brandCards, brandCard);
@@ -287,6 +479,18 @@ renderRail(document.getElementById("cw-fashion-rail"), fashionDeals, dealCard);
 renderRail(document.getElementById("cw-mobile-rail"), mobileDeals, dealCard);
 renderRail(document.getElementById("cw-trendy-rail"), trendyDeals, dealCard);
 renderRail(document.getElementById("cw-coupon-rail"), couponDeals, dealCard);
+renderRail(topSellingRail, mobileDeals, dealCard);
+renderRail(loanPageRail, trendyDeals, dealCard);
+renderRail(creditCardRail, creditCardDeals, dealCard);
+renderGrid(storeGrid, storeDirectoryData, storeDirectoryCard);
+renderGrid(cashbackGrid, storeDirectoryData.slice(0, 4), storeDirectoryCard);
+renderGrid(couponGrid, couponDeals, dealCard);
+renderGrid(endingGrid, couponDeals.slice(0, 4), dealCard);
+renderGrid(offerGrid, [amazonDeals[0], flipkartDeals[0], creditCardDeals[0], fashionDeals[0], mobileDeals[0]], dealCard);
+
+[heroRail, categoryRail, brandRail, amazonRail, flipkartRail, cardsRail, fashionRail, mobileRail, trendyRail, couponRail]
+  .forEach(mountRailArrows);
+[topSellingRail, loanPageRail, creditCardRail].forEach(mountRailArrows);
 
 document.addEventListener("click", (event) => {
   if (event.target.closest?.("[data-open-builder]")) {
@@ -341,24 +545,35 @@ searchInput?.addEventListener("keydown", (event) => {
 
   const q = searchInput.value.trim().toLowerCase();
   const map = [
-    { key: "home", id: "top" },
-    { key: "category", id: "top-categories" },
-    { key: "brand", id: "popular-brands" },
-    { key: "amazon", id: "amazon-deals" },
-    { key: "flipkart", id: "flipkart-deals" },
-    { key: "card", id: "best-card" },
-    { key: "fashion", id: "fashion-buys" },
-    { key: "mobile", id: "top-selling-product" },
-    { key: "selling", id: "top-selling-product" },
-    { key: "loan", id: "loan" },
-    { key: "trendy", id: "loan" },
-    { key: "coupon", id: "discount-coupons" },
+    { key: "home", id: "top", type: "scroll" },
+    { key: "category", id: "top-categories", type: "scroll" },
+    { key: "brand", id: "popular-brands", type: "scroll" },
+    { key: "amazon", id: "amazon-deals", type: "scroll" },
+    { key: "flipkart", id: "flipkart-deals", type: "scroll" },
+    { key: "card", href: "./best-credit-card.html", type: "navigate" },
+    { key: "fashion", id: "fashion-buys", type: "scroll" },
+    { key: "mobile", href: "./top-selling.html", type: "navigate" },
+    { key: "selling", href: "./top-selling.html", type: "navigate" },
+    { key: "loan", href: "./loan.html", type: "navigate" },
+    { key: "trendy", href: "./loan.html", type: "navigate" },
+    { key: "coupon", id: "discount-coupons", type: "scroll" },
+    { key: "wallet", href: "./wallet.html", type: "navigate" },
+    { key: "login", href: "./login.html", type: "navigate" },
+    { key: "faq", href: "./faq.html", type: "navigate" },
   ];
 
   const found = map.find((entry) => q.includes(entry.key));
-  const target = found ? document.getElementById(found.id) : null;
+  if (!found) return;
+
+  if (found.type === "navigate" && found.href) {
+    window.location.href = found.href;
+    return;
+  }
+
+  const target = found.id ? document.getElementById(found.id) : null;
   target?.scrollIntoView({ behavior: "smooth", block: "start" });
 });
 
 setModalVisibility(true);
+renderWalletDashboard();
 
