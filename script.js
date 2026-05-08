@@ -1,4 +1,4 @@
-const heroRail = document.getElementById("cw-hero-rail");
+﻿const heroRail = document.getElementById("cw-hero-rail");
 const categoryRail = document.getElementById("cw-category-rail");
 const brandRail = document.getElementById("cw-brand-rail");
 const amazonRail = document.getElementById("cw-amazon-rail");
@@ -85,8 +85,8 @@ const brandCards = [
 ];
 
 const amazonDeals = [
-  { store: "amazon", title: "boAt Airdopes 161 Bluetooth Earbuds", subtitle: "Upto 70% off on audio", price: "₹699", oldPrice: "₹1,999", badge: "LIVE NOW", image: "./amazon.png", theme: "theme-amazon" },
-  { store: "amazon", title: "Noise ColorFit Pulse 3 Smart Watch", subtitle: "Up to 70% cashback", price: "₹1,299", oldPrice: "₹2,999", badge: "TRENDING", image: "./amazon.png", theme: "theme-blue" },
+  { store: "amazon", title: "boAt Airdopes 161 Bluetooth Earbuds", subtitle: "Upto 70% off on audio", price: "₹699", oldPrice: "₹1,999", badge: "LIVE NOW", image: "./amazon.png", theme: "theme-amazon", url: "https://amzn.to/42hIddk" },
+  { store: "amazon", title: "Noise ColorFit Pulse 3 Smart Watch", subtitle: "Up to 70% cashback", price: "₹1,299", oldPrice: "₹2,999", badge: "TRENDING", image: "./amazon.png", theme: "theme-blue", url: "https://amzn.to/4wcmlxL" },
   { store: "amazon", title: "Home Essentials Combo", subtitle: "Across categories", price: "₹899", oldPrice: "₹1,799", badge: "HOT DEAL", image: "./bigbasket.png", theme: "theme-green" },
   { store: "amazon", title: "Kitchen Top Picks", subtitle: "Budget shopping", price: "₹499", oldPrice: "₹999", badge: "TOP PICK", image: "./logo-wordmark.svg", theme: "theme-orange" },
 ];
@@ -113,7 +113,7 @@ const fashionDeals = [
 ];
 
 const mobileDeals = [
-  { store: "amazon", title: "OnePlus Nord CE", subtitle: "Popular mid-range pick", price: "₹24,999", oldPrice: "₹29,999", badge: "HOT", image: "./amazon.png", theme: "theme-blue" },
+  { store: "amazon", title: "OnePlus Nord CE", subtitle: "Popular mid-range pick", price: "₹24,999", oldPrice: "₹29,999", badge: "HOT", image: "./amazon.png", theme: "theme-blue", url: "https://amzn.to/4tk4nXa" },
   { store: "flipkart", title: "Redmi Note Series", subtitle: "Budget champion phones", price: "₹14,999", oldPrice: "₹17,999", badge: "BESTSELLER", image: "./flipkart.png", theme: "theme-flipkart" },
   { store: "croma", title: "Samsung Galaxy A55", subtitle: "Display and battery combo", price: "₹35,999", oldPrice: "₹39,999", badge: "TOP SELLING", image: "./croma-logo.svg", theme: "theme-indigo" },
   { store: "amazon", title: "iPhone Accessories", subtitle: "Accessories and add-ons", price: "₹999", oldPrice: "₹1,999", badge: "UPSELL", image: "./logo-wordmark.svg", theme: "theme-orange" },
@@ -167,6 +167,8 @@ function sectionForStore(store) {
 
 function heroCard(item) {
   const store = storeFor(item);
+  const href = item.url || sectionForStore(item.store);
+  const externalAttrs = item.url ? ' target="_blank" rel="noopener noreferrer"' : "";
   return `
     <article class="cw-hero-card ${item.theme}">
       <div class="cw-hero-card__copy">
@@ -179,7 +181,7 @@ function heroCard(item) {
         </div>
         <div class="cw-card-actions">
           <button class="cw-btn cw-btn--primary" type="button" data-open-builder>View Deal & Earn</button>
-          <a class="cw-btn cw-btn--ghost" href="${sectionForStore(item.store)}">Open store</a>
+          <a class="cw-btn cw-btn--ghost" href="${href}"${externalAttrs}>Open store</a>
         </div>
       </div>
       <div class="cw-hero-card__art">
@@ -216,6 +218,8 @@ function brandCard(item) {
 
 function dealCard(item) {
   const store = storeFor(item);
+  const href = item.url || sectionForStore(item.store);
+  const externalAttrs = item.url ? ' target="_blank" rel="noopener noreferrer"' : "";
   return `
     <article class="cw-deal-card ${item.theme}">
       <div class="cw-deal-card__art">
@@ -231,7 +235,7 @@ function dealCard(item) {
         </div>
         <div class="cw-card-actions">
           <button class="cw-btn cw-btn--primary" type="button" data-open-builder>View Deal & Earn</button>
-          <a class="cw-btn cw-btn--ghost" href="${sectionForStore(item.store)}">Open store</a>
+          <a class="cw-btn cw-btn--ghost" href="${href}"${externalAttrs}>Open store</a>
         </div>
       </div>
     </article>
@@ -357,3 +361,4 @@ searchInput?.addEventListener("keydown", (event) => {
 });
 
 setModalVisibility(true);
+
