@@ -33,42 +33,37 @@
     <main class="cw-login-layout">
       <section class="cw-login-hero">
         <p class="cw-eyebrow">Premium login</p>
-        <h1>One account for saved links, wallet updates, and quick sharing.</h1>
+        <h1>Sign in with Google and we’ll open your account right away.</h1>
         <p class="cw-login-hero__copy">
-          Sign in with email or Google and keep your session ready on this device. Create an account to save
-          your profile, phone number, and future earnings area in one place.
+          No password, no extra signup fields, no phone number. Just use your Google email once and we’ll
+          remember your session on this device with your Gmail name.
         </p>
 
         <div class="cw-login-points">
           <article class="cw-login-point">
-            <strong>Fast access</strong>
-            <span>One-click login flow with clean states.</span>
+            <strong>One step</strong>
+            <span>Only the Google email is needed to start.</span>
           </article>
           <article class="cw-login-point">
-            <strong>Local security</strong>
-            <span>Accounts stay on your browser unless you save them.</span>
+            <strong>Google name</strong>
+            <span>Your account label comes from the Gmail prefix.</span>
           </article>
           <article class="cw-login-point">
-            <strong>Ready for growth</strong>
-            <span>Profile, wallet, and referral layers are already planned.</span>
+            <strong>Wallet ready</strong>
+            <span>Login unlocks wallet, orders, and saved links.</span>
           </article>
         </div>
 
         <div class="cw-login-hero__stats">
-          <span>Google ready</span>
+          <span>Google only</span>
           <span>Remember me</span>
-          <span>Wallet sync</span>
-          <span>Session cards</span>
+          <span>Wallet unlock</span>
+          <span>Saved session</span>
         </div>
       </section>
 
       <section class="cw-login-stack">
         <article class="cw-login-card">
-          <div class="cw-login-tabs" role="tablist" aria-label="Login modes">
-            <button class="cw-login-tab is-active" type="button" data-login-tab="signin">Sign in</button>
-            <button class="cw-login-tab" type="button" data-login-tab="signup">Create account</button>
-          </div>
-
           <div class="cw-login-fast">
             <button class="cw-btn cw-btn--primary cw-login-fast__btn" type="button" data-social-provider="google">
               Continue with Google
@@ -80,78 +75,16 @@
           <div class="cw-login-panels">
             <form class="cw-login-form is-active" id="login-form" autocomplete="on" data-panel="signin">
               <div class="cw-field">
-                <label for="login-email">Email address</label>
-                <input id="login-email" type="email" placeholder="name@example.com" required />
+                <label for="login-email">Google email</label>
+                <input id="login-email" type="email" placeholder="yourname@gmail.com" required />
               </div>
 
-              <div class="cw-field">
-                <label for="login-password">Password</label>
-                <input id="login-password" type="password" placeholder="Enter your password" required />
-              </div>
-
-              <div class="cw-login-row">
+              <div class="cw-login-actions">
                 <label class="cw-check" for="login-remember">
                   <input id="login-remember" type="checkbox" checked />
                   <span>Keep me signed in on this device</span>
                 </label>
-                <a class="cw-login-link" href="#register-form" data-login-tab="signup">Need an account?</a>
-              </div>
-
-              <div class="cw-login-actions">
-                <button class="cw-btn cw-btn--primary" type="submit">Sign In</button>
-                <button class="cw-btn cw-btn--ghost" type="button" id="login-fill-email">Use saved email</button>
-              </div>
-            </form>
-
-            <form class="cw-login-form" id="register-form" autocomplete="on" data-panel="signup">
-              <div class="cw-field-grid">
-                <div class="cw-field">
-                  <label for="register-first-name">First name</label>
-                  <input id="register-first-name" type="text" placeholder="Your first name" required />
-                </div>
-                <div class="cw-field">
-                  <label for="register-surname">Surname</label>
-                  <input id="register-surname" type="text" placeholder="Your surname" required />
-                </div>
-              </div>
-
-              <div class="cw-field">
-                <label for="register-phone">Mobile number</label>
-                <input id="register-phone" type="tel" placeholder="10-digit mobile number" inputmode="tel" required />
-              </div>
-
-              <div class="cw-field">
-                <label for="register-email">Email address</label>
-                <input id="register-email" type="email" placeholder="name@example.com" required />
-              </div>
-
-              <div class="cw-field">
-                <label for="register-provider">Account method</label>
-                <select id="register-provider">
-                  <option value="email">Email + password</option>
-                  <option value="google">Google</option>
-                </select>
-              </div>
-
-              <div class="cw-field-grid">
-                <div class="cw-field">
-                  <label for="register-password">Password</label>
-                  <input id="register-password" type="password" placeholder="Create password" required />
-                </div>
-                <div class="cw-field">
-                  <label for="register-confirm">Confirm password</label>
-                  <input id="register-confirm" type="password" placeholder="Repeat password" required />
-                </div>
-              </div>
-
-              <label class="cw-check" for="register-remember">
-                <input id="register-remember" type="checkbox" checked />
-                <span>Keep my account on this device</span>
-              </label>
-
-              <div class="cw-login-actions">
-                <button class="cw-btn cw-btn--primary" type="submit">Create Account</button>
-                <button class="cw-btn cw-btn--ghost" type="button" id="register-fill-google">Use Google mode</button>
+                <button class="cw-btn cw-btn--primary" type="submit">Continue with Google</button>
               </div>
             </form>
           </div>
@@ -162,10 +95,9 @@
             <p class="cw-eyebrow">Current session</p>
             <h2 id="session-title">Not signed in</h2>
             <div class="cw-login-summary__list">
-              <div class="cw-login-summary__item" id="session-email">Email not saved yet.</div>
-              <div class="cw-login-summary__item" id="session-phone">Mobile number not saved yet.</div>
+              <div class="cw-login-summary__item" id="session-email">Google email not saved yet.</div>
               <div class="cw-login-summary__item" id="session-provider">Provider not set yet.</div>
-              <div class="cw-login-summary__item" id="session-since">Sign in or create an account to activate this area.</div>
+              <div class="cw-login-summary__item" id="session-since">Sign in with Google to activate this area.</div>
             </div>
             <div class="cw-login-actions">
               <button class="cw-btn cw-btn--ghost" type="button" id="logout-button">Logout</button>
@@ -176,9 +108,9 @@
           <article class="cw-login-summary cw-login-summary--accent">
             <p class="cw-eyebrow">Why this login feels premium</p>
             <div class="cw-login-summary__list">
-              <div class="cw-login-summary__item">Smooth sign in and account creation.</div>
-              <div class="cw-login-summary__item">Google quick entry button with saved-email support.</div>
-              <div class="cw-login-summary__item">Account data stays local until you connect a backend.</div>
+              <div class="cw-login-summary__item">Smooth Google-only sign in.</div>
+              <div class="cw-login-summary__item">Your Gmail prefix becomes the visible account name.</div>
+              <div class="cw-login-summary__item">No extra signup form, no password step, no clutter.</div>
             </div>
           </article>
         </aside>
