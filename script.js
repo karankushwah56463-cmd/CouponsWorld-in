@@ -422,50 +422,74 @@ function renderWalletDashboard() {
   const walletBadge = document.getElementById("cw-wallet-badge");
 
   const session = loadSessionSummary();
-  const entries = loadWalletEntries();
-  const totals = entries.reduce(
-    (acc, item) => {
-      const value = Number((item.amount || "0").replace(/[^0-9.]/g, "")) || 0;
-      const status = String(item.status || "").toLowerCase();
-      if (status.includes("pending")) acc.pending += value;
-      if (status.includes("confirmed")) acc.confirmed += value;
-      if (status.includes("withdrawable")) acc.withdrawable += value;
-      return acc;
-    },
-    { pending: 0, confirmed: 0, withdrawable: 0 }
-  );
+  const hasSession = Boolean(session?.email);
+  const entries = hasSession ? loadWalletEntries() : [];
+  const totals = hasSession
+    ? entries.reduce(
+        (acc, item) => {
+          const value = Number((item.amount || "0").replace(/[^0-9.]/g, "")) || 0;
+          const status = String(item.status || "").toLowerCase();
+          if (status.includes("pending")) acc.pending += value;
+          if (status.includes("confirmed")) acc.confirmed += value;
+          if (status.includes("withdrawable")) acc.withdrawable += value;
+          return acc;
+        },
+        { pending: 0, confirmed: 0, withdrawable: 0 }
+      )
+    : { pending: 0, confirmed: 0, withdrawable: 0 };
 
   if (walletName) {
-    walletName.textContent = session ? `Welcome back, ${session.email.split("@")[0]}` : "Your cashback wallet";
+    walletName.textContent = hasSession ? `Welcome back, ${session.email.split("@")[0]}` : "Login to unlock your wallet";
   }
   if (walletEmail) {
-    walletEmail.textContent = session ? session.email : "Login to see your saved activity.";
+    walletEmail.textContent = hasSession
+      ? session.email
+      : "Sign in first to unlock pending cashback, confirmed earnings, and withdrawals.";
   }
   if (walletBadge) {
-    walletBadge.textContent = session?.provider ? `${session.provider} account` : "Local wallet demo";
+    walletBadge.textContent = hasSession && session?.provider ? `${session.provider} account` : "Wallet locked";
   }
 
   if (walletSummary) {
-    walletSummary.innerHTML = [
-      { label: "Pending", value: `₹${totals.pending.toFixed(0)}`, note: "Waiting on retailer confirmation" },
-      { label: "Confirmed", value: `₹${totals.confirmed.toFixed(0)}`, note: "Ready when you are" },
-      { label: "Withdrawable", value: `₹${totals.withdrawable.toFixed(0)}`, note: "Available for payout" },
-      { label: "Tracked orders", value: String(entries.length), note: "Recent checks and referrals" },
-    ]
-      .map(
-        (item) => `
-          <article class="cw-wallet-card">
-            <span class="cw-pill cw-pill--soft">${item.label}</span>
-            <strong>${item.value}</strong>
-            <p>${item.note}</p>
-          </article>
-        `
-      )
-      .join("");
+    walletSummary.innerHTML = hasSession
+      ? [
+          { label: "Pending", value: `₹${totals.pending.toFixed(0)}`, note: "Waiting on retailer confirmation" },
+          { label: "Confirmed", value: `₹${totals.confirmed.toFixed(0)}`, note: "Ready when you are" },
+          { label: "Withdrawable", value: `₹${totals.withdrawable.toFixed(0)}`, note: "Available for payout" },
+          { label: "Tracked orders", value: String(entries.length), note: "Recent checks and referrals" },
+        ]
+          .map(
+            (item) => `
+              <article class="cw-wallet-card">
+                <span class="cw-pill cw-pill--soft">${item.label}</span>
+                <strong>${item.value}</strong>
+                <p>${item.note}</p>
+              </article>
+            `
+          )
+          .join("")
+      : `
+        <article class="cw-wallet-card cw-wallet-card--locked">
+          <span class="cw-pill cw-pill--soft">Locked</span>
+          <strong>Sign in to view your wallet</strong>
+          <p>Your cashback totals, tracked orders, and payout balance stay hidden until you log in.</p>
+          <a class="cw-btn cw-btn--primary" href="./login.html">Sign in now</a>
+        </article>
+      `;
   }
 
   if (walletActivity) {
-    walletActivity.innerHTML = entries.map(walletRow).join("");
+    walletActivity.innerHTML = hasSession
+      ? entries.map(walletRow).join("")
+      : `
+        <article class="cw-wallet-row cw-wallet-row--locked">
+          <div>
+            <strong>Wallet activity hidden</strong>
+            <p>Log in first to see pending, confirmed, and withdrawable activity.</p>
+          </div>
+          <a class="cw-btn cw-btn--ghost" href="./login.html">Go to login</a>
+        </article>
+      `;
   }
 }
 
